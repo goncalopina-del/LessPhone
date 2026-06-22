@@ -1,0 +1,286 @@
+{
+  "@@locale": "bn",
+  "appName": "Present",
+  "continueButton": "চালিয়ে যান",
+  "cancelButton": "বাতিল",
+  "skipButton": "এড়িয়ে যান",
+  "doneButton": "সম্পন্ন",
+  "backButton": "ফিরে যান",
+  "saveButton": "সংরক্ষণ",
+  "retryButton": "আবার চেষ্টা করুন",
+  "languageScreenTitle": "আপনার ভাষা বেছে নিন",
+  "languageScreenSubtitle": "আপনি যেকোনো সময় সেটিংসে এটি পরিবর্তন করতে পারবেন",
+  "onboardingProblemTitle": "স্ক্রিন সবসময় মাঝে থাকে",
+  "onboardingProblemBody": "আমরা গড়ে প্রতিদিন ৪ ঘণ্টা ১৭ মিনিট ফোনে কাটাই — প্রায়ই প্রিয়জনদের পাশে বসে।",
+  "onboardingSolutionTitle": "Present মনোযোগ পরিবর্তন করে",
+  "onboardingSolutionBody": "আমরা ব্লক করি না। আমরা প্রতিস্থাপন করি। স্ক্রল করার বদলে, সত্যিকারের গুরুত্বপূর্ণ কিছু করুন।",
+  "onboardingHowTitle": "কীভাবে কাজ করে",
+  "onboardingHowSteps": "1. একটি সেশন শুরু করুন\n2. পরিবার যোগ দেয়\n3. একসাথে পয়েন্ট অর্জন করুন",
+  "onboardingStartTitle": "আপনি কি প্রস্তুত?",
+  "onboardingStartCta": "অ্যাকাউন্ট তৈরি করুন",
+  "onboardingAlreadyHaveAccount": "আমার ইতিমধ্যে অ্যাকাউন্ট আছে",
+  "onboardingFamiliesCount": "{count} টি পরিবার ইতিমধ্যে যোগ দিয়েছে",
+  "@onboardingFamiliesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "authSignInWithApple": "Apple দিয়ে চালিয়ে যান",
+  "authSignInWithGoogle": "Google দিয়ে চালিয়ে যান",
+  "authEmailPlaceholder": "আপনার@ইমেইল.com",
+  "authSendMagicLink": "ম্যাজিক লিংক পাঠান",
+  "authMagicLinkSent": "আপনার ইমেইল চেক করুন — {email} তে লিংক পাঠানো হয়েছে",
+  "@authMagicLinkSent": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "authNoPassword": "পাসওয়ার্ড ছাড়া। আরও নিরাপদ।",
+  "authOr": "অথবা",
+  "authBiometricPrompt": "চালিয়ে যেতে যাচাই করুন",
+  "setupStep": "ধাপ {current} / {total}",
+  "@setupStep": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "setupProfileTitle": "আপনার নাম কী?",
+  "setupProfileNameHint": "আপনার নাম",
+  "setupFamilyTitle": "আপনার পরিবারের নাম দিন",
+  "setupFamilyHint": "যেমন: রহমান পরিবার",
+  "setupFamilyRole": "আপনার ভূমিকা",
+  "setupRoleAdult": "প্রাপ্তবয়স্ক",
+  "setupRoleYoung": "তরুণ",
+  "setupInviteTitle": "পরিবারকে আমন্ত্রণ জানান",
+  "setupInviteSubtitle": "ঐচ্ছিক — পরে করতে পারবেন",
+  "setupInviteEmailHint": "পরিবারের সদস্যের ইমেইল",
+  "setupInviteAddAnother": "+ আরেকজন যোগ করুন",
+  "setupCreateFamily": "পরিবার তৈরি করুন →",
+  "setupCanInviteLater": "পরেও আমন্ত্রণ জানাতে পারবেন",
+  "homeGreeting": "হ্যালো, {name} 👋",
+  "@homeGreeting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "homeOfflineScoreLabel": "সাপ্তাহিক অফলাইন স্কোর",
+  "homeScoreUp": "↑ গত সপ্তাহের চেয়ে {pts} পয়েন্ট বেশি",
+  "@homeScoreUp": {
+    "placeholders": {
+      "pts": {
+        "type": "int"
+      }
+    }
+  },
+  "homeScoreDown": "↓ গত সপ্তাহের চেয়ে {pts} পয়েন্ট কম",
+  "@homeScoreDown": {
+    "placeholders": {
+      "pts": {
+        "type": "int"
+      }
+    }
+  },
+  "homeMembersPresent": "{count} জন উপস্থিত",
+  "@homeMembersPresent": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeMemberOffline": "অফলাইন",
+  "homeStartSession": "▶  একসাথে সময় শুরু করুন",
+  "homeRitualSuggested": "প্রস্তাবিত কার্যক্রম",
+  "homeDiaryThisWeek": "এই সপ্তাহের ডায়েরি",
+  "sessionTitle": "একসাথে সময়",
+  "sessionMinutesTogether": "মিনিট একসাথে",
+  "sessionStartNow": "এখনই শুরু করুন",
+  "sessionEndButton": "শেষ করুন",
+  "sessionEndConfirm": "{duration} মিনিটের সেশন শেষ করবেন?",
+  "@sessionEndConfirm": {
+    "placeholders": {
+      "duration": {
+        "type": "int"
+      }
+    }
+  },
+  "sessionKeepGoing": "চালিয়ে যান",
+  "sessionCheckInPrompt": "আপনি কি এখনও এখানে আছেন? ✋",
+  "sessionCheckInYes": "হ্যাঁ, আমি এখানে আছি",
+  "sessionCheckInNo": "আমার মনোযোগ সরে গেছে",
+  "sessionCompletedTitle": "সেশন সম্পন্ন!",
+  "sessionCompletedScore": "+{pts} পয়েন্ট",
+  "@sessionCompletedScore": {
+    "placeholders": {
+      "pts": {
+        "type": "int"
+      }
+    }
+  },
+  "sessionStreakMessage": "টানা {days} দিন 🔥",
+  "@sessionStreakMessage": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "sessionDiaryPrompt": "কেমন ছিল?",
+  "sessionMinimumNotMet": "৫ মিনিটের কম সেশন স্কোরে গণনা হয় না",
+  "dashboardTitle": "ড্যাশবোর্ড",
+  "dashboardOfflineScore": "অফলাইন স্কোর",
+  "dashboardPercentile": "শীর্ষ {pct}% পরিবারের মধ্যে",
+  "@dashboardPercentile": {
+    "placeholders": {
+      "pct": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardTimeTogether": "একসাথে সময়",
+  "dashboardSessions": "সেশন",
+  "dashboardStreak": "ধারাবাহিকতা",
+  "dashboardBestSession": "সেরা সেশন",
+  "dashboardPeriodWeek": "সপ্তাহ",
+  "dashboardPeriodMonth": "মাস",
+  "dashboardPeriodAll": "সম্পূর্ণ ইতিহাস",
+  "dashboardPremiumRequired": "সম্পূর্ণ ইতিহাস আনলক করুন",
+  "ritualsTitle": "কার্যক্রম",
+  "ritualsSuggestedNow": "এখন প্রস্তাবিত",
+  "ritualsOther": "অন্যান্য কার্যক্রম",
+  "ritualsStartThis": "এটি শুরু করুন ▶",
+  "ritualsMinutes": "{min} মিনিট",
+  "@ritualsMinutes": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      }
+    }
+  },
+  "familyTitle": "পরিবার",
+  "familyMembers": "সদস্য ({count})",
+  "@familyMembers": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "familyActiveNow": "এখন সক্রিয়",
+  "familyInvitePending": "আমন্ত্রণ মুলতুবি",
+  "familyInviteMember": "+ পরিবারের সদস্যকে আমন্ত্রণ জানান",
+  "familyInviteLink": "আমন্ত্রণ লিংক কপি করুন",
+  "familyInviteLinkCopied": "লিংক কপি হয়েছে!",
+  "familyRoleAdmin": "অ্যাডমিন",
+  "familyRoleAdult": "প্রাপ্তবয়স্ক",
+  "familyRoleYoung": "তরুণ",
+  "familyPointsLabel": "{pts} পয়েন্ট",
+  "@familyPointsLabel": {
+    "placeholders": {
+      "pts": {
+        "type": "int"
+      }
+    }
+  },
+  "diaryTitle": "ডায়েরি",
+  "diaryHowWasIt": "কেমন ছিল?",
+  "diaryAddNote": "নোট যোগ করুন (ঐচ্ছিক)",
+  "diaryNoteHint": "এই মুহূর্ত সম্পর্কে কিছু লিখুন…",
+  "diarySessionDuration": "{min} মিনিট একসাথে",
+  "@diarySessionDuration": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      }
+    }
+  },
+  "diaryNoEntries": "এখনও কোনো ডায়েরি এন্ট্রি নেই।\nআপনার প্রথম সেশন শুরু করুন!",
+  "settingsTitle": "সেটিংস",
+  "settingsLanguage": "ভাষা",
+  "settingsNotifications": "বিজ্ঞপ্তি",
+  "settingsNotificationsRituals": "কার্যক্রম পরামর্শ",
+  "settingsNotificationsStreak": "ধারাবাহিকতার রিমাইন্ডার",
+  "settingsNotificationsFamily": "পারিবারিক কার্যক্রম",
+  "settingsPrivacy": "গোপনীয়তা",
+  "settingsBiometric": "ফেস আইডি / আঙুলের ছাপ",
+  "settingsMfa": "দ্বি-ফ্যাক্টর যাচাইকরণ",
+  "settingsExportData": "আমার ডেটা রপ্তানি করুন",
+  "settingsDeleteAccount": "অ্যাকাউন্ট মুছে ফেলুন",
+  "settingsSubscription": "সাবস্ক্রিপশন",
+  "settingsSignOut": "সাইন আউট",
+  "settingsVersion": "সংস্করণ {version}",
+  "@settingsVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "paywallTitle": "উপস্থিত থাকুন",
+  "paywallSubtitle": "প্রতি মাসে এক কাপ চায়ের চেয়েও কম খরচে পুরো পরিবারের জন্য।",
+  "paywallTrialBadge": "২১ দিন বিনামূল্যে",
+  "paywallPlanFamily": "পারিবারিক",
+  "paywallPlanFamilyDesc": "সবাই অন্তর্ভুক্ত। একটি প্ল্যান।",
+  "paywallPlanIndividual": "ব্যক্তিগত",
+  "paywallPlanIndividualDesc": "ব্যক্তিগত প্রিমিয়াম অভিজ্ঞতা।",
+  "paywallPerMonth": "/মাস",
+  "paywallStartTrial": "বিনামূল্যে ট্রায়াল শুরু করুন",
+  "paywallNoCard": "ক্রেডিট কার্ড লাগবে না",
+  "paywallMaybeLater": "পরে হয়তো",
+  "paywallVsBuiltIn": "Apple Screen Time বা Google Digital Wellbeing-এর মতো নয় — আমরা শুধু থামতে বলি না। আমরা বলি এর বদলে এটি করুন।",
+  "paywallRestorePurchases": "কেনাকাটা পুনরুদ্ধার করুন",
+  "errorGeneric": "কিছু একটা ভুল হয়েছে। আবার চেষ্টা করুন।",
+  "errorNetwork": "ইন্টারনেট সংযোগ নেই",
+  "errorAuthFailed": "যাচাইকরণ ব্যর্থ হয়েছে",
+  "errorInvalidEmail": "একটি বৈধ ইমেইল প্রবেশ করুন",
+  "errorSessionMinimum": "সর্বনিম্ন সেশন সময়: ৫ মিনিট",
+  "notifRitualTitle": "শুভ সন্ধ্যা, {family} 🌿",
+  "@notifRitualTitle": {
+    "placeholders": {
+      "family": {
+        "type": "String"
+      }
+    }
+  },
+  "notifRitualBody": "একসাথে ৩০ মিনিট কাটানোর এটি একটি ভালো সময়।",
+  "notifStreakTitle": "আপনার ধারাবাহিকতা ঝুঁকিতে 🔥",
+  "notifStreakBody": "আপনার টানা {days} দিন হয়েছে। এখন ভাঙবেন না!",
+  "@notifStreakBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "notifInviteAcceptedTitle": "{name} {family}-এ যোগ দিয়েছে!",
+  "@notifInviteAcceptedTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "family": {
+        "type": "String"
+      }
+    }
+  },
+  "notifTrialEndingTitle": "বিনামূল্যে ট্রায়াল শীঘ্রই শেষ হচ্ছে ⏳",
+  "notifTrialEndingBody": "{days} দিন বাকি আছে। এক কাপ চায়ের চেয়ে কম খরচে চালিয়ে যান।",
+  "@notifTrialEndingBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  }
+}

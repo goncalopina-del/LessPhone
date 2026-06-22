@@ -1,0 +1,286 @@
+{
+  "@@locale": "zh",
+  "appName": "Present",
+  "continueButton": "继续",
+  "cancelButton": "取消",
+  "skipButton": "跳过",
+  "doneButton": "完成",
+  "backButton": "返回",
+  "saveButton": "保存",
+  "retryButton": "重试",
+  "languageScreenTitle": "选择语言",
+  "languageScreenSubtitle": "您可以随时在设置中更改",
+  "onboardingProblemTitle": "屏幕总是横在中间",
+  "onboardingProblemBody": "我们平均每天花4小时17分钟看手机——往往就在最爱的人身旁。",
+  "onboardingSolutionTitle": "Present 改变焦点",
+  "onboardingSolutionBody": "我们不屏蔽。我们替代。与其刷手机，不如做真正重要的事。",
+  "onboardingHowTitle": "使用方法",
+  "onboardingHowSteps": "1. 开始陪伴时光\n2. 家人加入\n3. 一起赢得陪伴积分",
+  "onboardingStartTitle": "准备好陪伴了吗？",
+  "onboardingStartCta": "创建账户",
+  "onboardingAlreadyHaveAccount": "已有账户",
+  "onboardingFamiliesCount": "{count} 个家庭已在使用",
+  "@onboardingFamiliesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "authSignInWithApple": "使用 Apple 继续",
+  "authSignInWithGoogle": "使用 Google 继续",
+  "authEmailPlaceholder": "您的邮箱",
+  "authSendMagicLink": "发送登录链接",
+  "authMagicLinkSent": "请查收邮件 — 链接已发送至 {email}",
+  "@authMagicLinkSent": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "authNoPassword": "无需密码，更加安全。",
+  "authOr": "或",
+  "authBiometricPrompt": "验证身份以继续",
+  "setupStep": "第 {current} 步，共 {total} 步",
+  "@setupStep": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "setupProfileTitle": "您叫什么名字？",
+  "setupProfileNameHint": "您的名字",
+  "setupFamilyTitle": "给您的家庭起个名字",
+  "setupFamilyHint": "例如：张家",
+  "setupFamilyRole": "您的角色",
+  "setupRoleAdult": "成年人",
+  "setupRoleYoung": "青少年",
+  "setupInviteTitle": "邀请您的家人",
+  "setupInviteSubtitle": "可选 — 稍后也可以邀请",
+  "setupInviteEmailHint": "家人的邮箱",
+  "setupInviteAddAnother": "+ 添加其他人",
+  "setupCreateFamily": "创建家庭 →",
+  "setupCanInviteLater": "稍后可以邀请更多人",
+  "homeGreeting": "你好，{name} 👋",
+  "@homeGreeting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "homeOfflineScoreLabel": "本周离线分数",
+  "homeScoreUp": "↑ 比上周高 {pts} 分",
+  "@homeScoreUp": {
+    "placeholders": {
+      "pts": {
+        "type": "int"
+      }
+    }
+  },
+  "homeScoreDown": "↓ 比上周低 {pts} 分",
+  "@homeScoreDown": {
+    "placeholders": {
+      "pts": {
+        "type": "int"
+      }
+    }
+  },
+  "homeMembersPresent": "{count} 人在场",
+  "@homeMembersPresent": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeMemberOffline": "不在线",
+  "homeStartSession": "▶  开始陪伴时光",
+  "homeRitualSuggested": "推荐活动",
+  "homeDiaryThisWeek": "本周日记",
+  "sessionTitle": "陪伴时光",
+  "sessionMinutesTogether": "分钟共处",
+  "sessionStartNow": "现在开始",
+  "sessionEndButton": "结束",
+  "sessionEndConfirm": "结束 {duration} 分钟的陪伴时光？",
+  "@sessionEndConfirm": {
+    "placeholders": {
+      "duration": {
+        "type": "int"
+      }
+    }
+  },
+  "sessionKeepGoing": "继续",
+  "sessionCheckInPrompt": "您还在吗？✋",
+  "sessionCheckInYes": "是的，我在",
+  "sessionCheckInNo": "我分心了",
+  "sessionCompletedTitle": "陪伴完成！",
+  "sessionCompletedScore": "+{pts} 分",
+  "@sessionCompletedScore": {
+    "placeholders": {
+      "pts": {
+        "type": "int"
+      }
+    }
+  },
+  "sessionStreakMessage": "连续 {days} 天 🔥",
+  "@sessionStreakMessage": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "sessionDiaryPrompt": "感觉怎么样？",
+  "sessionMinimumNotMet": "不足5分钟的陪伴不计入分数",
+  "dashboardTitle": "数据",
+  "dashboardOfflineScore": "离线分数",
+  "dashboardPercentile": "超过 {pct}% 的家庭",
+  "@dashboardPercentile": {
+    "placeholders": {
+      "pct": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardTimeTogether": "共处时长",
+  "dashboardSessions": "次陪伴",
+  "dashboardStreak": "连续天数",
+  "dashboardBestSession": "最长陪伴",
+  "dashboardPeriodWeek": "本周",
+  "dashboardPeriodMonth": "本月",
+  "dashboardPeriodAll": "全部",
+  "dashboardPremiumRequired": "解锁完整记录",
+  "ritualsTitle": "活动",
+  "ritualsSuggestedNow": "当前推荐",
+  "ritualsOther": "其他活动",
+  "ritualsStartThis": "开始此活动 ▶",
+  "ritualsMinutes": "{min} 分钟",
+  "@ritualsMinutes": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      }
+    }
+  },
+  "familyTitle": "家庭",
+  "familyMembers": "成员（{count}）",
+  "@familyMembers": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "familyActiveNow": "当前在线",
+  "familyInvitePending": "邀请待确认",
+  "familyInviteMember": "+ 邀请家人",
+  "familyInviteLink": "复制邀请链接",
+  "familyInviteLinkCopied": "链接已复制！",
+  "familyRoleAdmin": "管理员",
+  "familyRoleAdult": "成年人",
+  "familyRoleYoung": "青少年",
+  "familyPointsLabel": "{pts}分",
+  "@familyPointsLabel": {
+    "placeholders": {
+      "pts": {
+        "type": "int"
+      }
+    }
+  },
+  "diaryTitle": "日记",
+  "diaryHowWasIt": "感觉怎么样？",
+  "diaryAddNote": "添加备注（可选）",
+  "diaryNoteHint": "记录这个美好时刻…",
+  "diarySessionDuration": "共处 {min} 分钟",
+  "@diarySessionDuration": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      }
+    }
+  },
+  "diaryNoEntries": "还没有日记记录。\n开始您的第一次陪伴时光吧！",
+  "settingsTitle": "设置",
+  "settingsLanguage": "语言",
+  "settingsNotifications": "通知",
+  "settingsNotificationsRituals": "活动提醒",
+  "settingsNotificationsStreak": "连续打卡提醒",
+  "settingsNotificationsFamily": "家庭动态",
+  "settingsPrivacy": "隐私",
+  "settingsBiometric": "面容ID / 指纹",
+  "settingsMfa": "双重验证",
+  "settingsExportData": "导出数据",
+  "settingsDeleteAccount": "删除账户",
+  "settingsSubscription": "订阅",
+  "settingsSignOut": "退出登录",
+  "settingsVersion": "版本 {version}",
+  "@settingsVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "paywallTitle": "专注当下",
+  "paywallSubtitle": "每月不到一杯咖啡的价格，全家共享。",
+  "paywallTrialBadge": "21天免费试用",
+  "paywallPlanFamily": "家庭版",
+  "paywallPlanFamilyDesc": "全家共享，一个订阅。",
+  "paywallPlanIndividual": "个人版",
+  "paywallPlanIndividualDesc": "个人高级体验。",
+  "paywallPerMonth": "/月",
+  "paywallStartTrial": "开始免费试用",
+  "paywallNoCard": "无需信用卡",
+  "paywallMaybeLater": "稍后再说",
+  "paywallVsBuiltIn": "与 Apple 屏幕时间或 Google 数字健康不同 — 我们不只是说停止，我们说用这个来替代。",
+  "paywallRestorePurchases": "恢复购买",
+  "errorGeneric": "出错了，请重试。",
+  "errorNetwork": "无网络连接",
+  "errorAuthFailed": "验证失败",
+  "errorInvalidEmail": "请输入有效的邮箱地址",
+  "errorSessionMinimum": "最短陪伴时间：5分钟",
+  "notifRitualTitle": "晚上好，{family} 🌿",
+  "@notifRitualTitle": {
+    "placeholders": {
+      "family": {
+        "type": "String"
+      }
+    }
+  },
+  "notifRitualBody": "现在是一起共度30分钟的好时机。",
+  "notifStreakTitle": "您的连续记录面临中断 🔥",
+  "notifStreakBody": "您已连续 {days} 天打卡，不要让它中断！",
+  "@notifStreakBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "notifInviteAcceptedTitle": "{name} 加入了 {family}！",
+  "@notifInviteAcceptedTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "family": {
+        "type": "String"
+      }
+    }
+  },
+  "notifTrialEndingTitle": "免费试用即将结束 ⏳",
+  "notifTrialEndingBody": "还剩 {days} 天。每月不到一杯咖啡，继续陪伴。",
+  "@notifTrialEndingBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  }
+}

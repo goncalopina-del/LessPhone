@@ -1,0 +1,8 @@
+-keep class io.flutter.** { *; }
+-keep class io.flutter.plugins.** { *; }
+-dontwarn okhttp3.**
+-keep class okhttp3.** { *; }
+-keep class kotlin.** { *; }
+-dontwarn kotlin.**
+-keep class com.revenuecat.** { *; }
+-keep class com.google.firebase.** { *; }

@@ -1,0 +1,286 @@
+{
+  "@@locale": "fr",
+  "appName": "Present",
+  "continueButton": "Continuer",
+  "cancelButton": "Annuler",
+  "skipButton": "Passer",
+  "doneButton": "Terminé",
+  "backButton": "Retour",
+  "saveButton": "Sauvegarder",
+  "retryButton": "Réessayer",
+  "languageScreenTitle": "Choisissez votre langue",
+  "languageScreenSubtitle": "Vous pouvez la modifier à tout moment dans les Paramètres",
+  "onboardingProblemTitle": "L'écran est toujours entre vous",
+  "onboardingProblemBody": "En moyenne, nous passons 4h17 par jour sur notre téléphone — souvent à côté des personnes que nous aimons le plus.",
+  "onboardingSolutionTitle": "Present change le focus",
+  "onboardingSolutionBody": "Nous ne bloquons pas. Nous remplaçons. Au lieu de scroller, faites quelque chose qui compte vraiment.",
+  "onboardingHowTitle": "Comment ça marche",
+  "onboardingHowSteps": "1. Démarrez une Session Présence\n2. La famille rejoint\n3. Gagnez des points ensemble",
+  "onboardingStartTitle": "Prêt à être présent ?",
+  "onboardingStartCta": "Créer un compte",
+  "onboardingAlreadyHaveAccount": "J'ai déjà un compte",
+  "onboardingFamiliesCount": "{count} familles déjà présentes",
+  "@onboardingFamiliesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "authSignInWithApple": "Continuer avec Apple",
+  "authSignInWithGoogle": "Continuer avec Google",
+  "authEmailPlaceholder": "votre@email.com",
+  "authSendMagicLink": "Envoyer le lien magique",
+  "authMagicLinkSent": "Vérifiez votre e-mail — lien envoyé à {email}",
+  "@authMagicLinkSent": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "authNoPassword": "Sans mot de passe. Plus sécurisé.",
+  "authOr": "ou",
+  "authBiometricPrompt": "Authentifiez-vous pour continuer",
+  "setupStep": "Étape {current} sur {total}",
+  "@setupStep": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "setupProfileTitle": "Quel est votre prénom ?",
+  "setupProfileNameHint": "Votre prénom",
+  "setupFamilyTitle": "Donnez un nom à votre famille",
+  "setupFamilyHint": "ex : Famille Martin",
+  "setupFamilyRole": "Votre rôle",
+  "setupRoleAdult": "Adulte",
+  "setupRoleYoung": "Jeune",
+  "setupInviteTitle": "Invitez votre famille",
+  "setupInviteSubtitle": "Facultatif — vous pouvez le faire plus tard",
+  "setupInviteEmailHint": "E-mail du membre de la famille",
+  "setupInviteAddAnother": "+ Ajouter une autre personne",
+  "setupCreateFamily": "Créer la famille →",
+  "setupCanInviteLater": "Vous pouvez inviter plus tard",
+  "homeGreeting": "Bonjour, {name} 👋",
+  "@homeGreeting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "homeOfflineScoreLabel": "Score hebdomadaire",
+  "homeScoreUp": "↑ {pts}pts vs la semaine dernière",
+  "@homeScoreUp": {
+    "placeholders": {
+      "pts": {
+        "type": "int"
+      }
+    }
+  },
+  "homeScoreDown": "↓ {pts}pts vs la semaine dernière",
+  "@homeScoreDown": {
+    "placeholders": {
+      "pts": {
+        "type": "int"
+      }
+    }
+  },
+  "homeMembersPresent": "{count} présent(s)",
+  "@homeMembersPresent": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeMemberOffline": "hors ligne",
+  "homeStartSession": "▶  Démarrer une session présence",
+  "homeRitualSuggested": "Activité suggérée",
+  "homeDiaryThisWeek": "Journal de la semaine",
+  "sessionTitle": "Session Présence",
+  "sessionMinutesTogether": "minutes ensemble",
+  "sessionStartNow": "Démarrer maintenant",
+  "sessionEndButton": "Terminer la session",
+  "sessionEndConfirm": "Terminer la session de {duration} minutes ?",
+  "@sessionEndConfirm": {
+    "placeholders": {
+      "duration": {
+        "type": "int"
+      }
+    }
+  },
+  "sessionKeepGoing": "Continuer",
+  "sessionCheckInPrompt": "Êtes-vous toujours là ? ✋",
+  "sessionCheckInYes": "Oui, je suis là",
+  "sessionCheckInNo": "Je me suis laissé distraire",
+  "sessionCompletedTitle": "Session terminée !",
+  "sessionCompletedScore": "+{pts} points",
+  "@sessionCompletedScore": {
+    "placeholders": {
+      "pts": {
+        "type": "int"
+      }
+    }
+  },
+  "sessionStreakMessage": "{days} jours consécutifs 🔥",
+  "@sessionStreakMessage": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "sessionDiaryPrompt": "Comment s'est passée la session ?",
+  "sessionMinimumNotMet": "Les sessions de moins de 5 minutes ne comptent pas",
+  "dashboardTitle": "Tableau de bord",
+  "dashboardOfflineScore": "Score hors ligne",
+  "dashboardPercentile": "Top {pct}% des familles",
+  "@dashboardPercentile": {
+    "placeholders": {
+      "pct": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardTimeTogether": "Temps ensemble",
+  "dashboardSessions": "Sessions",
+  "dashboardStreak": "Série",
+  "dashboardBestSession": "Meilleure session",
+  "dashboardPeriodWeek": "Semaine",
+  "dashboardPeriodMonth": "Mois",
+  "dashboardPeriodAll": "Historique",
+  "dashboardPremiumRequired": "Débloquer l'historique complet",
+  "ritualsTitle": "Rituels",
+  "ritualsSuggestedNow": "Suggéré maintenant",
+  "ritualsOther": "Autres rituels",
+  "ritualsStartThis": "Démarrer ce rituel ▶",
+  "ritualsMinutes": "{min} min",
+  "@ritualsMinutes": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      }
+    }
+  },
+  "familyTitle": "Famille",
+  "familyMembers": "Membres ({count})",
+  "@familyMembers": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "familyActiveNow": "Actif maintenant",
+  "familyInvitePending": "Invitation en attente",
+  "familyInviteMember": "+ Inviter un membre",
+  "familyInviteLink": "Copier le lien d'invitation",
+  "familyInviteLinkCopied": "Lien copié !",
+  "familyRoleAdmin": "Admin",
+  "familyRoleAdult": "Adulte",
+  "familyRoleYoung": "Jeune",
+  "familyPointsLabel": "{pts}pts",
+  "@familyPointsLabel": {
+    "placeholders": {
+      "pts": {
+        "type": "int"
+      }
+    }
+  },
+  "diaryTitle": "Journal",
+  "diaryHowWasIt": "Comment s'est passée la session ?",
+  "diaryAddNote": "Ajouter une note (facultatif)",
+  "diaryNoteHint": "Quelques mots sur ce moment…",
+  "diarySessionDuration": "{min} min ensemble",
+  "@diarySessionDuration": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      }
+    }
+  },
+  "diaryNoEntries": "Pas encore d'entrées dans le journal.\nCommencez votre première session !",
+  "settingsTitle": "Paramètres",
+  "settingsLanguage": "Langue",
+  "settingsNotifications": "Notifications",
+  "settingsNotificationsRituals": "Suggestions de rituels",
+  "settingsNotificationsStreak": "Rappels de série",
+  "settingsNotificationsFamily": "Activité familiale",
+  "settingsPrivacy": "Confidentialité",
+  "settingsBiometric": "Face ID / Empreinte digitale",
+  "settingsMfa": "Authentification à deux facteurs",
+  "settingsExportData": "Exporter mes données",
+  "settingsDeleteAccount": "Supprimer le compte",
+  "settingsSubscription": "Abonnement",
+  "settingsSignOut": "Se déconnecter",
+  "settingsVersion": "Version {version}",
+  "@settingsVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "paywallTitle": "Restez Présent",
+  "paywallSubtitle": "Moins d'un café par mois pour toute la famille.",
+  "paywallTrialBadge": "21 jours d'essai gratuit",
+  "paywallPlanFamily": "Famille",
+  "paywallPlanFamilyDesc": "Tout le monde inclus. Un seul abonnement.",
+  "paywallPlanIndividual": "Individuel",
+  "paywallPlanIndividualDesc": "Expérience solo premium.",
+  "paywallPerMonth": "/mois",
+  "paywallStartTrial": "Commencer l'essai gratuit",
+  "paywallNoCard": "Sans carte bancaire",
+  "paywallMaybeLater": "Peut-être plus tard",
+  "paywallVsBuiltIn": "Contrairement au Screen Time d'Apple ou au Digital Wellbeing de Google — nous ne disons pas seulement ARRÊTE. Nous disons FAIS CECI À LA PLACE.",
+  "paywallRestorePurchases": "Restaurer les achats",
+  "errorGeneric": "Une erreur s'est produite. Réessayez.",
+  "errorNetwork": "Pas de connexion internet",
+  "errorAuthFailed": "Échec de l'authentification",
+  "errorInvalidEmail": "Veuillez saisir un e-mail valide",
+  "errorSessionMinimum": "Durée minimale de session : 5 minutes",
+  "notifRitualTitle": "Bonsoir, {family} 🌿",
+  "@notifRitualTitle": {
+    "placeholders": {
+      "family": {
+        "type": "String"
+      }
+    }
+  },
+  "notifRitualBody": "C'est le bon moment pour 30 minutes ensemble.",
+  "notifStreakTitle": "Votre série est en danger 🔥",
+  "notifStreakBody": "Vous avez {days} jours consécutifs. Ne brisez pas ça maintenant !",
+  "@notifStreakBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "notifInviteAcceptedTitle": "{name} a rejoint {family} !",
+  "@notifInviteAcceptedTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "family": {
+        "type": "String"
+      }
+    }
+  },
+  "notifTrialEndingTitle": "Votre essai gratuit se termine bientôt ⏳",
+  "notifTrialEndingBody": "Il reste {days} jours. Continuez pour moins d'un café par mois.",
+  "@notifTrialEndingBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  }
+}

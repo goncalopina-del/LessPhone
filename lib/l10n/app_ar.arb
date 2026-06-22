@@ -1,0 +1,286 @@
+{
+  "@@locale": "ar",
+  "appName": "Present",
+  "continueButton": "متابعة",
+  "cancelButton": "إلغاء",
+  "skipButton": "تخطي",
+  "doneButton": "تم",
+  "backButton": "رجوع",
+  "saveButton": "حفظ",
+  "retryButton": "حاول مجدداً",
+  "languageScreenTitle": "اختر لغتك",
+  "languageScreenSubtitle": "يمكنك تغييرها في أي وقت من الإعدادات",
+  "onboardingProblemTitle": "الشاشة دائماً في الطريق",
+  "onboardingProblemBody": "نقضي في المتوسط 4 ساعات و17 دقيقة يومياً على هواتفنا — غالباً بجانب من نحبهم.",
+  "onboardingSolutionTitle": "Present يغيّر التركيز",
+  "onboardingSolutionBody": "لا نحجب. نستبدل. بدلاً من التمرير، افعل ما يهم حقاً.",
+  "onboardingHowTitle": "كيف يعمل",
+  "onboardingHowSteps": "1. ابدأ جلسة حضور\n2. تنضم العائلة\n3. اكسبوا نقاط معاً",
+  "onboardingStartTitle": "هل أنت مستعد للحضور؟",
+  "onboardingStartCta": "إنشاء حساب",
+  "onboardingAlreadyHaveAccount": "لدي حساب بالفعل",
+  "onboardingFamiliesCount": "{count} عائلة تستخدمه بالفعل",
+  "@onboardingFamiliesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "authSignInWithApple": "المتابعة مع Apple",
+  "authSignInWithGoogle": "المتابعة مع Google",
+  "authEmailPlaceholder": "بريدك@الإلكتروني.com",
+  "authSendMagicLink": "إرسال رابط الدخول",
+  "authMagicLinkSent": "تحقق من بريدك الإلكتروني — تم إرسال الرابط إلى {email}",
+  "@authMagicLinkSent": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "authNoPassword": "بدون كلمة مرور. أكثر أماناً.",
+  "authOr": "أو",
+  "authBiometricPrompt": "التحقق للمتابعة",
+  "setupStep": "الخطوة {current} من {total}",
+  "@setupStep": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "setupProfileTitle": "ما اسمك؟",
+  "setupProfileNameHint": "اسمك",
+  "setupFamilyTitle": "أعطِ اسماً لعائلتك",
+  "setupFamilyHint": "مثال: عائلة محمد",
+  "setupFamilyRole": "دورك",
+  "setupRoleAdult": "بالغ",
+  "setupRoleYoung": "شاب",
+  "setupInviteTitle": "ادعُ عائلتك",
+  "setupInviteSubtitle": "اختياري — يمكنك فعل ذلك لاحقاً",
+  "setupInviteEmailHint": "بريد أحد أفراد العائلة",
+  "setupInviteAddAnother": "+ إضافة شخص آخر",
+  "setupCreateFamily": "إنشاء العائلة →",
+  "setupCanInviteLater": "يمكنك دعوة المزيد لاحقاً",
+  "homeGreeting": "مرحباً، {name} 👋",
+  "@homeGreeting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "homeOfflineScoreLabel": "نقاط الحضور الأسبوعية",
+  "homeScoreUp": "↑ {pts} نقطة أكثر من الأسبوع الماضي",
+  "@homeScoreUp": {
+    "placeholders": {
+      "pts": {
+        "type": "int"
+      }
+    }
+  },
+  "homeScoreDown": "↓ {pts} نقطة أقل من الأسبوع الماضي",
+  "@homeScoreDown": {
+    "placeholders": {
+      "pts": {
+        "type": "int"
+      }
+    }
+  },
+  "homeMembersPresent": "{count} حاضر",
+  "@homeMembersPresent": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "homeMemberOffline": "غير متصل",
+  "homeStartSession": "▶  ابدأ وقت الحضور",
+  "homeRitualSuggested": "نشاط مقترح",
+  "homeDiaryThisWeek": "يوميات هذا الأسبوع",
+  "sessionTitle": "وقت الحضور",
+  "sessionMinutesTogether": "دقيقة معاً",
+  "sessionStartNow": "ابدأ الآن",
+  "sessionEndButton": "إنهاء الجلسة",
+  "sessionEndConfirm": "إنهاء جلسة {duration} دقيقة؟",
+  "@sessionEndConfirm": {
+    "placeholders": {
+      "duration": {
+        "type": "int"
+      }
+    }
+  },
+  "sessionKeepGoing": "استمر",
+  "sessionCheckInPrompt": "هل لا تزال حاضراً؟ ✋",
+  "sessionCheckInYes": "نعم، أنا هنا",
+  "sessionCheckInNo": "تشتت انتباهي",
+  "sessionCompletedTitle": "أحسنت!",
+  "sessionCompletedScore": "+{pts} نقطة",
+  "@sessionCompletedScore": {
+    "placeholders": {
+      "pts": {
+        "type": "int"
+      }
+    }
+  },
+  "sessionStreakMessage": "{days} أيام متتالية 🔥",
+  "@sessionStreakMessage": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "sessionDiaryPrompt": "كيف كانت التجربة؟",
+  "sessionMinimumNotMet": "الجلسات أقل من 5 دقائق لا تُحتسب في النقاط",
+  "dashboardTitle": "الإحصائيات",
+  "dashboardOfflineScore": "نقاط الحضور",
+  "dashboardPercentile": "ضمن أفضل {pct}% من العائلات",
+  "@dashboardPercentile": {
+    "placeholders": {
+      "pct": {
+        "type": "int"
+      }
+    }
+  },
+  "dashboardTimeTogether": "الوقت معاً",
+  "dashboardSessions": "جلسات",
+  "dashboardStreak": "التسلسل",
+  "dashboardBestSession": "أطول جلسة",
+  "dashboardPeriodWeek": "أسبوع",
+  "dashboardPeriodMonth": "شهر",
+  "dashboardPeriodAll": "كل الوقت",
+  "dashboardPremiumRequired": "فتح السجل الكامل",
+  "ritualsTitle": "الأنشطة",
+  "ritualsSuggestedNow": "مقترح الآن",
+  "ritualsOther": "أنشطة أخرى",
+  "ritualsStartThis": "ابدأ هذا النشاط ▶",
+  "ritualsMinutes": "{min} دقيقة",
+  "@ritualsMinutes": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      }
+    }
+  },
+  "familyTitle": "العائلة",
+  "familyMembers": "الأعضاء ({count})",
+  "@familyMembers": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "familyActiveNow": "نشط الآن",
+  "familyInvitePending": "الدعوة معلقة",
+  "familyInviteMember": "+ دعوة فرد من العائلة",
+  "familyInviteLink": "نسخ رابط الدعوة",
+  "familyInviteLinkCopied": "تم نسخ الرابط!",
+  "familyRoleAdmin": "مسؤول",
+  "familyRoleAdult": "بالغ",
+  "familyRoleYoung": "شاب",
+  "familyPointsLabel": "{pts} نقطة",
+  "@familyPointsLabel": {
+    "placeholders": {
+      "pts": {
+        "type": "int"
+      }
+    }
+  },
+  "diaryTitle": "اليوميات",
+  "diaryHowWasIt": "كيف كانت؟",
+  "diaryAddNote": "إضافة ملاحظة (اختياري)",
+  "diaryNoteHint": "بضع كلمات عن هذه اللحظة…",
+  "diarySessionDuration": "{min} دقيقة معاً",
+  "@diarySessionDuration": {
+    "placeholders": {
+      "min": {
+        "type": "int"
+      }
+    }
+  },
+  "diaryNoEntries": "لا توجد مدخلات في اليوميات بعد.\nابدأ أول جلسة حضور!",
+  "settingsTitle": "الإعدادات",
+  "settingsLanguage": "اللغة",
+  "settingsNotifications": "الإشعارات",
+  "settingsNotificationsRituals": "اقتراحات الأنشطة",
+  "settingsNotificationsStreak": "تذكيرات التسلسل",
+  "settingsNotificationsFamily": "نشاط العائلة",
+  "settingsPrivacy": "الخصوصية",
+  "settingsBiometric": "Face ID / بصمة الإصبع",
+  "settingsMfa": "المصادقة الثنائية",
+  "settingsExportData": "تصدير بياناتي",
+  "settingsDeleteAccount": "حذف الحساب",
+  "settingsSubscription": "الاشتراك",
+  "settingsSignOut": "تسجيل الخروج",
+  "settingsVersion": "الإصدار {version}",
+  "@settingsVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "paywallTitle": "كن حاضراً",
+  "paywallSubtitle": "أقل من ثمن قهوة شهرياً للعائلة كلها.",
+  "paywallTrialBadge": "تجربة مجانية 21 يوماً",
+  "paywallPlanFamily": "العائلة",
+  "paywallPlanFamilyDesc": "الجميع مشمولون. خطة واحدة.",
+  "paywallPlanIndividual": "فردي",
+  "paywallPlanIndividualDesc": "تجربة فردية متميزة.",
+  "paywallPerMonth": "/شهر",
+  "paywallStartTrial": "ابدأ التجربة المجانية",
+  "paywallNoCard": "لا حاجة لبطاقة ائتمان",
+  "paywallMaybeLater": "ربما لاحقاً",
+  "paywallVsBuiltIn": "على عكس Screen Time من Apple أو Digital Wellbeing من Google — نحن لا نقول فقط توقف. نحن نقول افعل هذا بدلاً من ذلك.",
+  "paywallRestorePurchases": "استعادة المشتريات",
+  "errorGeneric": "حدث خطأ ما. حاول مجدداً.",
+  "errorNetwork": "لا يوجد اتصال بالإنترنت",
+  "errorAuthFailed": "فشل التحقق",
+  "errorInvalidEmail": "الرجاء إدخال بريد إلكتروني صحيح",
+  "errorSessionMinimum": "الحد الأدنى لمدة الجلسة: 5 دقائق",
+  "notifRitualTitle": "مساء الخير، {family} 🌿",
+  "@notifRitualTitle": {
+    "placeholders": {
+      "family": {
+        "type": "String"
+      }
+    }
+  },
+  "notifRitualBody": "وقت رائع لقضاء 30 دقيقة معاً.",
+  "notifStreakTitle": "تسلسلك في خطر 🔥",
+  "notifStreakBody": "لديك {days} أيام متتالية. لا تكسرها الآن!",
+  "@notifStreakBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "notifInviteAcceptedTitle": "انضم {name} إلى {family}!",
+  "@notifInviteAcceptedTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "family": {
+        "type": "String"
+      }
+    }
+  },
+  "notifTrialEndingTitle": "تنتهي تجربتك المجانية قريباً ⏳",
+  "notifTrialEndingBody": "تبقى {days} أيام. استمر بأقل من ثمن قهوة شهرياً.",
+  "@notifTrialEndingBody": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  }
+}

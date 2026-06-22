@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleName</key>
+    <string>Present</string>
+    <key>CFBundleDisplayName</key>
+    <string>Present</string>
+    <key>CFBundleIdentifier</key>
+    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+    <key>CFBundleVersion</key>
+    <string>$(FLUTTER_BUILD_NUMBER)</string>
+    <key>CFBundleShortVersionString</key>
+    <string>$(FLUTTER_BUILD_NAME)</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleSignature</key>
+    <string>????</string>
+    <key>CFBundleExecutable</key>
+    <string>$(EXECUTABLE_NAME)</string>
+
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+    </array>
+    <key>UISupportedInterfaceOrientations~ipad</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLName</key>
+            <string>app.present.ios</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>present</string>
+            </array>
+        </dict>
+    </array>
+
+    <key>NSCameraUsageDescription</key>
+    <string>Present uses the camera to add photos to your family diary entries.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Present uses the photo library to add photos to your family diary entries.</string>
+    <key>NSFaceIDUsageDescription</key>
+    <string>Present uses Face ID to let you log in quickly and securely.</string>
+
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>fetch</string>
+        <string>remote-notification</string>
+    </array>
+
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <false/>
+    </dict>
+
+    <key>io.flutter.embedded_views_preview</key>
+    <true/>
+    <key>CADisableMinimumFrameDurationOnPhone</key>
+    <true/>
+    <key>UIApplicationSupportsIndirectInputEvents</key>
+    <true/>
+
+    <key>CFBundleLocalizations</key>
+    <array>
+        <string>pt-PT</string>
+        <string>pt-BR</string>
+        <string>en</string>
+        <string>zh-Hans</string>
+        <string>hi</string>
+        <string>es</string>
+        <string>ar</string>
+        <string>fr</string>
+        <string>bn</string>
+        <string>ru</string>
+        <string>id</string>
+    </array>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
+</dict>
+</plist>
