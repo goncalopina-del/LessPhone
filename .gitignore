@@ -43,3 +43,14 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Local properties
+/android/local.properties
+
+# Present app archive and docs
+/present app.zip
+/present app/
+/present-functional-specs.html
+/present-tech-architecture.html
+
+
