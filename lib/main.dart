@@ -37,8 +37,12 @@ Future<void> main() async {
   await Hive.openBox<String>('prefs');
   await Hive.openBox<dynamic>('session_cache');
 
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  try {
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  } catch (_) {
+    // Firebase init may fail on web or without valid config — continue without it
+  }
 
   assert(Env.isConfigured, 'SUPABASE_URL and SUPABASE_ANON_KEY must be set');
   await Supabase.initialize(
