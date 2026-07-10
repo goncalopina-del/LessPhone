@@ -72,7 +72,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(path: Routes.auth, builder: (_, __) => const AuthScreen()),
       GoRoute(
         path: Routes.authConfirm,
-        builder: (_, state) => AuthScreen(magicLinkToken: state.uri.queryParameters['token']),
+        builder: (_, state) => AuthScreen(
+          magicLinkToken: state.uri.queryParameters['token'],
+          magicLinkCode: state.uri.queryParameters['code'],
+          magicLinkTokenHash: state.uri.queryParameters['token_hash'],
+        ),
       ),
       GoRoute(path: Routes.familySetup, builder: (_, __) => const FamilySetupScreen()),
       GoRoute(

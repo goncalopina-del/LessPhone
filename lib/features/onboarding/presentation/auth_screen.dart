@@ -13,7 +13,14 @@ import '../../../shared/widgets/present_text_field.dart';
 
 class AuthScreen extends ConsumerStatefulWidget {
   final String? magicLinkToken;
-  const AuthScreen({super.key, this.magicLinkToken});
+  final String? magicLinkCode;
+  final String? magicLinkTokenHash;
+  const AuthScreen({
+    super.key,
+    this.magicLinkToken,
+    this.magicLinkCode,
+    this.magicLinkTokenHash,
+  });
 
   @override
   ConsumerState<AuthScreen> createState() => _AuthScreenState();
@@ -21,17 +28,28 @@ class AuthScreen extends ConsumerStatefulWidget {
 
 class _AuthScreenState extends ConsumerState<AuthScreen> {
   final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   bool _isLoading = false;
   bool _magicLinkSent = false;
+  bool _usingPassword = false;
+  bool _isSignUp = false;
   String? _error;
+
+  AppLocalizations get l10n => AppLocalizations.of(context);
 
   @override
   void initState() {
     super.initState();
-    if (widget.magicLinkToken != null) {
-      _handleMagicLinkCallback(widget.magicLinkToken!);
+    if (widget.magicLinkToken != null ||
+        widget.magicLinkCode != null ||
+        widget.magicLinkTokenHash != null) {
+      _handleMagicLinkCallback(
+        code: widget.magicLinkCode,
+        token: widget.magicLinkToken,
+        tokenHash: widget.magicLinkTokenHash,
+      );
     } else {
       _maybeAuthenticateWithBiometric();
     }
@@ -40,6 +58,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
   @override
   void dispose() {
     _emailController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -63,11 +82,26 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
     } catch (_) {}
   }
 
-  Future<void> _handleMagicLinkCallback(String token) async {
+  Future<void> _handleMagicLinkCallback({
+    String? code,
+    String? token,
+    String? tokenHash,
+  }) async {
     setState(() => _isLoading = true);
     try {
-      await ref.read(authRepositoryProvider).handleMagicLinkToken(token);
-      if (mounted) context.go(Routes.home);
+      final session = await ref
+          .read(authRepositoryProvider)
+          .handleMagicLinkCallback(code: code, token: token, tokenHash: tokenHash);
+      if (session != null && mounted) {
+        context.go(Routes.home);
+        return;
+      }
+      if (mounted) {
+        setState(() {
+          _error = AppLocalizations.of(context).errorAuthFailed;
+          _isLoading = false;
+        });
+      }
     } catch (_) {
       if (mounted) {
         setState(() {
@@ -108,7 +142,45 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
       await ref.read(authRepositoryProvider).sendMagicLink(_emailController.text);
       if (mounted) setState(() => _magicLinkSent = true);
     } catch (_) {
-      if (mounted) setState(() => _error = AppLocalizations.of(context).errorGeneric);
+      if (mounted) setState(() => _error = l10n.errorGeneric);
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
+  }
+
+  Future<void> _signInWithEmail() async {
+    if (!(_formKey.currentState?.validate() ?? false)) return;
+    setState(() { _isLoading = true; _error = null; });
+    try {
+      final session = await ref
+          .read(authRepositoryProvider)
+          .signInWithEmail(_emailController.text, _passwordController.text);
+      if (session != null && mounted) {
+        context.go(Routes.home);
+        return;
+      }
+      if (mounted) setState(() => _error = l10n.errorAuthFailed);
+    } catch (_) {
+      if (mounted) setState(() => _error = l10n.errorAuthFailed);
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
+    }
+  }
+
+  Future<void> _signUpWithEmail() async {
+    if (!(_formKey.currentState?.validate() ?? false)) return;
+    setState(() { _isLoading = true; _error = null; });
+    try {
+      final session = await ref
+          .read(authRepositoryProvider)
+          .signUpWithEmail(_emailController.text, _passwordController.text);
+      if (session != null && mounted) {
+        context.go(Routes.home);
+        return;
+      }
+      if (mounted) setState(() => _magicLinkSent = true);
+    } catch (_) {
+      if (mounted) setState(() => _error = l10n.errorGeneric);
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
@@ -152,24 +224,63 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
                       controller: _emailController,
                       hintText: l10n.authEmailPlaceholder,
                       keyboardType: TextInputType.emailAddress,
-                      textInputAction: TextInputAction.done,
-                      onSubmitted: (_) => _sendMagicLink(),
+                      textInputAction: TextInputAction.next,
                       validator: (v) {
                         final value = v?.trim() ?? '';
                         final ok = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$').hasMatch(value);
                         return ok ? null : l10n.errorInvalidEmail;
                       },
                     ),
+                    if (_usingPassword) ...[
+                      const SizedBox(height: 12),
+                      PresentTextField(
+                        controller: _passwordController,
+                        hintText: l10n.authPasswordPlaceholder,
+                        obscureText: true,
+                        textInputAction: TextInputAction.done,
+                        onSubmitted: (_) => _isSignUp ? _signUpWithEmail() : _signInWithEmail(),
+                        validator: (v) {
+                          final value = v ?? '';
+                          return value.length >= 6 ? null : l10n.authInvalidPassword;
+                        },
+                      ),
+                    ],
                     const SizedBox(height: 12),
                     SizedBox(
                       width: double.infinity,
                       child: OutlinedButton(
-                        onPressed: _isLoading ? null : _sendMagicLink,
+                        onPressed: _isLoading
+                            ? null
+                            : (_usingPassword
+                                ? (_isSignUp ? _signUpWithEmail : _signInWithEmail)
+                                : _sendMagicLink),
                         child: _isLoading
                             ? const SizedBox(height: 18, width: 18, child: CircularProgressIndicator(strokeWidth: 2, color: AppColors.teal))
-                            : Text(l10n.authSendMagicLink),
+                            : Text(_usingPassword
+                                ? (_isSignUp ? l10n.authCreateAccount : l10n.authSignIn)
+                                : l10n.authSendMagicLink),
                       ),
                     ),
+                    const SizedBox(height: 8),
+                    TextButton(
+                      onPressed: _isLoading
+                          ? null
+                          : () => setState(() => _usingPassword = !_usingPassword),
+                      child: Text(
+                        _usingPassword ? l10n.authUseMagicLink : l10n.authUsePassword,
+                        style: const TextStyle(color: AppColors.teal, fontSize: 13),
+                      ),
+                    ),
+                    if (_usingPassword)
+                      TextButton(
+                        onPressed: _isLoading
+                            ? null
+                            : () => setState(() => _isSignUp = !_isSignUp),
+                        child: Text(
+                          _isSignUp ? l10n.authHaveAccount : l10n.authNoAccount,
+                          style: TextStyle(color: AppColors.paper.withOpacity(0.4), fontSize: 12),
+                        ),
+                      ),
                   ]),
                 ).animate().fadeIn(delay: 260.ms, duration: 350.ms),
                 const SizedBox(height: 16),

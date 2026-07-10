@@ -101,6 +101,31 @@ class AppLocalizationsPt extends AppLocalizations {
   String get authBiometricPrompt => 'Autentica para continuar';
 
   @override
+  String get authPasswordPlaceholder => 'Password';
+
+  @override
+  String get authUsePassword => 'Continue with email & password';
+
+  @override
+  String get authUseMagicLink => 'Use magic link instead';
+
+  @override
+  String get authSignIn => 'Sign in';
+
+  @override
+  String get authCreateAccount => 'Create account';
+
+  @override
+  String get authNoAccount => 'No account? Create one';
+
+  @override
+  String get authHaveAccount => 'Already have an account? Sign in';
+
+  @override
+  String get authInvalidPassword =>
+      'Please enter a password (min. 6 characters)';
+
+  @override
   String setupStep(int current, int total) {
     return 'Passo $current de $total';
   }

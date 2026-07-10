@@ -42,6 +42,14 @@
   "authNoPassword": "No password. More secure.",
   "authOr": "or",
   "authBiometricPrompt": "Authenticate to continue",
+  "authPasswordPlaceholder": "Password",
+  "authUsePassword": "Continue with email & password",
+  "authUseMagicLink": "Use magic link instead",
+  "authSignIn": "Sign in",
+  "authCreateAccount": "Create account",
+  "authNoAccount": "No account? Create one",
+  "authHaveAccount": "Already have an account? Sign in",
+  "authInvalidPassword": "Please enter a password (min. 6 characters)",
   "setupStep": "Step {current} of {total}",
   "@setupStep": {
     "placeholders": {

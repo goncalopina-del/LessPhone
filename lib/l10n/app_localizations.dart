@@ -284,6 +284,54 @@ abstract class AppLocalizations {
   /// **'Authenticate to continue'**
   String get authBiometricPrompt;
 
+  /// No description provided for @authPasswordPlaceholder.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get authPasswordPlaceholder;
+
+  /// No description provided for @authUsePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with email & password'**
+  String get authUsePassword;
+
+  /// No description provided for @authUseMagicLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Use magic link instead'**
+  String get authUseMagicLink;
+
+  /// No description provided for @authSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get authSignIn;
+
+  /// No description provided for @authCreateAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Create account'**
+  String get authCreateAccount;
+
+  /// No description provided for @authNoAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'No account? Create one'**
+  String get authNoAccount;
+
+  /// No description provided for @authHaveAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account? Sign in'**
+  String get authHaveAccount;
+
+  /// No description provided for @authInvalidPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a password (min. 6 characters)'**
+  String get authInvalidPassword;
+
   /// No description provided for @setupStep.
   ///
   /// In en, this message translates to:

@@ -1,3 +1,5 @@
+import 'dart:developer' as dev;
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -23,6 +25,11 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  FlutterError.onError = (details) {
+    dev.log('FlutterError: ${details.exception}',
+        error: details.exception, stackTrace: details.stack);
+  };
+
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -33,38 +40,67 @@ Future<void> main() async {
     statusBarIconBrightness: Brightness.dark,
   ));
 
-  await Hive.initFlutter();
-  await Hive.openBox<String>('prefs');
-  await Hive.openBox<dynamic>('session_cache');
+  try {
+    await Hive.initFlutter();
+    await Hive.openBox<String>('prefs');
+    await Hive.openBox<dynamic>('session_cache');
+  } catch (e, st) {
+    dev.log('Hive init failed: $e', error: e, stackTrace: st);
+  }
 
   try {
     await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  } catch (_) {
-    // Firebase init may fail on web or without valid config — continue without it
+  } catch (e, st) {
+    dev.log('Firebase init skipped: $e', error: e, stackTrace: st);
   }
 
   assert(Env.isConfigured, 'SUPABASE_URL and SUPABASE_ANON_KEY must be set');
-  await Supabase.initialize(
-    url: Env.supabaseUrl,
-    anonKey: Env.supabaseAnonKey,
-    authOptions: const FlutterAuthClientOptions(
-      authFlowType: AuthFlowType.pkce,
-      autoRefreshToken: true,
-    ),
-    realtimeClientOptions: const RealtimeClientOptions(eventsPerSecond: 10),
-    storageOptions: const StorageClientOptions(retryAttempts: 3),
-  );
-
-  await Purchases.setLogLevel(LogLevel.warn);
-  final rcKey = defaultTargetPlatform == TargetPlatform.iOS
-      ? Env.revenueCatAppleKey
-      : Env.revenueCatGoogleKey;
-  if (rcKey.isNotEmpty) {
-    await Purchases.configure(PurchasesConfiguration(rcKey));
+  try {
+    await Supabase.initialize(
+      url: Env.supabaseUrl,
+      anonKey: Env.supabaseAnonKey,
+      authOptions: const FlutterAuthClientOptions(
+        authFlowType: AuthFlowType.pkce,
+        autoRefreshToken: true,
+      ),
+      realtimeClientOptions: const RealtimeClientOptions(eventsPerSecond: 10),
+      storageOptions: const StorageClientOptions(retryAttempts: 3),
+    );
+  } catch (e, st) {
+    dev.log('Supabase init failed: $e', error: e, stackTrace: st);
   }
 
-  runApp(const ProviderScope(child: PresentApp()));
+  if (!kIsWeb) {
+    try {
+      await Purchases.setLogLevel(LogLevel.warn);
+      final rcKey = defaultTargetPlatform == TargetPlatform.iOS
+          ? Env.revenueCatAppleKey
+          : Env.revenueCatGoogleKey;
+      if (rcKey.isNotEmpty) {
+        await Purchases.configure(PurchasesConfiguration(rcKey));
+      }
+    } catch (e, st) {
+      dev.log('RevenueCat init skipped: $e', error: e, stackTrace: st);
+    }
+  }
+
+  try {
+    runApp(const ProviderScope(child: PresentApp()));
+  } catch (e, st) {
+    dev.log('runApp failed: $e', error: e, stackTrace: st);
+    runApp(MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(24),
+            child: Text('Startup error:\n\n$e\n\n$st',
+                style: const TextStyle(color: Colors.red)),
+          ),
+        ),
+      ),
+    ));
+  }
 }
 
 class PresentApp extends ConsumerWidget {
