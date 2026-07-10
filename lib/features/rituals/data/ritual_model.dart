@@ -20,7 +20,12 @@ class RitualItem {
     final titleI18n = (json['title_i18n'] as Map?) ?? {};
     final langOnly = locale.split('_').first;
 
-    final title = (titleI18n[locale] ?? titleI18n[langOnly] ?? titleI18n['en'] ?? (titleI18n.isNotEmpty ? titleI18n.values.first : '')) as String;
+    final localeAlt = locale.replaceAll('_', '-');
+    final title = (titleI18n[locale] ??
+        titleI18n[localeAlt] ??
+        titleI18n[langOnly] ??
+        titleI18n['en'] ??
+        (titleI18n.isNotEmpty ? titleI18n.values.first : '')) as String;
 
     return RitualItem(
       id: json['id'] as String,
