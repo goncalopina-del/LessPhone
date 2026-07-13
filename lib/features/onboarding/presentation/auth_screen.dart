@@ -8,7 +8,7 @@ import '../../../core/auth/auth_provider.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/security/secure_storage.dart';
 import '../../../core/theme/app_theme.dart';
-import '../../../l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../../shared/widgets/present_text_field.dart';
 
 class AuthScreen extends ConsumerStatefulWidget {

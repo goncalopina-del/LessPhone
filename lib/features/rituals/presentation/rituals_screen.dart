@@ -7,7 +7,7 @@ import '../../../core/auth/auth_provider.dart';
 import '../../../core/database/supabase_client.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/theme/app_theme.dart';
-import '../../../l10n/app_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../data/ritual_model.dart';
 
 final _ritualsProvider = FutureProvider.family<List<RitualItem>, String>((ref, locale) async {

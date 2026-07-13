@@ -1,25 +1,25 @@
 {
   "@@locale": "id",
   "appName": "Present",
-  "continueButton": "Lanjutkan",
-  "cancelButton": "Batal",
-  "skipButton": "Lewati",
-  "doneButton": "Selesai",
-  "backButton": "Kembali",
-  "saveButton": "Simpan",
-  "retryButton": "Coba lagi",
-  "languageScreenTitle": "Pilih bahasa Anda",
-  "languageScreenSubtitle": "Anda dapat mengubahnya kapan saja di Pengaturan",
-  "onboardingProblemTitle": "Layar selalu ada di antara kita",
-  "onboardingProblemBody": "Rata-rata kita menghabiskan 4 jam 17 menit sehari di ponsel — sering kali di samping orang-orang yang kita cintai.",
-  "onboardingSolutionTitle": "Present mengubah fokus",
-  "onboardingSolutionBody": "Kami tidak memblokir. Kami mengganti. Alih-alih menggulir, lakukan sesuatu yang benar-benar berarti.",
-  "onboardingHowTitle": "Cara kerjanya",
-  "onboardingHowSteps": "1. Mulai Sesi Bersama\n2. Keluarga bergabung\n3. Kumpulkan poin bersama",
-  "onboardingStartTitle": "Siap untuk hadir?",
-  "onboardingStartCta": "Buat akun",
-  "onboardingAlreadyHaveAccount": "Saya sudah punya akun",
-  "onboardingFamiliesCount": "{count} keluarga sudah bergabung",
+  "continueButton": "Continue",
+  "cancelButton": "Cancel",
+  "skipButton": "Skip",
+  "doneButton": "Done",
+  "backButton": "Back",
+  "saveButton": "Save",
+  "retryButton": "Try again",
+  "languageScreenTitle": "Choose your language",
+  "languageScreenSubtitle": "You can change this anytime in Settings",
+  "onboardingProblemTitle": "The screen is always in the way",
+  "onboardingProblemBody": "On average, we spend 4 hours 17 minutes a day on our phones — often beside the people we love most.",
+  "onboardingSolutionTitle": "Present changes the focus",
+  "onboardingSolutionBody": "We don't block. We replace. Instead of scrolling, do something that actually matters.",
+  "onboardingHowTitle": "Here's how it works",
+  "onboardingHowSteps": "1. Start a Present Session\n2. Family joins in\n3. Earn presence points together",
+  "onboardingStartTitle": "Ready to be present?",
+  "onboardingStartCta": "Create account",
+  "onboardingAlreadyHaveAccount": "I already have an account",
+  "onboardingFamiliesCount": "{count} families already present",
   "@onboardingFamiliesCount": {
     "placeholders": {
       "count": {
@@ -27,11 +27,11 @@
       }
     }
   },
-  "authSignInWithApple": "Lanjutkan dengan Apple",
-  "authSignInWithGoogle": "Lanjutkan dengan Google",
-  "authEmailPlaceholder": "email@anda.com",
-  "authSendMagicLink": "Kirim tautan masuk",
-  "authMagicLinkSent": "Periksa email Anda — tautan dikirim ke {email}",
+  "authSignInWithApple": "Continue with Apple",
+  "authSignInWithGoogle": "Continue with Google",
+  "authEmailPlaceholder": "your@email.com",
+  "authSendMagicLink": "Send magic link",
+  "authMagicLinkSent": "Check your email — link sent to {email}",
   "@authMagicLinkSent": {
     "placeholders": {
       "email": {
@@ -39,10 +39,18 @@
       }
     }
   },
-  "authNoPassword": "Tanpa kata sandi. Lebih aman.",
-  "authOr": "atau",
-  "authBiometricPrompt": "Verifikasi untuk melanjutkan",
-  "setupStep": "Langkah {current} dari {total}",
+  "authNoPassword": "No password. More secure.",
+  "authOr": "or",
+  "authBiometricPrompt": "Authenticate to continue",
+  "authPasswordPlaceholder": "Password",
+  "authUsePassword": "Continue with email & password",
+  "authUseMagicLink": "Use magic link instead",
+  "authSignIn": "Sign in",
+  "authCreateAccount": "Create account",
+  "authNoAccount": "No account? Create one",
+  "authHaveAccount": "Already have an account? Sign in",
+  "authInvalidPassword": "Please enter a password (min. 6 characters)",
+  "setupStep": "Step {current} of {total}",
   "@setupStep": {
     "placeholders": {
       "current": {
@@ -53,20 +61,20 @@
       }
     }
   },
-  "setupProfileTitle": "Siapa nama Anda?",
-  "setupProfileNameHint": "Nama Anda",
-  "setupFamilyTitle": "Beri nama keluarga Anda",
-  "setupFamilyHint": "mis: Keluarga Santoso",
-  "setupFamilyRole": "Peran Anda",
-  "setupRoleAdult": "Dewasa",
-  "setupRoleYoung": "Muda",
-  "setupInviteTitle": "Undang keluarga Anda",
-  "setupInviteSubtitle": "Opsional — bisa dilakukan nanti",
-  "setupInviteEmailHint": "Email anggota keluarga",
-  "setupInviteAddAnother": "+ Tambah orang lain",
-  "setupCreateFamily": "Buat keluarga →",
-  "setupCanInviteLater": "Anda bisa mengundang lebih banyak nanti",
-  "homeGreeting": "Halo, {name} 👋",
+  "setupProfileTitle": "What's your name?",
+  "setupProfileNameHint": "Your name",
+  "setupFamilyTitle": "Name your family",
+  "setupFamilyHint": "e.g. The Silva Family",
+  "setupFamilyRole": "Your role",
+  "setupRoleAdult": "Adult",
+  "setupRoleYoung": "Young person",
+  "setupInviteTitle": "Invite your family",
+  "setupInviteSubtitle": "Optional — you can do this later",
+  "setupInviteEmailHint": "Family member's email",
+  "setupInviteAddAnother": "+ Add another",
+  "setupCreateFamily": "Create family →",
+  "setupCanInviteLater": "You can invite more later",
+  "homeGreeting": "Hello, {name} 👋",
   "@homeGreeting": {
     "placeholders": {
       "name": {
@@ -74,8 +82,8 @@
       }
     }
   },
-  "homeOfflineScoreLabel": "Skor Offline Minggu Ini",
-  "homeScoreUp": "↑ {pts} poin dari minggu lalu",
+  "homeOfflineScoreLabel": "Weekly Offline Score",
+  "homeScoreUp": "↑ {pts}pts vs last week",
   "@homeScoreUp": {
     "placeholders": {
       "pts": {
@@ -83,7 +91,7 @@
       }
     }
   },
-  "homeScoreDown": "↓ {pts} poin dari minggu lalu",
+  "homeScoreDown": "↓ {pts}pts vs last week",
   "@homeScoreDown": {
     "placeholders": {
       "pts": {
@@ -91,7 +99,7 @@
       }
     }
   },
-  "homeMembersPresent": "{count} hadir",
+  "homeMembersPresent": "{count} present",
   "@homeMembersPresent": {
     "placeholders": {
       "count": {
@@ -100,14 +108,14 @@
     }
   },
   "homeMemberOffline": "offline",
-  "homeStartSession": "▶  Mulai Sesi Bersama",
-  "homeRitualSuggested": "Aktivitas yang disarankan",
-  "homeDiaryThisWeek": "Jurnal minggu ini",
-  "sessionTitle": "Sesi Bersama",
-  "sessionMinutesTogether": "menit bersama",
-  "sessionStartNow": "Mulai sekarang",
-  "sessionEndButton": "Akhiri sesi",
-  "sessionEndConfirm": "Akhiri sesi {duration} menit?",
+  "homeStartSession": "▶  Start Present Session",
+  "homeRitualSuggested": "Suggested ritual",
+  "homeDiaryThisWeek": "This week's diary",
+  "sessionTitle": "Present Session",
+  "sessionMinutesTogether": "minutes together",
+  "sessionStartNow": "Start now",
+  "sessionEndButton": "End session",
+  "sessionEndConfirm": "End {duration} minute session?",
   "@sessionEndConfirm": {
     "placeholders": {
       "duration": {
@@ -115,12 +123,12 @@
       }
     }
   },
-  "sessionKeepGoing": "Lanjutkan",
-  "sessionCheckInPrompt": "Apakah Anda masih di sini? ✋",
-  "sessionCheckInYes": "Ya, saya di sini",
-  "sessionCheckInNo": "Saya terganggu",
-  "sessionCompletedTitle": "Sesi selesai!",
-  "sessionCompletedScore": "+{pts} poin",
+  "sessionKeepGoing": "Keep going",
+  "sessionCheckInPrompt": "Still present? ✋",
+  "sessionCheckInYes": "Yes, still here",
+  "sessionCheckInNo": "I got distracted",
+  "sessionCompletedTitle": "Session complete!",
+  "sessionCompletedScore": "+{pts} points",
   "@sessionCompletedScore": {
     "placeholders": {
       "pts": {
@@ -128,7 +136,7 @@
       }
     }
   },
-  "sessionStreakMessage": "{days} hari berturut-turut 🔥",
+  "sessionStreakMessage": "{days} day streak 🔥",
   "@sessionStreakMessage": {
     "placeholders": {
       "days": {
@@ -136,11 +144,11 @@
       }
     }
   },
-  "sessionDiaryPrompt": "Bagaimana rasanya?",
-  "sessionMinimumNotMet": "Sesi kurang dari 5 menit tidak dihitung",
-  "dashboardTitle": "Dasbor",
-  "dashboardOfflineScore": "Skor Offline",
-  "dashboardPercentile": "Top {pct}% keluarga",
+  "sessionDiaryPrompt": "How was it?",
+  "sessionMinimumNotMet": "Sessions under 5 minutes don't count towards your score",
+  "dashboardTitle": "Dashboard",
+  "dashboardOfflineScore": "Offline Score",
+  "dashboardPercentile": "Top {pct}% of families",
   "@dashboardPercentile": {
     "placeholders": {
       "pct": {
@@ -148,19 +156,19 @@
       }
     }
   },
-  "dashboardTimeTogether": "Waktu bersama",
-  "dashboardSessions": "Sesi",
+  "dashboardTimeTogether": "Time together",
+  "dashboardSessions": "Sessions",
   "dashboardStreak": "Streak",
-  "dashboardBestSession": "Sesi terbaik",
-  "dashboardPeriodWeek": "Minggu",
-  "dashboardPeriodMonth": "Bulan",
-  "dashboardPeriodAll": "Semua waktu",
-  "dashboardPremiumRequired": "Buka riwayat lengkap",
-  "ritualsTitle": "Ritual",
-  "ritualsSuggestedNow": "Disarankan sekarang",
-  "ritualsOther": "Ritual lainnya",
-  "ritualsStartThis": "Mulai ritual ini ▶",
-  "ritualsMinutes": "{min} menit",
+  "dashboardBestSession": "Best session",
+  "dashboardPeriodWeek": "Week",
+  "dashboardPeriodMonth": "Month",
+  "dashboardPeriodAll": "All time",
+  "dashboardPremiumRequired": "Unlock full history",
+  "ritualsTitle": "Rituals",
+  "ritualsSuggestedNow": "Suggested now",
+  "ritualsOther": "Other rituals",
+  "ritualsStartThis": "Start this ritual ▶",
+  "ritualsMinutes": "{min} min",
   "@ritualsMinutes": {
     "placeholders": {
       "min": {
@@ -168,8 +176,8 @@
       }
     }
   },
-  "familyTitle": "Keluarga",
-  "familyMembers": "Anggota ({count})",
+  "familyTitle": "Family",
+  "familyMembers": "Members ({count})",
   "@familyMembers": {
     "placeholders": {
       "count": {
@@ -177,14 +185,15 @@
       }
     }
   },
-  "familyActiveNow": "Aktif sekarang",
-  "familyInvitePending": "Undangan menunggu",
-  "familyInviteMember": "+ Undang anggota keluarga",
-  "familyInviteLink": "Salin tautan undangan",
-  "familyInviteLinkCopied": "Tautan disalin!",
+  "familyActiveNow": "Active now",
+  "familyInvitePending": "Invite pending",
+  "familyInviteMember": "+ Invite family member",
+  "familyInviteLink": "Copy invite link",
+  "familyInviteLinkCopied": "Link copied!",
+  "familyInviteShareWhatsApp": "Invite via WhatsApp",
   "familyRoleAdmin": "Admin",
-  "familyRoleAdult": "Dewasa",
-  "familyRoleYoung": "Muda",
+  "familyRoleAdult": "Adult",
+  "familyRoleYoung": "Young",
   "familyPointsLabel": "{pts}pts",
   "@familyPointsLabel": {
     "placeholders": {
@@ -193,11 +202,11 @@
       }
     }
   },
-  "diaryTitle": "Jurnal",
-  "diaryHowWasIt": "Bagaimana rasanya?",
-  "diaryAddNote": "Tambah catatan (opsional)",
-  "diaryNoteHint": "Beberapa kata tentang momen ini…",
-  "diarySessionDuration": "{min} menit bersama",
+  "diaryTitle": "Diary",
+  "diaryHowWasIt": "How was it?",
+  "diaryAddNote": "Add a note (optional)",
+  "diaryNoteHint": "A few words about this moment…",
+  "diarySessionDuration": "{min} min together",
   "@diarySessionDuration": {
     "placeholders": {
       "min": {
@@ -205,21 +214,21 @@
       }
     }
   },
-  "diaryNoEntries": "Belum ada entri jurnal.\nMulai Sesi Bersama pertama Anda!",
-  "settingsTitle": "Pengaturan",
-  "settingsLanguage": "Bahasa",
-  "settingsNotifications": "Notifikasi",
-  "settingsNotificationsRituals": "Saran ritual",
-  "settingsNotificationsStreak": "Pengingat streak",
-  "settingsNotificationsFamily": "Aktivitas keluarga",
-  "settingsPrivacy": "Privasi",
-  "settingsBiometric": "Face ID / Sidik Jari",
-  "settingsMfa": "Autentikasi dua faktor",
-  "settingsExportData": "Ekspor data saya",
-  "settingsDeleteAccount": "Hapus akun",
-  "settingsSubscription": "Langganan",
-  "settingsSignOut": "Keluar",
-  "settingsVersion": "Versi {version}",
+  "diaryNoEntries": "No diary entries yet.\nStart your first Present Session!",
+  "settingsTitle": "Settings",
+  "settingsLanguage": "Language",
+  "settingsNotifications": "Notifications",
+  "settingsNotificationsRituals": "Ritual suggestions",
+  "settingsNotificationsStreak": "Streak reminders",
+  "settingsNotificationsFamily": "Family activity",
+  "settingsPrivacy": "Privacy",
+  "settingsBiometric": "Face ID / Fingerprint",
+  "settingsMfa": "Two-factor authentication",
+  "settingsExportData": "Export my data",
+  "settingsDeleteAccount": "Delete account",
+  "settingsSubscription": "Subscription",
+  "settingsSignOut": "Sign out",
+  "settingsVersion": "Version {version}",
   "@settingsVersion": {
     "placeholders": {
       "version": {
@@ -227,25 +236,27 @@
       }
     }
   },
-  "paywallTitle": "Tetap Hadir",
-  "paywallSubtitle": "Kurang dari secangkir kopi per bulan untuk seluruh keluarga.",
-  "paywallTrialBadge": "21 hari gratis",
-  "paywallPlanFamily": "Keluarga",
-  "paywallPlanFamilyDesc": "Semua termasuk. Satu paket.",
-  "paywallPlanIndividual": "Individu",
-  "paywallPlanIndividualDesc": "Pengalaman solo premium.",
-  "paywallPerMonth": "/bulan",
-  "paywallStartTrial": "Mulai uji coba gratis",
-  "paywallNoCard": "Tanpa kartu kredit",
-  "paywallMaybeLater": "Mungkin nanti",
-  "paywallVsBuiltIn": "Tidak seperti Screen Time Apple atau Digital Wellbeing Google — kami tidak hanya bilang BERHENTI. Kami bilang LAKUKAN INI SEBAGAI GANTINYA.",
-  "paywallRestorePurchases": "Pulihkan pembelian",
-  "errorGeneric": "Terjadi kesalahan. Coba lagi.",
-  "errorNetwork": "Tidak ada koneksi internet",
-  "errorAuthFailed": "Autentikasi gagal",
-  "errorInvalidEmail": "Masukkan email yang valid",
-  "errorSessionMinimum": "Waktu minimum sesi: 5 menit",
-  "notifRitualTitle": "Selamat malam, {family} 🌿",
+  "paywallTitle": "Stay Present",
+  "paywallSubtitle": "Less than a coffee per month for your whole family.",
+  "paywallTrialBadge": "21-day free trial",
+  "paywallPlanFamily": "Family",
+  "paywallPlanFamilyDesc": "Everyone included. One plan.",
+  "paywallPlanIndividual": "Individual",
+  "paywallPlanIndividualDesc": "Solo premium experience.",
+  "paywallPerMonth": "/month",
+  "paywallBilledMonthly": "/month",
+  "paywallBilledAnnually": "/year",
+  "paywallStartTrial": "Start free trial",
+  "paywallNoCard": "No credit card required",
+  "paywallMaybeLater": "Maybe later",
+  "paywallVsBuiltIn": "Unlike Apple Screen Time or Google Digital Wellbeing — we don't just say STOP. We say DO THIS INSTEAD.",
+  "paywallRestorePurchases": "Restore purchases",
+  "errorGeneric": "Something went wrong. Please try again.",
+  "errorNetwork": "No internet connection",
+  "errorAuthFailed": "Authentication failed",
+  "errorInvalidEmail": "Please enter a valid email",
+  "errorSessionMinimum": "Minimum session time: 5 minutes",
+  "notifRitualTitle": "Good evening, {family} 🌿",
   "@notifRitualTitle": {
     "placeholders": {
       "family": {
@@ -253,9 +264,9 @@
       }
     }
   },
-  "notifRitualBody": "Waktu yang tepat untuk 30 menit bersama.",
-  "notifStreakTitle": "Streak Anda dalam bahaya 🔥",
-  "notifStreakBody": "Anda sudah {days} hari berturut-turut. Jangan hentikan sekarang!",
+  "notifRitualBody": "A great time for 30 minutes together.",
+  "notifStreakTitle": "Your streak is at risk 🔥",
+  "notifStreakBody": "You have {days} days in a row. Don't break it now!",
   "@notifStreakBody": {
     "placeholders": {
       "days": {
@@ -263,7 +274,7 @@
       }
     }
   },
-  "notifInviteAcceptedTitle": "{name} bergabung dengan {family}!",
+  "notifInviteAcceptedTitle": "{name} joined {family}!",
   "@notifInviteAcceptedTitle": {
     "placeholders": {
       "name": {
@@ -274,8 +285,8 @@
       }
     }
   },
-  "notifTrialEndingTitle": "Uji coba gratis segera berakhir ⏳",
-  "notifTrialEndingBody": "{days} hari tersisa. Lanjutkan dengan harga kurang dari kopi per bulan.",
+  "notifTrialEndingTitle": "Your free trial ends soon ⏳",
+  "notifTrialEndingBody": "{days} days left. Continue for less than a coffee a month.",
   "@notifTrialEndingBody": {
     "placeholders": {
       "days": {

@@ -1,25 +1,25 @@
 {
   "@@locale": "hi",
   "appName": "Present",
-  "continueButton": "जारी रखें",
-  "cancelButton": "रद्द करें",
-  "skipButton": "छोड़ें",
-  "doneButton": "हो गया",
-  "backButton": "वापस",
-  "saveButton": "सहेजें",
-  "retryButton": "पुनः प्रयास करें",
-  "languageScreenTitle": "अपनी भाषा चुनें",
-  "languageScreenSubtitle": "आप इसे सेटिंग में कभी भी बदल सकते हैं",
-  "onboardingProblemTitle": "स्क्रीन हमेशा बीच में आती है",
-  "onboardingProblemBody": "हम औसतन रोज़ 4 घंटे 17 मिनट फोन पर बिताते हैं — अक्सर अपने प्रियजनों के पास बैठकर।",
-  "onboardingSolutionTitle": "Present आपका ध्यान बदलता है",
-  "onboardingSolutionBody": "हम ब्लॉक नहीं करते। हम बदलते हैं। स्क्रॉल करने की बजाय, वो करें जो वाकई ज़रूरी है।",
-  "onboardingHowTitle": "यह कैसे काम करता है",
-  "onboardingHowSteps": "1. Present सत्र शुरू करें\n2. परिवार जुड़ें\n3. साथ में अंक अर्जित करें",
-  "onboardingStartTitle": "क्या आप तैयार हैं?",
-  "onboardingStartCta": "खाता बनाएं",
-  "onboardingAlreadyHaveAccount": "मेरे पास पहले से खाता है",
-  "onboardingFamiliesCount": "{count} परिवार पहले से जुड़े हैं",
+  "continueButton": "Continue",
+  "cancelButton": "Cancel",
+  "skipButton": "Skip",
+  "doneButton": "Done",
+  "backButton": "Back",
+  "saveButton": "Save",
+  "retryButton": "Try again",
+  "languageScreenTitle": "Choose your language",
+  "languageScreenSubtitle": "You can change this anytime in Settings",
+  "onboardingProblemTitle": "The screen is always in the way",
+  "onboardingProblemBody": "On average, we spend 4 hours 17 minutes a day on our phones — often beside the people we love most.",
+  "onboardingSolutionTitle": "Present changes the focus",
+  "onboardingSolutionBody": "We don't block. We replace. Instead of scrolling, do something that actually matters.",
+  "onboardingHowTitle": "Here's how it works",
+  "onboardingHowSteps": "1. Start a Present Session\n2. Family joins in\n3. Earn presence points together",
+  "onboardingStartTitle": "Ready to be present?",
+  "onboardingStartCta": "Create account",
+  "onboardingAlreadyHaveAccount": "I already have an account",
+  "onboardingFamiliesCount": "{count} families already present",
   "@onboardingFamiliesCount": {
     "placeholders": {
       "count": {
@@ -27,11 +27,11 @@
       }
     }
   },
-  "authSignInWithApple": "Apple से जारी रखें",
-  "authSignInWithGoogle": "Google से जारी रखें",
-  "authEmailPlaceholder": "आपका@ईमेल.com",
-  "authSendMagicLink": "मैजिक लिंक भेजें",
-  "authMagicLinkSent": "अपना ईमेल जांचें — {email} पर लिंक भेजा गया",
+  "authSignInWithApple": "Continue with Apple",
+  "authSignInWithGoogle": "Continue with Google",
+  "authEmailPlaceholder": "your@email.com",
+  "authSendMagicLink": "Send magic link",
+  "authMagicLinkSent": "Check your email — link sent to {email}",
   "@authMagicLinkSent": {
     "placeholders": {
       "email": {
@@ -39,10 +39,18 @@
       }
     }
   },
-  "authNoPassword": "पासवर्ड नहीं। अधिक सुरक्षित।",
-  "authOr": "या",
-  "authBiometricPrompt": "जारी रखने के लिए प्रमाणित करें",
-  "setupStep": "चरण {current} / {total}",
+  "authNoPassword": "No password. More secure.",
+  "authOr": "or",
+  "authBiometricPrompt": "Authenticate to continue",
+  "authPasswordPlaceholder": "Password",
+  "authUsePassword": "Continue with email & password",
+  "authUseMagicLink": "Use magic link instead",
+  "authSignIn": "Sign in",
+  "authCreateAccount": "Create account",
+  "authNoAccount": "No account? Create one",
+  "authHaveAccount": "Already have an account? Sign in",
+  "authInvalidPassword": "Please enter a password (min. 6 characters)",
+  "setupStep": "Step {current} of {total}",
   "@setupStep": {
     "placeholders": {
       "current": {
@@ -53,20 +61,20 @@
       }
     }
   },
-  "setupProfileTitle": "आपका नाम क्या है?",
-  "setupProfileNameHint": "आपका नाम",
-  "setupFamilyTitle": "अपने परिवार का नाम दें",
-  "setupFamilyHint": "जैसे: शर्मा परिवार",
-  "setupFamilyRole": "आपकी भूमिका",
-  "setupRoleAdult": "वयस्क",
-  "setupRoleYoung": "युवा",
-  "setupInviteTitle": "परिवार को आमंत्रित करें",
-  "setupInviteSubtitle": "वैकल्पिक — बाद में भी कर सकते हैं",
-  "setupInviteEmailHint": "परिवार के सदस्य का ईमेल",
-  "setupInviteAddAnother": "+ और जोड़ें",
-  "setupCreateFamily": "परिवार बनाएं →",
-  "setupCanInviteLater": "आप बाद में और लोगों को आमंत्रित कर सकते हैं",
-  "homeGreeting": "नमस्ते, {name} 👋",
+  "setupProfileTitle": "What's your name?",
+  "setupProfileNameHint": "Your name",
+  "setupFamilyTitle": "Name your family",
+  "setupFamilyHint": "e.g. The Silva Family",
+  "setupFamilyRole": "Your role",
+  "setupRoleAdult": "Adult",
+  "setupRoleYoung": "Young person",
+  "setupInviteTitle": "Invite your family",
+  "setupInviteSubtitle": "Optional — you can do this later",
+  "setupInviteEmailHint": "Family member's email",
+  "setupInviteAddAnother": "+ Add another",
+  "setupCreateFamily": "Create family →",
+  "setupCanInviteLater": "You can invite more later",
+  "homeGreeting": "Hello, {name} 👋",
   "@homeGreeting": {
     "placeholders": {
       "name": {
@@ -74,8 +82,8 @@
       }
     }
   },
-  "homeOfflineScoreLabel": "साप्ताहिक ऑफलाइन स्कोर",
-  "homeScoreUp": "↑ पिछले हफ्ते से {pts} अंक अधिक",
+  "homeOfflineScoreLabel": "Weekly Offline Score",
+  "homeScoreUp": "↑ {pts}pts vs last week",
   "@homeScoreUp": {
     "placeholders": {
       "pts": {
@@ -83,7 +91,7 @@
       }
     }
   },
-  "homeScoreDown": "↓ पिछले हफ्ते से {pts} अंक कम",
+  "homeScoreDown": "↓ {pts}pts vs last week",
   "@homeScoreDown": {
     "placeholders": {
       "pts": {
@@ -91,7 +99,7 @@
       }
     }
   },
-  "homeMembersPresent": "{count} उपस्थित",
+  "homeMembersPresent": "{count} present",
   "@homeMembersPresent": {
     "placeholders": {
       "count": {
@@ -99,15 +107,15 @@
       }
     }
   },
-  "homeMemberOffline": "ऑफलाइन",
-  "homeStartSession": "▶  साथ का समय शुरू करें",
-  "homeRitualSuggested": "सुझाई गई गतिविधि",
-  "homeDiaryThisWeek": "इस हफ्ते की डायरी",
-  "sessionTitle": "साथ का समय",
-  "sessionMinutesTogether": "मिनट साथ",
-  "sessionStartNow": "अभी शुरू करें",
-  "sessionEndButton": "समाप्त करें",
-  "sessionEndConfirm": "{duration} मिनट का सत्र समाप्त करें?",
+  "homeMemberOffline": "offline",
+  "homeStartSession": "▶  Start Present Session",
+  "homeRitualSuggested": "Suggested ritual",
+  "homeDiaryThisWeek": "This week's diary",
+  "sessionTitle": "Present Session",
+  "sessionMinutesTogether": "minutes together",
+  "sessionStartNow": "Start now",
+  "sessionEndButton": "End session",
+  "sessionEndConfirm": "End {duration} minute session?",
   "@sessionEndConfirm": {
     "placeholders": {
       "duration": {
@@ -115,12 +123,12 @@
       }
     }
   },
-  "sessionKeepGoing": "जारी रखें",
-  "sessionCheckInPrompt": "क्या आप अभी भी यहाँ हैं? ✋",
-  "sessionCheckInYes": "हाँ, मैं यहाँ हूँ",
-  "sessionCheckInNo": "मेरा ध्यान भटका",
-  "sessionCompletedTitle": "बहुत बढ़िया!",
-  "sessionCompletedScore": "+{pts} अंक",
+  "sessionKeepGoing": "Keep going",
+  "sessionCheckInPrompt": "Still present? ✋",
+  "sessionCheckInYes": "Yes, still here",
+  "sessionCheckInNo": "I got distracted",
+  "sessionCompletedTitle": "Session complete!",
+  "sessionCompletedScore": "+{pts} points",
   "@sessionCompletedScore": {
     "placeholders": {
       "pts": {
@@ -128,7 +136,7 @@
       }
     }
   },
-  "sessionStreakMessage": "{days} दिन लगातार 🔥",
+  "sessionStreakMessage": "{days} day streak 🔥",
   "@sessionStreakMessage": {
     "placeholders": {
       "days": {
@@ -136,11 +144,11 @@
       }
     }
   },
-  "sessionDiaryPrompt": "कैसा रहा?",
-  "sessionMinimumNotMet": "5 मिनट से कम के सत्र स्कोर में नहीं गिने जाते",
-  "dashboardTitle": "डैशबोर्ड",
-  "dashboardOfflineScore": "ऑफलाइन स्कोर",
-  "dashboardPercentile": "शीर्ष {pct}% परिवारों में",
+  "sessionDiaryPrompt": "How was it?",
+  "sessionMinimumNotMet": "Sessions under 5 minutes don't count towards your score",
+  "dashboardTitle": "Dashboard",
+  "dashboardOfflineScore": "Offline Score",
+  "dashboardPercentile": "Top {pct}% of families",
   "@dashboardPercentile": {
     "placeholders": {
       "pct": {
@@ -148,19 +156,19 @@
       }
     }
   },
-  "dashboardTimeTogether": "साथ बिताया समय",
-  "dashboardSessions": "सत्र",
-  "dashboardStreak": "लगातार दिन",
-  "dashboardBestSession": "सबसे लंबा सत्र",
-  "dashboardPeriodWeek": "सप्ताह",
-  "dashboardPeriodMonth": "महीना",
-  "dashboardPeriodAll": "पूरा इतिहास",
-  "dashboardPremiumRequired": "पूरा इतिहास अनलॉक करें",
-  "ritualsTitle": "गतिविधियाँ",
-  "ritualsSuggestedNow": "अभी के लिए सुझाव",
-  "ritualsOther": "अन्य गतिविधियाँ",
-  "ritualsStartThis": "यह शुरू करें ▶",
-  "ritualsMinutes": "{min} मिनट",
+  "dashboardTimeTogether": "Time together",
+  "dashboardSessions": "Sessions",
+  "dashboardStreak": "Streak",
+  "dashboardBestSession": "Best session",
+  "dashboardPeriodWeek": "Week",
+  "dashboardPeriodMonth": "Month",
+  "dashboardPeriodAll": "All time",
+  "dashboardPremiumRequired": "Unlock full history",
+  "ritualsTitle": "Rituals",
+  "ritualsSuggestedNow": "Suggested now",
+  "ritualsOther": "Other rituals",
+  "ritualsStartThis": "Start this ritual ▶",
+  "ritualsMinutes": "{min} min",
   "@ritualsMinutes": {
     "placeholders": {
       "min": {
@@ -168,8 +176,8 @@
       }
     }
   },
-  "familyTitle": "परिवार",
-  "familyMembers": "सदस्य ({count})",
+  "familyTitle": "Family",
+  "familyMembers": "Members ({count})",
   "@familyMembers": {
     "placeholders": {
       "count": {
@@ -177,15 +185,16 @@
       }
     }
   },
-  "familyActiveNow": "अभी ऑनलाइन",
-  "familyInvitePending": "आमंत्रण लंबित",
-  "familyInviteMember": "+ परिवार को आमंत्रित करें",
-  "familyInviteLink": "आमंत्रण लिंक कॉपी करें",
-  "familyInviteLinkCopied": "लिंक कॉपी हो गया!",
-  "familyRoleAdmin": "एडमिन",
-  "familyRoleAdult": "वयस्क",
-  "familyRoleYoung": "युवा",
-  "familyPointsLabel": "{pts} अंक",
+  "familyActiveNow": "Active now",
+  "familyInvitePending": "Invite pending",
+  "familyInviteMember": "+ Invite family member",
+  "familyInviteLink": "Copy invite link",
+  "familyInviteLinkCopied": "Link copied!",
+  "familyInviteShareWhatsApp": "Invite via WhatsApp",
+  "familyRoleAdmin": "Admin",
+  "familyRoleAdult": "Adult",
+  "familyRoleYoung": "Young",
+  "familyPointsLabel": "{pts}pts",
   "@familyPointsLabel": {
     "placeholders": {
       "pts": {
@@ -193,11 +202,11 @@
       }
     }
   },
-  "diaryTitle": "डायरी",
-  "diaryHowWasIt": "कैसा रहा?",
-  "diaryAddNote": "नोट जोड़ें (वैकल्पिक)",
-  "diaryNoteHint": "इस पल के बारे में कुछ लिखें…",
-  "diarySessionDuration": "{min} मिनट साथ",
+  "diaryTitle": "Diary",
+  "diaryHowWasIt": "How was it?",
+  "diaryAddNote": "Add a note (optional)",
+  "diaryNoteHint": "A few words about this moment…",
+  "diarySessionDuration": "{min} min together",
   "@diarySessionDuration": {
     "placeholders": {
       "min": {
@@ -205,21 +214,21 @@
       }
     }
   },
-  "diaryNoEntries": "अभी तक कोई डायरी प्रविष्टि नहीं है।\nअपना पहला सत्र शुरू करें!",
-  "settingsTitle": "सेटिंग्स",
-  "settingsLanguage": "भाषा",
-  "settingsNotifications": "सूचनाएं",
-  "settingsNotificationsRituals": "गतिविधि सुझाव",
-  "settingsNotificationsStreak": "लगातार स्ट्रीक अनुस्मारक",
-  "settingsNotificationsFamily": "पारिवारिक गतिविधि",
-  "settingsPrivacy": "गोपनीयता",
-  "settingsBiometric": "फेस आईडी / फिंगरप्रिंट",
-  "settingsMfa": "दो-कारक प्रमाणीकरण",
-  "settingsExportData": "मेरा डेटा निर्यात करें",
-  "settingsDeleteAccount": "खाता हटाएं",
-  "settingsSubscription": "सदस्यता",
-  "settingsSignOut": "साइन आउट",
-  "settingsVersion": "संस्करण {version}",
+  "diaryNoEntries": "No diary entries yet.\nStart your first Present Session!",
+  "settingsTitle": "Settings",
+  "settingsLanguage": "Language",
+  "settingsNotifications": "Notifications",
+  "settingsNotificationsRituals": "Ritual suggestions",
+  "settingsNotificationsStreak": "Streak reminders",
+  "settingsNotificationsFamily": "Family activity",
+  "settingsPrivacy": "Privacy",
+  "settingsBiometric": "Face ID / Fingerprint",
+  "settingsMfa": "Two-factor authentication",
+  "settingsExportData": "Export my data",
+  "settingsDeleteAccount": "Delete account",
+  "settingsSubscription": "Subscription",
+  "settingsSignOut": "Sign out",
+  "settingsVersion": "Version {version}",
   "@settingsVersion": {
     "placeholders": {
       "version": {
@@ -227,25 +236,27 @@
       }
     }
   },
-  "paywallTitle": "उपस्थित रहें",
-  "paywallSubtitle": "महीने में एक कप चाय से भी कम में पूरे परिवार के लिए।",
-  "paywallTrialBadge": "21 दिन मुफ़्त",
-  "paywallPlanFamily": "पारिवारिक",
-  "paywallPlanFamilyDesc": "सभी शामिल। एक प्लान।",
-  "paywallPlanIndividual": "व्यक्तिगत",
-  "paywallPlanIndividualDesc": "व्यक्तिगत प्रीमियम अनुभव।",
-  "paywallPerMonth": "/माह",
-  "paywallStartTrial": "मुफ़्त ट्रायल शुरू करें",
-  "paywallNoCard": "क्रेडिट कार्ड की ज़रूरत नहीं",
-  "paywallMaybeLater": "बाद में",
-  "paywallVsBuiltIn": "Apple Screen Time या Google Digital Wellbeing के विपरीत — हम सिर्फ STOP नहीं कहते। हम कहते हैं इसकी जगह यह करें।",
-  "paywallRestorePurchases": "खरीदारी पुनर्स्थापित करें",
-  "errorGeneric": "कुछ गड़बड़ हो गई। कृपया पुनः प्रयास करें।",
-  "errorNetwork": "इंटरनेट कनेक्शन नहीं है",
-  "errorAuthFailed": "प्रमाणीकरण विफल",
-  "errorInvalidEmail": "कृपया एक वैध ईमेल दर्ज करें",
-  "errorSessionMinimum": "न्यूनतम सत्र समय: 5 मिनट",
-  "notifRitualTitle": "शुभ संध्या, {family} 🌿",
+  "paywallTitle": "Stay Present",
+  "paywallSubtitle": "Less than a coffee per month for your whole family.",
+  "paywallTrialBadge": "21-day free trial",
+  "paywallPlanFamily": "Family",
+  "paywallPlanFamilyDesc": "Everyone included. One plan.",
+  "paywallPlanIndividual": "Individual",
+  "paywallPlanIndividualDesc": "Solo premium experience.",
+  "paywallPerMonth": "/month",
+  "paywallBilledMonthly": "/month",
+  "paywallBilledAnnually": "/year",
+  "paywallStartTrial": "Start free trial",
+  "paywallNoCard": "No credit card required",
+  "paywallMaybeLater": "Maybe later",
+  "paywallVsBuiltIn": "Unlike Apple Screen Time or Google Digital Wellbeing — we don't just say STOP. We say DO THIS INSTEAD.",
+  "paywallRestorePurchases": "Restore purchases",
+  "errorGeneric": "Something went wrong. Please try again.",
+  "errorNetwork": "No internet connection",
+  "errorAuthFailed": "Authentication failed",
+  "errorInvalidEmail": "Please enter a valid email",
+  "errorSessionMinimum": "Minimum session time: 5 minutes",
+  "notifRitualTitle": "Good evening, {family} 🌿",
   "@notifRitualTitle": {
     "placeholders": {
       "family": {
@@ -253,9 +264,9 @@
       }
     }
   },
-  "notifRitualBody": "30 मिनट साथ बिताने का यह अच्छा समय है।",
-  "notifStreakTitle": "आपकी स्ट्रीक खतरे में है 🔥",
-  "notifStreakBody": "आप {days} दिनों से लगातार हैं। अब मत तोड़िए!",
+  "notifRitualBody": "A great time for 30 minutes together.",
+  "notifStreakTitle": "Your streak is at risk 🔥",
+  "notifStreakBody": "You have {days} days in a row. Don't break it now!",
   "@notifStreakBody": {
     "placeholders": {
       "days": {
@@ -263,7 +274,7 @@
       }
     }
   },
-  "notifInviteAcceptedTitle": "{name} {family} में शामिल हो गए!",
+  "notifInviteAcceptedTitle": "{name} joined {family}!",
   "@notifInviteAcceptedTitle": {
     "placeholders": {
       "name": {
@@ -274,8 +285,8 @@
       }
     }
   },
-  "notifTrialEndingTitle": "मुफ़्त ट्रायल जल्द समाप्त होगा ⏳",
-  "notifTrialEndingBody": "{days} दिन बाकी हैं। एक चाय से कम में जारी रखें।",
+  "notifTrialEndingTitle": "Your free trial ends soon ⏳",
+  "notifTrialEndingBody": "{days} days left. Continue for less than a coffee a month.",
   "@notifTrialEndingBody": {
     "placeholders": {
       "days": {

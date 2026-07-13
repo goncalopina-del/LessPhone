@@ -1,25 +1,25 @@
 {
   "@@locale": "ru",
   "appName": "Present",
-  "continueButton": "Продолжить",
-  "cancelButton": "Отмена",
-  "skipButton": "Пропустить",
-  "doneButton": "Готово",
-  "backButton": "Назад",
-  "saveButton": "Сохранить",
-  "retryButton": "Повторить",
-  "languageScreenTitle": "Выберите язык",
-  "languageScreenSubtitle": "Вы можете изменить его в настройках в любое время",
-  "onboardingProblemTitle": "Экран всегда между вами",
-  "onboardingProblemBody": "В среднем мы проводим 4 часа 17 минут в день за телефоном — зачастую рядом с самыми близкими людьми.",
-  "onboardingSolutionTitle": "Present меняет фокус",
-  "onboardingSolutionBody": "Мы не блокируем. Мы заменяем. Вместо бесконечного скролла — то, что действительно важно.",
-  "onboardingHowTitle": "Как это работает",
-  "onboardingHowSteps": "1. Начните сессию присутствия\n2. Семья присоединяется\n3. Зарабатывайте очки вместе",
-  "onboardingStartTitle": "Готовы быть здесь?",
-  "onboardingStartCta": "Создать аккаунт",
-  "onboardingAlreadyHaveAccount": "У меня уже есть аккаунт",
-  "onboardingFamiliesCount": "{count} семей уже используют",
+  "continueButton": "Continue",
+  "cancelButton": "Cancel",
+  "skipButton": "Skip",
+  "doneButton": "Done",
+  "backButton": "Back",
+  "saveButton": "Save",
+  "retryButton": "Try again",
+  "languageScreenTitle": "Choose your language",
+  "languageScreenSubtitle": "You can change this anytime in Settings",
+  "onboardingProblemTitle": "The screen is always in the way",
+  "onboardingProblemBody": "On average, we spend 4 hours 17 minutes a day on our phones — often beside the people we love most.",
+  "onboardingSolutionTitle": "Present changes the focus",
+  "onboardingSolutionBody": "We don't block. We replace. Instead of scrolling, do something that actually matters.",
+  "onboardingHowTitle": "Here's how it works",
+  "onboardingHowSteps": "1. Start a Present Session\n2. Family joins in\n3. Earn presence points together",
+  "onboardingStartTitle": "Ready to be present?",
+  "onboardingStartCta": "Create account",
+  "onboardingAlreadyHaveAccount": "I already have an account",
+  "onboardingFamiliesCount": "{count} families already present",
   "@onboardingFamiliesCount": {
     "placeholders": {
       "count": {
@@ -27,11 +27,11 @@
       }
     }
   },
-  "authSignInWithApple": "Продолжить с Apple",
-  "authSignInWithGoogle": "Продолжить с Google",
-  "authEmailPlaceholder": "ваш@email.ru",
-  "authSendMagicLink": "Отправить волшебную ссылку",
-  "authMagicLinkSent": "Проверьте почту — ссылка отправлена на {email}",
+  "authSignInWithApple": "Continue with Apple",
+  "authSignInWithGoogle": "Continue with Google",
+  "authEmailPlaceholder": "your@email.com",
+  "authSendMagicLink": "Send magic link",
+  "authMagicLinkSent": "Check your email — link sent to {email}",
   "@authMagicLinkSent": {
     "placeholders": {
       "email": {
@@ -39,10 +39,18 @@
       }
     }
   },
-  "authNoPassword": "Без пароля. Безопаснее.",
-  "authOr": "или",
-  "authBiometricPrompt": "Подтвердите личность для продолжения",
-  "setupStep": "Шаг {current} из {total}",
+  "authNoPassword": "No password. More secure.",
+  "authOr": "or",
+  "authBiometricPrompt": "Authenticate to continue",
+  "authPasswordPlaceholder": "Password",
+  "authUsePassword": "Continue with email & password",
+  "authUseMagicLink": "Use magic link instead",
+  "authSignIn": "Sign in",
+  "authCreateAccount": "Create account",
+  "authNoAccount": "No account? Create one",
+  "authHaveAccount": "Already have an account? Sign in",
+  "authInvalidPassword": "Please enter a password (min. 6 characters)",
+  "setupStep": "Step {current} of {total}",
   "@setupStep": {
     "placeholders": {
       "current": {
@@ -53,20 +61,20 @@
       }
     }
   },
-  "setupProfileTitle": "Как вас зовут?",
-  "setupProfileNameHint": "Ваше имя",
-  "setupFamilyTitle": "Дайте имя вашей семье",
-  "setupFamilyHint": "например: Семья Ивановых",
-  "setupFamilyRole": "Ваша роль",
-  "setupRoleAdult": "Взрослый",
-  "setupRoleYoung": "Молодой",
-  "setupInviteTitle": "Пригласите семью",
-  "setupInviteSubtitle": "Необязательно — можно сделать позже",
-  "setupInviteEmailHint": "Email члена семьи",
-  "setupInviteAddAnother": "+ Добавить ещё",
-  "setupCreateFamily": "Создать семью →",
-  "setupCanInviteLater": "Вы можете пригласить позже",
-  "homeGreeting": "Привет, {name} 👋",
+  "setupProfileTitle": "What's your name?",
+  "setupProfileNameHint": "Your name",
+  "setupFamilyTitle": "Name your family",
+  "setupFamilyHint": "e.g. The Silva Family",
+  "setupFamilyRole": "Your role",
+  "setupRoleAdult": "Adult",
+  "setupRoleYoung": "Young person",
+  "setupInviteTitle": "Invite your family",
+  "setupInviteSubtitle": "Optional — you can do this later",
+  "setupInviteEmailHint": "Family member's email",
+  "setupInviteAddAnother": "+ Add another",
+  "setupCreateFamily": "Create family →",
+  "setupCanInviteLater": "You can invite more later",
+  "homeGreeting": "Hello, {name} 👋",
   "@homeGreeting": {
     "placeholders": {
       "name": {
@@ -74,8 +82,8 @@
       }
     }
   },
-  "homeOfflineScoreLabel": "Еженедельный офлайн-счёт",
-  "homeScoreUp": "↑ На {pts} очков больше, чем на прошлой неделе",
+  "homeOfflineScoreLabel": "Weekly Offline Score",
+  "homeScoreUp": "↑ {pts}pts vs last week",
   "@homeScoreUp": {
     "placeholders": {
       "pts": {
@@ -83,7 +91,7 @@
       }
     }
   },
-  "homeScoreDown": "↓ На {pts} очков меньше, чем на прошлой неделе",
+  "homeScoreDown": "↓ {pts}pts vs last week",
   "@homeScoreDown": {
     "placeholders": {
       "pts": {
@@ -91,7 +99,7 @@
       }
     }
   },
-  "homeMembersPresent": "{count} присутствует",
+  "homeMembersPresent": "{count} present",
   "@homeMembersPresent": {
     "placeholders": {
       "count": {
@@ -99,15 +107,15 @@
       }
     }
   },
-  "homeMemberOffline": "не в сети",
-  "homeStartSession": "▶  Начать сессию присутствия",
-  "homeRitualSuggested": "Предлагаемое занятие",
-  "homeDiaryThisWeek": "Дневник за неделю",
-  "sessionTitle": "Сессия присутствия",
-  "sessionMinutesTogether": "минут вместе",
-  "sessionStartNow": "Начать сейчас",
-  "sessionEndButton": "Завершить сессию",
-  "sessionEndConfirm": "Завершить сессию на {duration} минут?",
+  "homeMemberOffline": "offline",
+  "homeStartSession": "▶  Start Present Session",
+  "homeRitualSuggested": "Suggested ritual",
+  "homeDiaryThisWeek": "This week's diary",
+  "sessionTitle": "Present Session",
+  "sessionMinutesTogether": "minutes together",
+  "sessionStartNow": "Start now",
+  "sessionEndButton": "End session",
+  "sessionEndConfirm": "End {duration} minute session?",
   "@sessionEndConfirm": {
     "placeholders": {
       "duration": {
@@ -115,12 +123,12 @@
       }
     }
   },
-  "sessionKeepGoing": "Продолжить",
-  "sessionCheckInPrompt": "Вы ещё здесь? ✋",
-  "sessionCheckInYes": "Да, я здесь",
-  "sessionCheckInNo": "Я отвлёкся",
-  "sessionCompletedTitle": "Сессия завершена!",
-  "sessionCompletedScore": "+{pts} очков",
+  "sessionKeepGoing": "Keep going",
+  "sessionCheckInPrompt": "Still present? ✋",
+  "sessionCheckInYes": "Yes, still here",
+  "sessionCheckInNo": "I got distracted",
+  "sessionCompletedTitle": "Session complete!",
+  "sessionCompletedScore": "+{pts} points",
   "@sessionCompletedScore": {
     "placeholders": {
       "pts": {
@@ -128,7 +136,7 @@
       }
     }
   },
-  "sessionStreakMessage": "{days} дней подряд 🔥",
+  "sessionStreakMessage": "{days} day streak 🔥",
   "@sessionStreakMessage": {
     "placeholders": {
       "days": {
@@ -136,11 +144,11 @@
       }
     }
   },
-  "sessionDiaryPrompt": "Как прошло?",
-  "sessionMinimumNotMet": "Сессии менее 5 минут не учитываются в счёте",
-  "dashboardTitle": "Статистика",
-  "dashboardOfflineScore": "Офлайн-счёт",
-  "dashboardPercentile": "Топ {pct}% семей",
+  "sessionDiaryPrompt": "How was it?",
+  "sessionMinimumNotMet": "Sessions under 5 minutes don't count towards your score",
+  "dashboardTitle": "Dashboard",
+  "dashboardOfflineScore": "Offline Score",
+  "dashboardPercentile": "Top {pct}% of families",
   "@dashboardPercentile": {
     "placeholders": {
       "pct": {
@@ -148,19 +156,19 @@
       }
     }
   },
-  "dashboardTimeTogether": "Время вместе",
-  "dashboardSessions": "Сессии",
-  "dashboardStreak": "Серия",
-  "dashboardBestSession": "Лучшая сессия",
-  "dashboardPeriodWeek": "Неделя",
-  "dashboardPeriodMonth": "Месяц",
-  "dashboardPeriodAll": "Вся история",
-  "dashboardPremiumRequired": "Открыть полную историю",
-  "ritualsTitle": "Занятия",
-  "ritualsSuggestedNow": "Предлагается сейчас",
-  "ritualsOther": "Другие занятия",
-  "ritualsStartThis": "Начать это занятие ▶",
-  "ritualsMinutes": "{min} мин",
+  "dashboardTimeTogether": "Time together",
+  "dashboardSessions": "Sessions",
+  "dashboardStreak": "Streak",
+  "dashboardBestSession": "Best session",
+  "dashboardPeriodWeek": "Week",
+  "dashboardPeriodMonth": "Month",
+  "dashboardPeriodAll": "All time",
+  "dashboardPremiumRequired": "Unlock full history",
+  "ritualsTitle": "Rituals",
+  "ritualsSuggestedNow": "Suggested now",
+  "ritualsOther": "Other rituals",
+  "ritualsStartThis": "Start this ritual ▶",
+  "ritualsMinutes": "{min} min",
   "@ritualsMinutes": {
     "placeholders": {
       "min": {
@@ -168,8 +176,8 @@
       }
     }
   },
-  "familyTitle": "Семья",
-  "familyMembers": "Участники ({count})",
+  "familyTitle": "Family",
+  "familyMembers": "Members ({count})",
   "@familyMembers": {
     "placeholders": {
       "count": {
@@ -177,15 +185,16 @@
       }
     }
   },
-  "familyActiveNow": "Сейчас онлайн",
-  "familyInvitePending": "Приглашение ожидает",
-  "familyInviteMember": "+ Пригласить члена семьи",
-  "familyInviteLink": "Скопировать ссылку-приглашение",
-  "familyInviteLinkCopied": "Ссылка скопирована!",
-  "familyRoleAdmin": "Администратор",
-  "familyRoleAdult": "Взрослый",
-  "familyRoleYoung": "Молодой",
-  "familyPointsLabel": "{pts} очков",
+  "familyActiveNow": "Active now",
+  "familyInvitePending": "Invite pending",
+  "familyInviteMember": "+ Invite family member",
+  "familyInviteLink": "Copy invite link",
+  "familyInviteLinkCopied": "Link copied!",
+  "familyInviteShareWhatsApp": "Invite via WhatsApp",
+  "familyRoleAdmin": "Admin",
+  "familyRoleAdult": "Adult",
+  "familyRoleYoung": "Young",
+  "familyPointsLabel": "{pts}pts",
   "@familyPointsLabel": {
     "placeholders": {
       "pts": {
@@ -193,11 +202,11 @@
       }
     }
   },
-  "diaryTitle": "Дневник",
-  "diaryHowWasIt": "Как прошло?",
-  "diaryAddNote": "Добавить заметку (необязательно)",
-  "diaryNoteHint": "Несколько слов об этом моменте…",
-  "diarySessionDuration": "{min} мин вместе",
+  "diaryTitle": "Diary",
+  "diaryHowWasIt": "How was it?",
+  "diaryAddNote": "Add a note (optional)",
+  "diaryNoteHint": "A few words about this moment…",
+  "diarySessionDuration": "{min} min together",
   "@diarySessionDuration": {
     "placeholders": {
       "min": {
@@ -205,21 +214,21 @@
       }
     }
   },
-  "diaryNoEntries": "В дневнике пока нет записей.\nНачните первую сессию присутствия!",
-  "settingsTitle": "Настройки",
-  "settingsLanguage": "Язык",
-  "settingsNotifications": "Уведомления",
-  "settingsNotificationsRituals": "Предложения занятий",
-  "settingsNotificationsStreak": "Напоминания о серии",
-  "settingsNotificationsFamily": "Активность семьи",
-  "settingsPrivacy": "Конфиденциальность",
-  "settingsBiometric": "Face ID / Отпечаток пальца",
-  "settingsMfa": "Двухфакторная аутентификация",
-  "settingsExportData": "Экспортировать мои данные",
-  "settingsDeleteAccount": "Удалить аккаунт",
-  "settingsSubscription": "Подписка",
-  "settingsSignOut": "Выйти",
-  "settingsVersion": "Версия {version}",
+  "diaryNoEntries": "No diary entries yet.\nStart your first Present Session!",
+  "settingsTitle": "Settings",
+  "settingsLanguage": "Language",
+  "settingsNotifications": "Notifications",
+  "settingsNotificationsRituals": "Ritual suggestions",
+  "settingsNotificationsStreak": "Streak reminders",
+  "settingsNotificationsFamily": "Family activity",
+  "settingsPrivacy": "Privacy",
+  "settingsBiometric": "Face ID / Fingerprint",
+  "settingsMfa": "Two-factor authentication",
+  "settingsExportData": "Export my data",
+  "settingsDeleteAccount": "Delete account",
+  "settingsSubscription": "Subscription",
+  "settingsSignOut": "Sign out",
+  "settingsVersion": "Version {version}",
   "@settingsVersion": {
     "placeholders": {
       "version": {
@@ -227,25 +236,27 @@
       }
     }
   },
-  "paywallTitle": "Будьте здесь",
-  "paywallSubtitle": "Дешевле чашки кофе в месяц для всей семьи.",
-  "paywallTrialBadge": "21 день бесплатно",
-  "paywallPlanFamily": "Семейный",
-  "paywallPlanFamilyDesc": "Все включены. Один план.",
-  "paywallPlanIndividual": "Личный",
-  "paywallPlanIndividualDesc": "Индивидуальный премиум-опыт.",
-  "paywallPerMonth": "/мес",
-  "paywallStartTrial": "Начать бесплатный период",
-  "paywallNoCard": "Без банковской карты",
-  "paywallMaybeLater": "Может быть, позже",
-  "paywallVsBuiltIn": "В отличие от Screen Time от Apple или Digital Wellbeing от Google — мы не просто говорим СТОП. Мы говорим СДЕЛАЙ ЭТО ВМЕСТО.",
-  "paywallRestorePurchases": "Восстановить покупки",
-  "errorGeneric": "Что-то пошло не так. Попробуйте ещё раз.",
-  "errorNetwork": "Нет подключения к интернету",
-  "errorAuthFailed": "Ошибка аутентификации",
-  "errorInvalidEmail": "Введите корректный email",
-  "errorSessionMinimum": "Минимальная длительность сессии: 5 минут",
-  "notifRitualTitle": "Добрый вечер, {family} 🌿",
+  "paywallTitle": "Stay Present",
+  "paywallSubtitle": "Less than a coffee per month for your whole family.",
+  "paywallTrialBadge": "21-day free trial",
+  "paywallPlanFamily": "Family",
+  "paywallPlanFamilyDesc": "Everyone included. One plan.",
+  "paywallPlanIndividual": "Individual",
+  "paywallPlanIndividualDesc": "Solo premium experience.",
+  "paywallPerMonth": "/month",
+  "paywallBilledMonthly": "/month",
+  "paywallBilledAnnually": "/year",
+  "paywallStartTrial": "Start free trial",
+  "paywallNoCard": "No credit card required",
+  "paywallMaybeLater": "Maybe later",
+  "paywallVsBuiltIn": "Unlike Apple Screen Time or Google Digital Wellbeing — we don't just say STOP. We say DO THIS INSTEAD.",
+  "paywallRestorePurchases": "Restore purchases",
+  "errorGeneric": "Something went wrong. Please try again.",
+  "errorNetwork": "No internet connection",
+  "errorAuthFailed": "Authentication failed",
+  "errorInvalidEmail": "Please enter a valid email",
+  "errorSessionMinimum": "Minimum session time: 5 minutes",
+  "notifRitualTitle": "Good evening, {family} 🌿",
   "@notifRitualTitle": {
     "placeholders": {
       "family": {
@@ -253,9 +264,9 @@
       }
     }
   },
-  "notifRitualBody": "Отличное время для 30 минут вместе.",
-  "notifStreakTitle": "Ваша серия под угрозой 🔥",
-  "notifStreakBody": "У вас {days} дней подряд. Не прерывайте сейчас!",
+  "notifRitualBody": "A great time for 30 minutes together.",
+  "notifStreakTitle": "Your streak is at risk 🔥",
+  "notifStreakBody": "You have {days} days in a row. Don't break it now!",
   "@notifStreakBody": {
     "placeholders": {
       "days": {
@@ -263,7 +274,7 @@
       }
     }
   },
-  "notifInviteAcceptedTitle": "{name} присоединился к {family}!",
+  "notifInviteAcceptedTitle": "{name} joined {family}!",
   "@notifInviteAcceptedTitle": {
     "placeholders": {
       "name": {
@@ -274,8 +285,8 @@
       }
     }
   },
-  "notifTrialEndingTitle": "Бесплатный период скоро заканчивается ⏳",
-  "notifTrialEndingBody": "Осталось {days} дней. Продолжайте дешевле чашки кофе в месяц.",
+  "notifTrialEndingTitle": "Your free trial ends soon ⏳",
+  "notifTrialEndingBody": "{days} days left. Continue for less than a coffee a month.",
   "@notifTrialEndingBody": {
     "placeholders": {
       "days": {

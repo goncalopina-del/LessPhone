@@ -1,25 +1,25 @@
 {
   "@@locale": "ar",
   "appName": "Present",
-  "continueButton": "متابعة",
-  "cancelButton": "إلغاء",
-  "skipButton": "تخطي",
-  "doneButton": "تم",
-  "backButton": "رجوع",
-  "saveButton": "حفظ",
-  "retryButton": "حاول مجدداً",
-  "languageScreenTitle": "اختر لغتك",
-  "languageScreenSubtitle": "يمكنك تغييرها في أي وقت من الإعدادات",
-  "onboardingProblemTitle": "الشاشة دائماً في الطريق",
-  "onboardingProblemBody": "نقضي في المتوسط 4 ساعات و17 دقيقة يومياً على هواتفنا — غالباً بجانب من نحبهم.",
-  "onboardingSolutionTitle": "Present يغيّر التركيز",
-  "onboardingSolutionBody": "لا نحجب. نستبدل. بدلاً من التمرير، افعل ما يهم حقاً.",
-  "onboardingHowTitle": "كيف يعمل",
-  "onboardingHowSteps": "1. ابدأ جلسة حضور\n2. تنضم العائلة\n3. اكسبوا نقاط معاً",
-  "onboardingStartTitle": "هل أنت مستعد للحضور؟",
-  "onboardingStartCta": "إنشاء حساب",
-  "onboardingAlreadyHaveAccount": "لدي حساب بالفعل",
-  "onboardingFamiliesCount": "{count} عائلة تستخدمه بالفعل",
+  "continueButton": "Continue",
+  "cancelButton": "Cancel",
+  "skipButton": "Skip",
+  "doneButton": "Done",
+  "backButton": "Back",
+  "saveButton": "Save",
+  "retryButton": "Try again",
+  "languageScreenTitle": "Choose your language",
+  "languageScreenSubtitle": "You can change this anytime in Settings",
+  "onboardingProblemTitle": "The screen is always in the way",
+  "onboardingProblemBody": "On average, we spend 4 hours 17 minutes a day on our phones — often beside the people we love most.",
+  "onboardingSolutionTitle": "Present changes the focus",
+  "onboardingSolutionBody": "We don't block. We replace. Instead of scrolling, do something that actually matters.",
+  "onboardingHowTitle": "Here's how it works",
+  "onboardingHowSteps": "1. Start a Present Session\n2. Family joins in\n3. Earn presence points together",
+  "onboardingStartTitle": "Ready to be present?",
+  "onboardingStartCta": "Create account",
+  "onboardingAlreadyHaveAccount": "I already have an account",
+  "onboardingFamiliesCount": "{count} families already present",
   "@onboardingFamiliesCount": {
     "placeholders": {
       "count": {
@@ -27,11 +27,11 @@
       }
     }
   },
-  "authSignInWithApple": "المتابعة مع Apple",
-  "authSignInWithGoogle": "المتابعة مع Google",
-  "authEmailPlaceholder": "بريدك@الإلكتروني.com",
-  "authSendMagicLink": "إرسال رابط الدخول",
-  "authMagicLinkSent": "تحقق من بريدك الإلكتروني — تم إرسال الرابط إلى {email}",
+  "authSignInWithApple": "Continue with Apple",
+  "authSignInWithGoogle": "Continue with Google",
+  "authEmailPlaceholder": "your@email.com",
+  "authSendMagicLink": "Send magic link",
+  "authMagicLinkSent": "Check your email — link sent to {email}",
   "@authMagicLinkSent": {
     "placeholders": {
       "email": {
@@ -39,10 +39,18 @@
       }
     }
   },
-  "authNoPassword": "بدون كلمة مرور. أكثر أماناً.",
-  "authOr": "أو",
-  "authBiometricPrompt": "التحقق للمتابعة",
-  "setupStep": "الخطوة {current} من {total}",
+  "authNoPassword": "No password. More secure.",
+  "authOr": "or",
+  "authBiometricPrompt": "Authenticate to continue",
+  "authPasswordPlaceholder": "Password",
+  "authUsePassword": "Continue with email & password",
+  "authUseMagicLink": "Use magic link instead",
+  "authSignIn": "Sign in",
+  "authCreateAccount": "Create account",
+  "authNoAccount": "No account? Create one",
+  "authHaveAccount": "Already have an account? Sign in",
+  "authInvalidPassword": "Please enter a password (min. 6 characters)",
+  "setupStep": "Step {current} of {total}",
   "@setupStep": {
     "placeholders": {
       "current": {
@@ -53,20 +61,20 @@
       }
     }
   },
-  "setupProfileTitle": "ما اسمك؟",
-  "setupProfileNameHint": "اسمك",
-  "setupFamilyTitle": "أعطِ اسماً لعائلتك",
-  "setupFamilyHint": "مثال: عائلة محمد",
-  "setupFamilyRole": "دورك",
-  "setupRoleAdult": "بالغ",
-  "setupRoleYoung": "شاب",
-  "setupInviteTitle": "ادعُ عائلتك",
-  "setupInviteSubtitle": "اختياري — يمكنك فعل ذلك لاحقاً",
-  "setupInviteEmailHint": "بريد أحد أفراد العائلة",
-  "setupInviteAddAnother": "+ إضافة شخص آخر",
-  "setupCreateFamily": "إنشاء العائلة →",
-  "setupCanInviteLater": "يمكنك دعوة المزيد لاحقاً",
-  "homeGreeting": "مرحباً، {name} 👋",
+  "setupProfileTitle": "What's your name?",
+  "setupProfileNameHint": "Your name",
+  "setupFamilyTitle": "Name your family",
+  "setupFamilyHint": "e.g. The Silva Family",
+  "setupFamilyRole": "Your role",
+  "setupRoleAdult": "Adult",
+  "setupRoleYoung": "Young person",
+  "setupInviteTitle": "Invite your family",
+  "setupInviteSubtitle": "Optional — you can do this later",
+  "setupInviteEmailHint": "Family member's email",
+  "setupInviteAddAnother": "+ Add another",
+  "setupCreateFamily": "Create family →",
+  "setupCanInviteLater": "You can invite more later",
+  "homeGreeting": "Hello, {name} 👋",
   "@homeGreeting": {
     "placeholders": {
       "name": {
@@ -74,8 +82,8 @@
       }
     }
   },
-  "homeOfflineScoreLabel": "نقاط الحضور الأسبوعية",
-  "homeScoreUp": "↑ {pts} نقطة أكثر من الأسبوع الماضي",
+  "homeOfflineScoreLabel": "Weekly Offline Score",
+  "homeScoreUp": "↑ {pts}pts vs last week",
   "@homeScoreUp": {
     "placeholders": {
       "pts": {
@@ -83,7 +91,7 @@
       }
     }
   },
-  "homeScoreDown": "↓ {pts} نقطة أقل من الأسبوع الماضي",
+  "homeScoreDown": "↓ {pts}pts vs last week",
   "@homeScoreDown": {
     "placeholders": {
       "pts": {
@@ -91,7 +99,7 @@
       }
     }
   },
-  "homeMembersPresent": "{count} حاضر",
+  "homeMembersPresent": "{count} present",
   "@homeMembersPresent": {
     "placeholders": {
       "count": {
@@ -99,15 +107,15 @@
       }
     }
   },
-  "homeMemberOffline": "غير متصل",
-  "homeStartSession": "▶  ابدأ وقت الحضور",
-  "homeRitualSuggested": "نشاط مقترح",
-  "homeDiaryThisWeek": "يوميات هذا الأسبوع",
-  "sessionTitle": "وقت الحضور",
-  "sessionMinutesTogether": "دقيقة معاً",
-  "sessionStartNow": "ابدأ الآن",
-  "sessionEndButton": "إنهاء الجلسة",
-  "sessionEndConfirm": "إنهاء جلسة {duration} دقيقة؟",
+  "homeMemberOffline": "offline",
+  "homeStartSession": "▶  Start Present Session",
+  "homeRitualSuggested": "Suggested ritual",
+  "homeDiaryThisWeek": "This week's diary",
+  "sessionTitle": "Present Session",
+  "sessionMinutesTogether": "minutes together",
+  "sessionStartNow": "Start now",
+  "sessionEndButton": "End session",
+  "sessionEndConfirm": "End {duration} minute session?",
   "@sessionEndConfirm": {
     "placeholders": {
       "duration": {
@@ -115,12 +123,12 @@
       }
     }
   },
-  "sessionKeepGoing": "استمر",
-  "sessionCheckInPrompt": "هل لا تزال حاضراً؟ ✋",
-  "sessionCheckInYes": "نعم، أنا هنا",
-  "sessionCheckInNo": "تشتت انتباهي",
-  "sessionCompletedTitle": "أحسنت!",
-  "sessionCompletedScore": "+{pts} نقطة",
+  "sessionKeepGoing": "Keep going",
+  "sessionCheckInPrompt": "Still present? ✋",
+  "sessionCheckInYes": "Yes, still here",
+  "sessionCheckInNo": "I got distracted",
+  "sessionCompletedTitle": "Session complete!",
+  "sessionCompletedScore": "+{pts} points",
   "@sessionCompletedScore": {
     "placeholders": {
       "pts": {
@@ -128,7 +136,7 @@
       }
     }
   },
-  "sessionStreakMessage": "{days} أيام متتالية 🔥",
+  "sessionStreakMessage": "{days} day streak 🔥",
   "@sessionStreakMessage": {
     "placeholders": {
       "days": {
@@ -136,11 +144,11 @@
       }
     }
   },
-  "sessionDiaryPrompt": "كيف كانت التجربة؟",
-  "sessionMinimumNotMet": "الجلسات أقل من 5 دقائق لا تُحتسب في النقاط",
-  "dashboardTitle": "الإحصائيات",
-  "dashboardOfflineScore": "نقاط الحضور",
-  "dashboardPercentile": "ضمن أفضل {pct}% من العائلات",
+  "sessionDiaryPrompt": "How was it?",
+  "sessionMinimumNotMet": "Sessions under 5 minutes don't count towards your score",
+  "dashboardTitle": "Dashboard",
+  "dashboardOfflineScore": "Offline Score",
+  "dashboardPercentile": "Top {pct}% of families",
   "@dashboardPercentile": {
     "placeholders": {
       "pct": {
@@ -148,19 +156,19 @@
       }
     }
   },
-  "dashboardTimeTogether": "الوقت معاً",
-  "dashboardSessions": "جلسات",
-  "dashboardStreak": "التسلسل",
-  "dashboardBestSession": "أطول جلسة",
-  "dashboardPeriodWeek": "أسبوع",
-  "dashboardPeriodMonth": "شهر",
-  "dashboardPeriodAll": "كل الوقت",
-  "dashboardPremiumRequired": "فتح السجل الكامل",
-  "ritualsTitle": "الأنشطة",
-  "ritualsSuggestedNow": "مقترح الآن",
-  "ritualsOther": "أنشطة أخرى",
-  "ritualsStartThis": "ابدأ هذا النشاط ▶",
-  "ritualsMinutes": "{min} دقيقة",
+  "dashboardTimeTogether": "Time together",
+  "dashboardSessions": "Sessions",
+  "dashboardStreak": "Streak",
+  "dashboardBestSession": "Best session",
+  "dashboardPeriodWeek": "Week",
+  "dashboardPeriodMonth": "Month",
+  "dashboardPeriodAll": "All time",
+  "dashboardPremiumRequired": "Unlock full history",
+  "ritualsTitle": "Rituals",
+  "ritualsSuggestedNow": "Suggested now",
+  "ritualsOther": "Other rituals",
+  "ritualsStartThis": "Start this ritual ▶",
+  "ritualsMinutes": "{min} min",
   "@ritualsMinutes": {
     "placeholders": {
       "min": {
@@ -168,8 +176,8 @@
       }
     }
   },
-  "familyTitle": "العائلة",
-  "familyMembers": "الأعضاء ({count})",
+  "familyTitle": "Family",
+  "familyMembers": "Members ({count})",
   "@familyMembers": {
     "placeholders": {
       "count": {
@@ -177,15 +185,16 @@
       }
     }
   },
-  "familyActiveNow": "نشط الآن",
-  "familyInvitePending": "الدعوة معلقة",
-  "familyInviteMember": "+ دعوة فرد من العائلة",
-  "familyInviteLink": "نسخ رابط الدعوة",
-  "familyInviteLinkCopied": "تم نسخ الرابط!",
-  "familyRoleAdmin": "مسؤول",
-  "familyRoleAdult": "بالغ",
-  "familyRoleYoung": "شاب",
-  "familyPointsLabel": "{pts} نقطة",
+  "familyActiveNow": "Active now",
+  "familyInvitePending": "Invite pending",
+  "familyInviteMember": "+ Invite family member",
+  "familyInviteLink": "Copy invite link",
+  "familyInviteLinkCopied": "Link copied!",
+  "familyInviteShareWhatsApp": "Invite via WhatsApp",
+  "familyRoleAdmin": "Admin",
+  "familyRoleAdult": "Adult",
+  "familyRoleYoung": "Young",
+  "familyPointsLabel": "{pts}pts",
   "@familyPointsLabel": {
     "placeholders": {
       "pts": {
@@ -193,11 +202,11 @@
       }
     }
   },
-  "diaryTitle": "اليوميات",
-  "diaryHowWasIt": "كيف كانت؟",
-  "diaryAddNote": "إضافة ملاحظة (اختياري)",
-  "diaryNoteHint": "بضع كلمات عن هذه اللحظة…",
-  "diarySessionDuration": "{min} دقيقة معاً",
+  "diaryTitle": "Diary",
+  "diaryHowWasIt": "How was it?",
+  "diaryAddNote": "Add a note (optional)",
+  "diaryNoteHint": "A few words about this moment…",
+  "diarySessionDuration": "{min} min together",
   "@diarySessionDuration": {
     "placeholders": {
       "min": {
@@ -205,21 +214,21 @@
       }
     }
   },
-  "diaryNoEntries": "لا توجد مدخلات في اليوميات بعد.\nابدأ أول جلسة حضور!",
-  "settingsTitle": "الإعدادات",
-  "settingsLanguage": "اللغة",
-  "settingsNotifications": "الإشعارات",
-  "settingsNotificationsRituals": "اقتراحات الأنشطة",
-  "settingsNotificationsStreak": "تذكيرات التسلسل",
-  "settingsNotificationsFamily": "نشاط العائلة",
-  "settingsPrivacy": "الخصوصية",
-  "settingsBiometric": "Face ID / بصمة الإصبع",
-  "settingsMfa": "المصادقة الثنائية",
-  "settingsExportData": "تصدير بياناتي",
-  "settingsDeleteAccount": "حذف الحساب",
-  "settingsSubscription": "الاشتراك",
-  "settingsSignOut": "تسجيل الخروج",
-  "settingsVersion": "الإصدار {version}",
+  "diaryNoEntries": "No diary entries yet.\nStart your first Present Session!",
+  "settingsTitle": "Settings",
+  "settingsLanguage": "Language",
+  "settingsNotifications": "Notifications",
+  "settingsNotificationsRituals": "Ritual suggestions",
+  "settingsNotificationsStreak": "Streak reminders",
+  "settingsNotificationsFamily": "Family activity",
+  "settingsPrivacy": "Privacy",
+  "settingsBiometric": "Face ID / Fingerprint",
+  "settingsMfa": "Two-factor authentication",
+  "settingsExportData": "Export my data",
+  "settingsDeleteAccount": "Delete account",
+  "settingsSubscription": "Subscription",
+  "settingsSignOut": "Sign out",
+  "settingsVersion": "Version {version}",
   "@settingsVersion": {
     "placeholders": {
       "version": {
@@ -227,25 +236,27 @@
       }
     }
   },
-  "paywallTitle": "كن حاضراً",
-  "paywallSubtitle": "أقل من ثمن قهوة شهرياً للعائلة كلها.",
-  "paywallTrialBadge": "تجربة مجانية 21 يوماً",
-  "paywallPlanFamily": "العائلة",
-  "paywallPlanFamilyDesc": "الجميع مشمولون. خطة واحدة.",
-  "paywallPlanIndividual": "فردي",
-  "paywallPlanIndividualDesc": "تجربة فردية متميزة.",
-  "paywallPerMonth": "/شهر",
-  "paywallStartTrial": "ابدأ التجربة المجانية",
-  "paywallNoCard": "لا حاجة لبطاقة ائتمان",
-  "paywallMaybeLater": "ربما لاحقاً",
-  "paywallVsBuiltIn": "على عكس Screen Time من Apple أو Digital Wellbeing من Google — نحن لا نقول فقط توقف. نحن نقول افعل هذا بدلاً من ذلك.",
-  "paywallRestorePurchases": "استعادة المشتريات",
-  "errorGeneric": "حدث خطأ ما. حاول مجدداً.",
-  "errorNetwork": "لا يوجد اتصال بالإنترنت",
-  "errorAuthFailed": "فشل التحقق",
-  "errorInvalidEmail": "الرجاء إدخال بريد إلكتروني صحيح",
-  "errorSessionMinimum": "الحد الأدنى لمدة الجلسة: 5 دقائق",
-  "notifRitualTitle": "مساء الخير، {family} 🌿",
+  "paywallTitle": "Stay Present",
+  "paywallSubtitle": "Less than a coffee per month for your whole family.",
+  "paywallTrialBadge": "21-day free trial",
+  "paywallPlanFamily": "Family",
+  "paywallPlanFamilyDesc": "Everyone included. One plan.",
+  "paywallPlanIndividual": "Individual",
+  "paywallPlanIndividualDesc": "Solo premium experience.",
+  "paywallPerMonth": "/month",
+  "paywallBilledMonthly": "/month",
+  "paywallBilledAnnually": "/year",
+  "paywallStartTrial": "Start free trial",
+  "paywallNoCard": "No credit card required",
+  "paywallMaybeLater": "Maybe later",
+  "paywallVsBuiltIn": "Unlike Apple Screen Time or Google Digital Wellbeing — we don't just say STOP. We say DO THIS INSTEAD.",
+  "paywallRestorePurchases": "Restore purchases",
+  "errorGeneric": "Something went wrong. Please try again.",
+  "errorNetwork": "No internet connection",
+  "errorAuthFailed": "Authentication failed",
+  "errorInvalidEmail": "Please enter a valid email",
+  "errorSessionMinimum": "Minimum session time: 5 minutes",
+  "notifRitualTitle": "Good evening, {family} 🌿",
   "@notifRitualTitle": {
     "placeholders": {
       "family": {
@@ -253,9 +264,9 @@
       }
     }
   },
-  "notifRitualBody": "وقت رائع لقضاء 30 دقيقة معاً.",
-  "notifStreakTitle": "تسلسلك في خطر 🔥",
-  "notifStreakBody": "لديك {days} أيام متتالية. لا تكسرها الآن!",
+  "notifRitualBody": "A great time for 30 minutes together.",
+  "notifStreakTitle": "Your streak is at risk 🔥",
+  "notifStreakBody": "You have {days} days in a row. Don't break it now!",
   "@notifStreakBody": {
     "placeholders": {
       "days": {
@@ -263,7 +274,7 @@
       }
     }
   },
-  "notifInviteAcceptedTitle": "انضم {name} إلى {family}!",
+  "notifInviteAcceptedTitle": "{name} joined {family}!",
   "@notifInviteAcceptedTitle": {
     "placeholders": {
       "name": {
@@ -274,8 +285,8 @@
       }
     }
   },
-  "notifTrialEndingTitle": "تنتهي تجربتك المجانية قريباً ⏳",
-  "notifTrialEndingBody": "تبقى {days} أيام. استمر بأقل من ثمن قهوة شهرياً.",
+  "notifTrialEndingTitle": "Your free trial ends soon ⏳",
+  "notifTrialEndingBody": "{days} days left. Continue for less than a coffee a month.",
   "@notifTrialEndingBody": {
     "placeholders": {
       "days": {
