@@ -41,13 +41,36 @@ jobs:
           flutter build web \
             --base-href=/LessPhone/ \
             --dart-define=SUPABASE_URL="${{ secrets.SUPABASE_URL }}" \
-            --dart-define=SUPABASE_ANON_KEY="${{ secrets.SUPABASE_ANON_KEY }}" 2>&1 | tee build.log
+            --dart-define=SUPABASE_ANON_KEY="${{ secrets.SUPABASE_ANON_KEY }}" > build.log 2>&1
 
-      - name: Echo build log on failure
+      - name: Post build log on failure
         if: failure()
-        run: cat build.log
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_SHA: ${{ github.sha }}
+        run: |
+          python3 - <<'PY'
+          import os, json, urllib.request
+          tok = os.environ['GITHUB_TOKEN']
+          sha = os.environ['GITHUB_SHA']
+          try:
+            log = open('build.log', errors='replace').read()[-4000:]
+          except Exception:
+            log = "(no build.log)"
+          body = "BUILD FAIL LOG (last 4000 chars):\n```\n" + log + "\n```"
+          data = json.dumps({"body": body}).encode()
+          req = urllib.request.Request(
+            f"https://api.github.com/repos/goncalopina-del/LessPhone/commits/{sha}/comments",
+            data=data,
+            headers={"Authorization":"Bearer "+tok,"Accept":"application/vnd.github+json","User-Agent":"ci","Content-Type":"application/json"})
+          try:
+            urllib.request.urlopen(req); print("posted")
+          except Exception as e:
+            print("post failed", e)
+          PY
 
       - name: Deploy to GitHub Pages
+        if: success()
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
