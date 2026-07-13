@@ -2,6 +2,8 @@ import 'dart:ui';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import '../database/supabase_client.dart';
+
 const _kLocaleKey = 'locale_lang';
 const _kCountryKey = 'locale_country';
 
@@ -38,6 +40,7 @@ class LocaleNotifier extends StateNotifier<Locale?> {
     final country = box.get(_kCountryKey);
     if (lang != null && lang.isNotEmpty) {
       state = Locale(lang, (country == null || country.isEmpty) ? null : country);
+      _syncLocaleToSupabase(state!);
     }
   }
 
@@ -46,6 +49,23 @@ class LocaleNotifier extends StateNotifier<Locale?> {
     await box.put(_kLocaleKey, locale.languageCode);
     await box.put(_kCountryKey, locale.countryCode ?? '');
     state = locale;
+    _syncLocaleToSupabase(locale);
+  }
+
+  /// Spec §01B step 3: keep the user's locale in sync with Supabase so that
+  /// Edge Functions, FCM notifications and emails are sent in the right language.
+  /// Best-effort: failures are ignored (e.g. before the user is authenticated).
+  Future<void> _syncLocaleToSupabase(Locale locale) async {
+    try {
+      final userId = supabase.auth.currentUser?.id;
+      if (userId == null) return;
+      final value = locale.countryCode != null
+          ? '${locale.languageCode}-${locale.countryCode}'
+          : locale.languageCode;
+      await supabase.from('users').update({'locale': value}).eq('id', userId);
+    } catch (_) {
+      // Non-critical: locale is also persisted locally in Hive.
+    }
   }
 
   Future<void> resetToDevice() async {

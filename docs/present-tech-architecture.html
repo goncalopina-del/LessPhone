@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Present App — Architecture & Tech Stack</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0e0e0e;
+    --paper: #f5f0e8;
+    --warm-white: #fdfaf4;
+    --accent: #c8521a;
+    --accent-light: #f0b080;
+    --accent-pale: #fdf0e6;
+    --green: #2d6a4f;
+    --green-light: #b7e4c7;
+    --blue: #1a4c8c;
+    --blue-light: #b8d4f5;
+    --gold: #b8860b;
+    --gold-light: #f5e4a0;
+    --red: #c0392b;
+    --red-light: #fad7d2;
+    --border: rgba(14,14,14,0.12);
+    --mono: 'DM Mono', monospace;
+    --serif: 'DM Serif Display', serif;
+    --sans: 'Outfit', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 3rem;
+    background: var(--ink);
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,82,26,0.25) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    pointer-events: none;
+  }
+
+  .cover::after {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(29,105,230,0.15) 0%, transparent 70%);
+    bottom: 80px; left: 50px;
+    pointer-events: none;
+  }
+
+  .cover-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 11px;
+    opacity: 0.5;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .cover-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-light);
+  }
+
+  .cover-title {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .cover-title span { color: var(--accent-light); font-style: italic; }
+
+  .cover-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.6;
+    max-width: 540px;
+    font-weight: 300;
+  }
+
+  .cover-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .pill {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.8rem;
+    border-radius: 2rem;
+    border: 1px solid rgba(245,240,232,0.2);
+    color: var(--paper);
+  }
+
+  .pill.orange { border-color: var(--accent-light); color: var(--accent-light); }
+  .pill.blue { border-color: #8ab4f8; color: #8ab4f8; }
+  .pill.green { border-color: #7fbf9e; color: #7fbf9e; }
+
+  .cover-footer {
+    font-family: var(--mono);
+    font-size: 10px;
+    opacity: 0.35;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── LAYOUT ── */
+  .page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 4rem 3rem;
+  }
+
+  /* ── SECTION HEADERS ── */
+  .section-num {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: 2.2rem;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    letter-spacing: -0.02em;
+  }
+
+  h3 {
+    font-family: var(--sans);
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.75rem;
+    color: var(--accent);
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 4rem 0;
+  }
+
+  /* ── DECISION CARD ── */
+  .decision-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 700px) {
+    .decision-grid { grid-template-columns: 1fr; }
+  }
+
+  .decision-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    position: relative;
+  }
+
+  .decision-card.winner {
+    border-color: var(--accent);
+    background: var(--accent-pale);
+  }
+
+  .winner-badge {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    background: var(--accent);
+    color: white;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 2rem;
+  }
+
+  .card-name {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-desc {
+    font-size: 0.85rem;
+    opacity: 0.65;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  .pros-cons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  .pros, .cons {
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+
+  .pros strong, .cons strong {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.3rem;
+  }
+
+  .pros strong { color: var(--green); }
+  .cons strong { color: var(--red); }
+
+  .pros li, .cons li {
+    list-style: none;
+    padding-left: 1rem;
+    position: relative;
+    opacity: 0.75;
+  }
+
+  .pros li::before { content: '+'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+  .cons li::before { content: '−'; position: absolute; left: 0; color: var(--red); font-weight: 700; }
+
+  /* ── VERDICT BOX ── */
+  .verdict {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin: 1.5rem 0;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .verdict-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .verdict p { font-size: 0.9rem; opacity: 0.85; line-height: 1.7; }
+  .verdict strong { color: var(--accent-light); }
+
+  /* ── STACK DIAGRAM ── */
+  .stack-diagram {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin: 2rem 0;
+  }
+
+  .stack-layer {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .stack-layer:last-child { border-bottom: none; }
+
+  .layer-label {
+    padding: 1.25rem 1.5rem;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .layer-label .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .layer-content {
+    padding: 1.25rem 1.5rem;
+    background: var(--warm-white);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    align-items: center;
+  }
+
+  .tech-chip {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 0.3rem 0.75rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: white;
+    white-space: nowrap;
+  }
+
+  .tech-chip.primary { background: var(--ink); color: white; border-color: var(--ink); }
+  .tech-chip.accent { background: var(--accent); color: white; border-color: var(--accent); }
+  .tech-chip.green { background: var(--green); color: white; border-color: var(--green); }
+  .tech-chip.blue { background: var(--blue); color: white; border-color: var(--blue); }
+  .tech-chip.gold { background: var(--gold); color: white; border-color: var(--gold); }
+
+  .layer-note {
+    font-size: 0.75rem;
+    opacity: 0.5;
+    width: 100%;
+    margin-top: 0.3rem;
+  }
+
+  /* ── SECURITY GRID ── */
+  .security-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  @media (max-width: 700px) {
+    .security-grid { grid-template-columns: 1fr; }
+  }
+
+  .sec-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem;
+  }
+
+  .sec-card .sec-icon {
+    font-size: 1.6rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .sec-card h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
+  .sec-card p {
+    font-size: 0.78rem;
+    opacity: 0.65;
+    line-height: 1.55;
+  }
+
+  /* ── FEATURE TABLE ── */
+  .feature-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.85rem;
+  }
+
+  .feature-table th {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.75rem 1rem;
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .feature-table th:first-child { border-radius: 8px 0 0 0; }
+  .feature-table th:last-child { border-radius: 0 8px 0 0; }
+
+  .feature-table td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  .feature-table tr:last-child td { border-bottom: none; }
+  .feature-table tr:nth-child(even) td { background: var(--warm-white); }
+
+  .badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .badge.mvp { background: var(--gold-light); color: var(--gold); }
+  .badge.v2 { background: var(--blue-light); color: var(--blue); }
+  .badge.v3 { background: var(--green-light); color: var(--green); }
+  .badge.wow { background: #f0e0f5; color: #7b2d8b; }
+
+  /* ── COST TABLE ── */
+  .cost-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.85rem;
+  }
+
+  .cost-table th {
+    text-align: left;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.75rem 1rem;
+    background: var(--green);
+    color: white;
+  }
+
+  .cost-table th:first-child { border-radius: 8px 0 0 0; }
+  .cost-table th:last-child { border-radius: 0 8px 0 0; text-align: right; }
+
+  .cost-table td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cost-table td:last-child { text-align: right; font-family: var(--mono); font-weight: 500; }
+  .cost-table tr:nth-child(even) td { background: var(--warm-white); }
+
+  .cost-total td {
+    font-weight: 700;
+    border-top: 2px solid var(--ink);
+    background: var(--ink) !important;
+    color: var(--paper);
+    font-family: var(--mono);
+  }
+
+  /* ── ARCH DIAGRAM ── */
+  .arch-box {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .arch-flow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin: 0.5rem 0;
+  }
+
+  .arch-node {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+
+  .arch-node.light {
+    background: white;
+    color: var(--ink);
+    border: 1px solid var(--border);
+  }
+
+  .arch-node.accent {
+    background: var(--accent);
+    color: white;
+  }
+
+  .arch-node.green {
+    background: var(--green);
+    color: white;
+  }
+
+  .arch-arrow {
+    font-size: 1rem;
+    opacity: 0.4;
+  }
+
+  /* ── FOLDER TREE ── */
+  .tree {
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 2;
+    background: var(--ink);
+    color: #c8d3e0;
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    overflow-x: auto;
+  }
+
+  .tree .dir { color: #8ab4f8; }
+  .tree .file { color: #c8d3e0; }
+  .tree .comment { color: #5a6a7a; font-style: italic; }
+  .tree .accent-file { color: var(--accent-light); }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+    margin: 2rem 0;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+
+  .tl-item {
+    position: relative;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px dashed var(--border);
+  }
+
+  .tl-item:last-child { border-bottom: none; }
+
+  .tl-dot {
+    position: absolute;
+    left: -2.45rem;
+    top: 0.3rem;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 3px solid var(--paper);
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+
+  .tl-phase {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+
+  .tl-title {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .tl-desc {
+    font-size: 0.85rem;
+    opacity: 0.65;
+    line-height: 1.6;
+  }
+
+  .tl-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+  }
+
+  .tl-chip {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+  }
+
+  /* ── QUOTE / HIGHLIGHT ── */
+  .highlight-box {
+    border-left: 3px solid var(--accent);
+    padding: 1rem 1.5rem;
+    background: var(--accent-pale);
+    border-radius: 0 8px 8px 0;
+    margin: 1.5rem 0;
+  }
+
+  .highlight-box p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .highlight-box strong { color: var(--accent); }
+
+  /* ── CODE BLOCK ── */
+  .code-block {
+    background: var(--ink);
+    color: #c8d3e0;
+    border-radius: 10px;
+    padding: 1.5rem;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    line-height: 1.8;
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+
+  .code-block .kw { color: #c792ea; }
+  .code-block .str { color: #c3e88d; }
+  .code-block .cmt { color: #546e7a; font-style: italic; }
+  .code-block .fn { color: #82aaff; }
+  .code-block .var { color: #f78c6c; }
+
+  /* ── RESPONSIVE ADJUSTMENTS ── */
+  @media (max-width: 700px) {
+    .page { padding: 2rem 1.5rem; }
+    .stack-layer { grid-template-columns: 120px 1fr; }
+    .cover { padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-meta">
+    <span>Present App · Architecture Document v2.0</span>
+    <span>Junho 2026 · Implementação Completa · Revisão Crítica Aplicada</span>
+  </div>
+
+  <div class="cover-body">
+    <div class="cover-tag">Technical Architecture & Engineering Spec</div>
+    <h1 class="cover-title">
+      Stack,<br>
+      Segurança<br>
+      &amp; <span>Impacto</span>
+    </h1>
+    <p class="cover-subtitle">Documento de arquitectura para engenheiro sénior. Decisões tecnológicas justificadas, estrutura de projecto, modelo de segurança, roadmap e estimativa de custos de infraestrutura.</p>
+    <div class="cover-pills">
+      <span class="pill orange">Flutter 3.x</span>
+      <span class="pill blue">Supabase</span>
+      <span class="pill green">Row-Level Security</span>
+      <span class="pill">iOS + Android</span>
+      <span class="pill">Freemium → Subscription</span>
+      <span class="pill green">€0/mês infra até ~2.000 MAU</span>
+      <span class="pill" style="border-color:#c0392b;color:#c0392b;">v2.0 · 65 ficheiros · 19 Bugs Corrigidos</span>
+    </div>
+  </div>
+
+  <div class="cover-footer">PRESENTE · reconnect · v1.0 — documento gerado para uso interno</div>
+</div>
+
+
+<!-- SECTION 1: FRAMEWORK DECISION -->
+<div class="page">
+  <div class="section-num">01 · Decisão de Framework Mobile</div>
+  <h2>Flutter vs React Native</h2>
+  <p style="opacity:0.65; margin-bottom:2rem; font-size:0.9rem;">Análise baseada em dados de 2025–2026. A decisão afecta performance de UI, custos de manutenção a longo prazo e facilidade de contratação.</p>
+
+  <div class="decision-grid">
+    <div class="decision-card winner">
+      <span class="winner-badge">✓ escolha</span>
+      <div class="card-name">Flutter</div>
+      <div class="card-desc">Framework da Google em Dart. Renderização própria via Skia/Impeller — não depende de componentes nativos do OS. UI 100% pixel-perfect em iOS e Android.</div>
+      <div class="pros-cons">
+        <div class="pros">
+          <strong>Prós</strong>
+          <ul>
+            <li>UI idêntica iOS/Android</li>
+            <li>Animações 60/120fps</li>
+            <li>1 codebase total</li>
+            <li>Custos manutenção previsíveis</li>
+            <li>Hot reload rápido</li>
+            <li>Impeller engine (2025)</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <strong>Contras</strong>
+          <ul>
+            <li>Dart (curva inicial)</li>
+            <li>Pool devs menor que JS</li>
+            <li>App size ligeiramente maior</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="decision-card">
+      <div class="card-name">React Native</div>
+      <div class="card-desc">Framework da Meta em JavaScript/TypeScript. Bridge para componentes nativos. Actualização arquitectural New Architecture (2025) melhorou performance.</div>
+      <div class="pros-cons">
+        <div class="pros">
+          <strong>Prós</strong>
+          <ul>
+            <li>Ecosystem JS vasto</li>
+            <li>Devs mais fáceis contratar</li>
+            <li>Reutilização com web</li>
+            <li>Maturidade do ecossistema</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <strong>Contras</strong>
+          <ul>
+            <li>UI inconsistente entre OS</li>
+            <li>Bridge overhead</li>
+            <li>Manutenção mais cara a escalar</li>
+            <li>Breaking changes frequentes</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="verdict">
+    <div class="verdict-icon">⚡</div>
+    <p><strong>Veredicto:</strong> Flutter é a escolha correcta para a Present. A app precisa de UI emocional e com impacto visual — animações suaves, transições cinematográficas, dashboards com gráficos vivos. <strong>Flutter renderiza tudo via engine própria</strong>, garantindo consistência visual perfeita em qualquer dispositivo. A longo prazo, <strong>custos de manutenção são mais previsíveis</strong> porque não há divergências iOS/Android. A desvantagem (Dart) é mitigada pela curva de aprendizagem curta para quem já conhece Java/Kotlin ou TypeScript.</p>
+  </div>
+</div>
+
+<div class="divider" style="margin:0;"></div>
+
+<!-- SECTION 2: BACKEND DECISION -->
+<div class="page">
+  <div class="section-num">02 · Decisão de Backend</div>
+  <h2>Supabase vs Firebase</h2>
+
+  <div class="decision-grid">
+    <div class="decision-card winner">
+      <span class="winner-badge">✓ escolha</span>
+      <div class="card-name">Supabase</div>
+      <div class="card-desc">Backend-as-a-Service open-source sobre PostgreSQL. Auth, Storage, Realtime, Edge Functions. Row-Level Security nativa. Self-hostable.</div>
+      <div class="pros-cons">
+        <div class="pros">
+          <strong>Prós</strong>
+          <ul>
+            <li>PostgreSQL real</li>
+            <li>Row-Level Security</li>
+            <li>Pricing previsível</li>
+            <li>Open-source / sem lock-in</li>
+            <li>Self-host se crescer</li>
+            <li>GDPR-friendly (EU region)</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <strong>Contras</strong>
+          <ul>
+            <li>Menos maduro que Firebase</li>
+            <li>Offline sync mais manual</li>
+            <li>Requer SQL expertise</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="decision-card">
+      <div class="card-name">Firebase</div>
+      <div class="card-desc">BaaS da Google. NoSQL Firestore, Auth, FCM push. Muito maduro, excelente offline sync, SDK Flutter robusto.</div>
+      <div class="pros-cons">
+        <div class="pros">
+          <strong>Prós</strong>
+          <ul>
+            <li>Melhor offline sync</li>
+            <li>FCM push nativo</li>
+            <li>Maturidade total</li>
+            <li>SDK Flutter excelente</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <strong>Contras</strong>
+          <ul>
+            <li>Pricing imprevisível</li>
+            <li>NoSQL (sem RLS nativa)</li>
+            <li>Vendor lock-in Google</li>
+            <li>GDPR mais complexo</li>
+            <li>3-5x mais caro a escalar</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="verdict">
+    <div class="verdict-icon">🔒</div>
+    <p><strong>Veredicto:</strong> Supabase ganha em dois eixos críticos para esta app: <strong>segurança de dados familiares</strong> (Row-Level Security no nível da base de dados é uma garantia arquitectural, não apenas lógica de aplicação) e <strong>custo previsível</strong>. Para 10.000 utilizadores activos, Supabase custa ~€25–50/mês vs Firebase €50–200+/mês com spikes imprevisíveis. A localização em EU West (Frankfurt) também simplifica conformidade com GDPR, essencial para dados de menores.</p>
+  </div>
+</div>
+
+<div class="divider" style="margin:0;"></div>
+
+<!-- SECTION 3: FULL STACK -->
+<div class="page">
+  <div class="section-num">03 · Stack Tecnológica Completa</div>
+  <h2>Arquitectura em Camadas</h2>
+
+  <div class="stack-diagram">
+    <div class="stack-layer">
+      <div class="layer-label">
+        <div class="dot" style="background:#c792ea;"></div>
+        UI Layer
+      </div>
+      <div class="layer-content">
+        <span class="tech-chip primary">Flutter 3.x</span>
+        <span class="tech-chip">Dart 3</span>
+        <span class="tech-chip accent">Riverpod 2</span>
+        <span class="tech-chip">GoRouter</span>
+        <span class="tech-chip">Flutter Animate</span>
+        <span class="tech-chip">Lottie</span>
+        <span class="layer-note">State management com Riverpod (reactive, testável). Navegação declarativa. Animações via Flutter Animate + Lottie para sequências complexas.</span>
+      </div>
+    </div>
+
+    <div class="stack-layer">
+      <div class="layer-label">
+        <div class="dot" style="background:#82aaff;"></div>
+        Data Layer
+      </div>
+      <div class="layer-content">
+        <span class="tech-chip blue">Supabase Flutter SDK</span>
+        <span class="tech-chip">Hive (local cache)</span>
+        <span class="tech-chip">Drift (local SQL)</span>
+        <span class="tech-chip">Connectivity+</span>
+        <span class="layer-note">Supabase para dados remotos. Hive para preferências locais. Drift para dados offline estruturados (histórico de sessões presenciais).</span>
+      </div>
+    </div>
+
+    <div class="stack-layer">
+      <div class="layer-label">
+        <div class="dot" style="background:#c3e88d;"></div>
+        Backend / BaaS
+      </div>
+      <div class="layer-content">
+        <span class="tech-chip green">Supabase (EU West)</span>
+        <span class="tech-chip">PostgreSQL 15</span>
+        <span class="tech-chip">Edge Functions (Deno)</span>
+        <span class="tech-chip">Supabase Realtime</span>
+        <span class="tech-chip">Supabase Storage</span>
+        <span class="layer-note">Toda a lógica de negócio sensível em Edge Functions (server-side). Realtime para sincronização de sessões familiares ao vivo.</span>
+      </div>
+    </div>
+
+    <div class="stack-layer">
+      <div class="layer-label">
+        <div class="dot" style="background:#f78c6c;"></div>
+        Auth / Identity
+      </div>
+      <div class="layer-content">
+        <span class="tech-chip accent">Supabase Auth</span>
+        <span class="tech-chip primary">Apple Sign-In ★</span>
+        <span class="tech-chip primary">Google Sign-In ★</span>
+        <span class="tech-chip">Magic Link (email)</span>
+        <span class="tech-chip">Biometrics (local_auth)</span>
+        <span class="tech-chip">MFA (TOTP)</span>
+        <span class="tech-chip">Session Management</span>
+        <span class="layer-note">★ Apple Sign-In obrigatório por App Store Review Guidelines §4.8. Google Sign-In obrigatório para Play Store. Ambos implementados via Supabase Auth OAuth2 + flutter_appauth. Biometria local (FaceID/Touch ID/Fingerprint) para re-auth sem password. MFA via TOTP disponível para utilizadores que o activem. JWTs 1h + refresh tokens com rotação automática. Sessões armazenadas em flutter_secure_storage (Keychain iOS / Keystore Android) — nunca SharedPreferences.</span>
+      </div>
+    </div>
+
+    <div class="stack-layer">
+      <div class="layer-label">
+        <div class="dot" style="background:#a8e6cf;"></div>
+        i18n / L10n
+      </div>
+      <div class="layer-content">
+        <span class="tech-chip green">flutter_localizations</span>
+        <span class="tech-chip green">intl 0.19+</span>
+        <span class="tech-chip">ARB files</span>
+        <span class="tech-chip">Locale detection (auto)</span>
+        <span class="tech-chip">RTL support</span>
+        <span class="tech-chip">NumberFormat</span>
+        <span class="tech-chip">DateFormat</span>
+        <span class="layer-note">Internacionalização completa desde o Dia 1. Línguas de lançamento: PT-PT, PT-BR, EN-US, ES-ES. Arquitectura ARB permite adicionar qualquer língua sem refactor. Detecção automática de locale do dispositivo com override manual persistido em Hive. Suporte RTL preparado para árabe/hebraico (v3). Formato de datas, números e moeda adaptam-se ao locale. Conteúdo dinâmico (rituais, insights) servido na língua do utilizador via campo locale na Edge Function.</span>
+      </div>
+    </div>
+
+    <div class="stack-layer">
+      <div class="layer-label">
+        <div class="dot" style="background:#f5e642;"></div>
+        Notificações
+      </div>
+      <div class="layer-content">
+        <span class="tech-chip gold">Firebase Cloud Messaging</span>
+        <span class="tech-chip">flutter_local_notifications</span>
+        <span class="tech-chip">Supabase Edge (trigger)</span>
+        <span class="layer-note">Excepção estratégica: FCM para push notifications (o melhor do mercado). Supabase Edge Functions fazem trigger → FCM. flutter_local_notifications para alertas in-app.</span>
+      </div>
+    </div>
+
+    <div class="stack-layer">
+      <div class="layer-label">
+        <div class="dot" style="background:#ff9e80;"></div>
+        Pagamentos
+      </div>
+      <div class="layer-content">
+        <span class="tech-chip accent">RevenueCat SDK</span>
+        <span class="tech-chip">App Store Subscriptions</span>
+        <span class="tech-chip">Google Play Billing</span>
+        <span class="layer-note">RevenueCat abstrai toda a complexidade de billing cross-platform. Dashboard unificado de MRR/churn. Webhooks para Supabase actualizar estado de subscription.</span>
+      </div>
+    </div>
+
+    <div class="stack-layer">
+      <div class="layer-label">
+        <div class="dot" style="background:#80cbc4;"></div>
+        Observability
+      </div>
+      <div class="layer-content">
+        <span class="tech-chip">Sentry (crashes)</span>
+        <span class="tech-chip">PostHog (analytics)</span>
+        <span class="tech-chip">Supabase Logs</span>
+        <span class="layer-note">Sentry para crash reporting. PostHog open-source para product analytics (self-hosted, GDPR-safe). Zero tracking de comportamento sensível.</span>
+      </div>
+    </div>
+
+    <div class="stack-layer">
+      <div class="layer-label">
+        <div class="dot" style="background:#b39ddb;"></div>
+        DevOps / CI
+      </div>
+      <div class="layer-content">
+        <span class="tech-chip">GitHub</span>
+        <span class="tech-chip">GitHub Actions</span>
+        <span class="tech-chip">Fastlane</span>
+        <span class="tech-chip">Codemagic</span>
+        <span class="layer-note">Pipeline CI/CD com Codemagic (especialista Flutter). Fastlane para signing e deployment automático. Branches: main → production, develop → staging.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p>💡 <strong>Princípio arquitectural:</strong> Toda a lógica de negócio que toca dados pessoais ou familiares corre em <strong>Edge Functions no servidor</strong>, nunca no cliente. O dispositivo apenas apresenta e captura dados — nunca toma decisões sobre acesso ou permissões.</p>
+  </div>
+</div>
+
+<div class="divider" style="margin:0;"></div>
+
+<!-- SECTION 4: SECURITY -->
+<div class="page">
+  <div class="section-num">04 · Modelo de Segurança</div>
+  <h2>Segurança por Camadas</h2>
+  <p style="opacity:0.65; margin-bottom:2rem; font-size:0.9rem;">App com dados de menores e dinâmicas familiares sensíveis. Segurança não é feature — é requisito arquitectural de base.</p>
+
+  <div class="security-grid">
+    <div class="sec-card">
+      <div class="sec-icon">🏛️</div>
+      <h4>Row-Level Security (RLS)</h4>
+      <p>Cada regra de acesso à base de dados é implementada em SQL via políticas RLS do PostgreSQL. Um utilizador <strong>nunca consegue ler dados de outra família</strong>, mesmo com bug na aplicação — a BD recusa ao nível do motor.</p>
+    </div>
+    <div class="sec-card">
+      <div class="sec-icon">🔑</div>
+      <h4>JWT + Refresh Tokens</h4>
+      <p>Autenticação via JWT de curta duração (1h). Refresh tokens com rotação automática. Armazenados em secure storage nativo (Keychain iOS / Keystore Android), nunca em SharedPreferences.</p>
+    </div>
+    <div class="sec-card">
+      <div class="sec-icon">🔐</div>
+      <h4>Encriptação em Trânsito</h4>
+      <p>TLS 1.3 obrigatório. Certificate pinning para endpoints críticos. Sem HTTP cleartext. Supabase fornece HTTPS por defeito em todos os endpoints.</p>
+    </div>
+    <div class="sec-card">
+      <div class="sec-icon">👶</div>
+      <h4>Protecção de Dados de Menores</h4>
+      <p>Conformidade com GDPR + COPPA. Dados de membros com idade inferior a 16 anos têm policies RLS extra restritivas. Sem tracking analítico para perfis infantis.</p>
+    </div>
+    <div class="sec-card">
+      <div class="sec-icon">📦</div>
+      <h4>Encriptação em Repouso</h4>
+      <p>Supabase storage encripta ficheiros com AES-256. Base de dados com encryption at rest no nível do disco. Backups encriptados com chave separada.</p>
+    </div>
+    <div class="sec-card">
+      <div class="sec-icon">🛡️</div>
+      <h4>Input Validation</h4>
+      <p>Validação dupla: client-side (UX) + server-side obrigatória em Edge Functions. Sanitização de todos os inputs. Protecção contra SQL injection via parameterized queries.</p>
+    </div>
+    <div class="sec-card">
+      <div class="sec-icon">👁️</div>
+      <h4>Auditoria de Acessos</h4>
+      <p>Log de todas as operações críticas (convites familiares, alterações de subscrição, exportação de dados). Logs imutáveis em tabela separada com RLS read-only.</p>
+    </div>
+    <div class="sec-card">
+      <div class="sec-icon">🌍</div>
+      <h4>GDPR / Data Residency</h4>
+      <p>Supabase em EU West (Frankfurt). Direito ao esquecimento implementado via stored procedure. Export de dados em JSON via self-service. DPA disponível com Supabase.</p>
+    </div>
+    <div class="sec-card">
+      <div class="sec-icon">🔄</div>
+      <h4>Rate Limiting</h4>
+      <p>Rate limiting em todos os endpoints de autenticação e convite. Prevenção de brute force em login. Protecção contra scraping de dados familiares.</p>
+    </div>
+  </div>
+
+  <h3>Modelo de Permissões — Família como Unidade</h3>
+  <div class="arch-box">
+    <div class="arch-flow">
+      <div class="arch-node accent">user_auth</div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-node light">family_member</div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-node green">family_group</div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-node light">sessions / data</div>
+    </div>
+    <p style="font-size:0.8rem; opacity:0.6; margin-top:0.75rem;">Hierarquia: cada utilizador pertence a um ou mais grupos familiares. RLS valida family_group_id em cada query. Papel de "Admin" para o criador do grupo (gere convites, subscrição).</p>
+  </div>
+
+  <div class="code-block">
+<span class="cmt">-- Exemplo de política RLS para sessões familiares</span>
+<span class="kw">CREATE POLICY</span> <span class="str">"family_members_see_own_sessions"</span>
+<span class="kw">ON</span> present_sessions
+<span class="kw">FOR SELECT</span>
+<span class="kw">USING</span> (
+  family_group_id <span class="kw">IN</span> (
+    <span class="kw">SELECT</span> family_group_id
+    <span class="kw">FROM</span> family_members
+    <span class="kw">WHERE</span> user_id <span class="kw">=</span> <span class="fn">auth.uid</span>()
+      <span class="kw">AND</span> status <span class="kw">=</span> <span class="str">'active'</span>
+  )
+);
+<span class="cmt">-- Zero acesso a dados de outras famílias, garantido pelo motor BD</span>
+  </div>
+</div>
+
+<div class="divider" style="margin:0;"></div>
+
+<!-- SECTION 5: FEATURES -->
+<div class="page">
+  <div class="section-num">05 · Funcionalidades com Impacto "WOW"</div>
+  <h2>O Que Vai Fazer as Pessoas Dizer <em>"Preciso Disto"</em></h2>
+
+  <table class="feature-table">
+    <thead>
+      <tr>
+        <th style="width:30%">Funcionalidade</th>
+        <th style="width:45%">Porquê é WOW</th>
+        <th style="width:10%">Release</th>
+        <th style="width:15%">Stack</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Sessão Presente</strong><br><span style="font-size:0.8rem;opacity:0.6;">Timer colaborativo de presença</span></td>
+        <td>Toda a família inicia uma sessão simultânea. O telemóvel fica "em modo de presença". Animação orgânica em tempo real mostra quem está "in". Quando alguém desbloqueia o ecrã, é visível para todos — cria accountabilidade social positiva.</td>
+        <td><span class="badge mvp">MVP</span></td>
+        <td><span style="font-size:0.75rem;">Supabase Realtime + Flutter Animate</span></td>
+      </tr>
+      <tr>
+        <td><strong>Offline Score Familiar</strong><br><span style="font-size:0.8rem;opacity:0.6;">Métrica proprietária de presença</span></td>
+        <td>Gráfico semanal/mensal de "horas presentes juntos" vs. "horas de ecrã individual". Não julgamental — mostra progresso. Comparação entre semanas com contexto ("Esta semana tiveram 3h mais juntos que no mês passado").</td>
+        <td><span class="badge mvp">MVP</span></td>
+        <td><span style="font-size:0.75rem;">fl_chart + Supabase</span></td>
+      </tr>
+      <tr>
+        <td><strong>Ritual Engine</strong><br><span style="font-size:0.8rem;opacity:0.6;">Sugestões contextuais de actividades</span></td>
+        <td>Às 19h de quinta, a app sabe que estão em casa. Sugere 3 actividades personalizadas baseadas em perfis, estação do ano, tempo meteorológico local, e histórico da família. "Noite de jogo?", "Cozinhar juntos a nova receita?", "Passeio de 30 min?"</td>
+        <td><span class="badge mvp">MVP</span></td>
+        <td><span style="font-size:0.75rem;">Edge Functions + OpenWeather API</span></td>
+      </tr>
+      <tr>
+        <td><strong>Nudge Inteligente</strong><br><span style="font-size:0.8rem;opacity:0.6;">Notificações com ciência por trás</span></td>
+        <td>Não é "Está a usar o telemóvel há muito tempo!". É: "O [nome do filho] está em casa há 2 horas sem interacção registada. Aqui está uma ideia de 10 minutos." Baseado em dados reais de localização e presença.</td>
+        <td><span class="badge mvp">MVP</span></td>
+        <td><span style="font-size:0.75rem;">FCM + Edge Functions</span></td>
+      </tr>
+      <tr>
+        <td><strong>Diário de Momentos</strong><br><span style="font-size:0.8rem;opacity:0.6;">Registo colaborativo da família</span></td>
+        <td>No fim de uma sessão presente, a app pergunta: "Como foi?" — uma frase, um emoji, uma foto. Constrói um diário visual da família ao longo do tempo. Fechado, privado, sem algoritmo.</td>
+        <td><span class="badge v2">v2</span></td>
+        <td><span style="font-size:0.75rem;">Supabase Storage + Flutter</span></td>
+      </tr>
+      <tr>
+        <td><strong>Insights de Impacto</strong><br><span style="font-size:0.8rem;opacity:0.6;">Educação baseada em evidência</span></td>
+        <td>Cards semanais com dados personalizados: "A [Nome] leu 20% mais desde que começaram as sessões presentes" (baseado em feedback manual). Conteúdo científico contextualizado ao perfil da família.</td>
+        <td><span class="badge v2">v2</span></td>
+        <td><span style="font-size:0.75rem;">Edge Functions + conteúdo CMS</span></td>
+      </tr>
+      <tr>
+        <td><strong>Modo Viagem</strong><br><span style="font-size:0.8rem;opacity:0.6;">Para famílias com membros distantes</span></td>
+        <td>Avós noutro país entram na sessão presente virtualmente. Vídeo simples + contagem de tempo partilhado. Não é o WhatsApp — é um ritual agendado com início e fim.</td>
+        <td><span class="badge v2">v2</span></td>
+        <td><span style="font-size:0.75rem;">WebRTC / Agora SDK</span></td>
+      </tr>
+      <tr>
+        <td><strong>Desafios Semanais</strong><br><span style="font-size:0.8rem;opacity:0.6;">Gamificação séria</span></td>
+        <td>"Esta semana: 3 jantares sem ecrãs". A família vê o progresso em tempo real. Conquistas que se podem partilhar (sem exposição pública — apenas dentro da família ou para amigos que também usam a app).</td>
+        <td><span class="badge v3">v3</span></td>
+        <td><span style="font-size:0.75rem;">Supabase Realtime</span></td>
+      </tr>
+      <tr>
+        <td><strong>Grupos de Amigos</strong><br><span style="font-size:0.8rem;opacity:0.6;">Expansão além da família</span></td>
+        <td>Criar grupos com amigos próximos. "Grupo de amigos de sempre" — desafios partilhados, sessões de almoço presente. O viral loop da app: convidares amigos cria mais utilizadores pagantes.</td>
+        <td><span class="badge v3">v3</span></td>
+        <td><span style="font-size:0.75rem;">Supabase + referral system</span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="divider" style="margin:0;"></div>
+
+<!-- SECTION 6: PROJECT STRUCTURE -->
+<div class="page">
+  <div class="section-num">06 · Estrutura de Projecto</div>
+  <h2>Clean Architecture Flutter</h2>
+  <p style="opacity:0.65; margin-bottom:1.5rem; font-size:0.9rem;">Arquitectura em camadas seguindo Clean Architecture + Feature-First folder structure. Cada feature é independente e testável isoladamente.</p>
+
+  <div class="tree">
+<span class="dir">present_app/</span>
+├── <span class="dir">lib/</span>
+│   ├── <span class="dir">core/</span>                     <span class="comment"># Shared utilities & infrastructure</span>
+│   │   ├── <span class="dir">auth/</span>                  <span class="comment"># Auth state, JWT management</span>
+│   │   ├── <span class="dir">database/</span>              <span class="comment"># Supabase client, RLS helpers</span>
+│   │   ├── <span class="dir">network/</span>               <span class="comment"># HTTP interceptors, connectivity</span>
+│   │   ├── <span class="dir">security/</span>              <span class="comment"># Secure storage, biometrics</span>
+│   │   ├── <span class="dir">theme/</span>                 <span class="comment"># Design system, tokens, typography</span>
+│   │   └── <span class="dir">utils/</span>                 <span class="comment"># Extensions, formatters, validators</span>
+│   │
+│   ├── <span class="dir">features/</span>                  <span class="comment"># Feature-first modules</span>
+│   │   ├── <span class="dir">onboarding/</span>            <span class="comment"># Primeiro uso, setup família</span>
+│   │   │   ├── <span class="dir">data/</span>              <span class="comment"># Repository impl + DTOs</span>
+│   │   │   ├── <span class="dir">domain/</span>            <span class="comment"># Use cases + entities</span>
+│   │   │   └── <span class="dir">presentation/</span>      <span class="comment"># Screens + providers</span>
+│   │   │
+│   │   ├── <span class="dir">session/</span>               <span class="comment"># Sessão Presente (core feature)</span>
+│   │   │   ├── <span class="dir">data/</span>
+│   │   │   ├── <span class="dir">domain/</span>
+│   │   │   └── <span class="dir">presentation/</span>
+│   │   │       ├── <span class="accent-file">session_screen.dart</span>
+│   │   │       ├── <span class="accent-file">session_timer_widget.dart</span>
+│   │   │       └── <span class="accent-file">family_presence_widget.dart</span>
+│   │   │
+│   │   ├── <span class="dir">dashboard/</span>             <span class="comment"># Offline Score, gráficos</span>
+│   │   ├── <span class="dir">rituals/</span>               <span class="comment"># Ritual Engine + sugestões</span>
+│   │   ├── <span class="dir">family/</span>                <span class="comment"># Gestão de grupo familiar</span>
+│   │   ├── <span class="dir">diary/</span>                 <span class="comment"># Diário de momentos</span>
+│   │   ├── <span class="dir">insights/</span>              <span class="comment"># Cards educacionais</span>
+│   │   └── <span class="dir">subscription/</span>          <span class="comment"># RevenueCat + paywall</span>
+│   │
+│   ├── <span class="dir">shared/</span>                    <span class="comment"># Widgets reutilizáveis</span>
+│   │   ├── <span class="dir">widgets/</span>               <span class="comment"># Components design system</span>
+│   │   └── <span class="dir">animations/</span>            <span class="comment"># Lottie files + custom painters</span>
+│   │
+│   └── <span class="accent-file">main.dart</span>                  <span class="comment"># App entry point + DI setup</span>
+│
+├── <span class="dir">supabase/</span>                      <span class="comment"># Backend code (co-located)</span>
+│   ├── <span class="dir">functions/</span>                 <span class="comment"># Edge Functions (Deno/TypeScript)</span>
+│   │   ├── <span class="accent-file">create-family-invite/</span>
+│   │   ├── <span class="accent-file">process-session-end/</span>
+│   │   └── <span class="accent-file">send-nudge-notification/</span>
+│   ├── <span class="dir">migrations/</span>                <span class="comment"># SQL migrations versionadas</span>
+│   └── <span class="accent-file">seed.sql</span>                   <span class="comment"># Dados de desenvolvimento</span>
+│
+├── <span class="dir">docs/</span>                          <span class="comment"># Documentação estruturada</span>
+│   ├── <span class="accent-file">ARCHITECTURE.md</span>
+│   ├── <span class="accent-file">SECURITY.md</span>
+│   ├── <span class="accent-file">API.md</span>
+│   ├── <span class="accent-file">CONTRIBUTING.md</span>
+│   └── <span class="dir">adr/</span>                       <span class="comment"># Architecture Decision Records</span>
+│
+├── <span class="dir">test/</span>
+│   ├── <span class="dir">unit/</span>                      <span class="comment"># Domain logic tests</span>
+│   ├── <span class="dir">integration/</span>               <span class="comment"># Feature integration tests</span>
+│   └── <span class="dir">golden/</span>                    <span class="comment"># UI screenshot tests</span>
+│
+└── <span class="accent-file">.github/workflows/</span>            <span class="comment"># CI/CD pipelines</span>
+  </div>
+
+  <div class="highlight-box">
+    <p>📐 <strong>Convenção:</strong> Cada feature segue o padrão <code>data → domain → presentation</code>. A camada <code>domain</code> nunca importa Flutter — é Dart puro e 100% testável sem emulador. A camada <code>presentation</code> nunca faz chamadas de rede directamente — usa sempre Use Cases do domain.</p>
+  </div>
+</div>
+
+<div class="divider" style="margin:0;"></div>
+
+<!-- SECTION 7: DOCUMENTATION -->
+<div class="page">
+  <div class="section-num">07 · Documentação Estruturada</div>
+  <h2>O Que Deve Ser Documentado</h2>
+
+  <table class="feature-table">
+    <thead>
+      <tr>
+        <th style="width:25%">Documento</th>
+        <th style="width:45%">Conteúdo</th>
+        <th style="width:15%">Localização</th>
+        <th style="width:15%">Manutenção</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>ARCHITECTURE.md</strong></td>
+        <td>Stack decisions justificadas, diagramas de camadas, fluxos de dados principais, princípios arquitecturais</td>
+        <td><code>/docs/</code></td>
+        <td>Sempre que muda arquitectura</td>
+      </tr>
+      <tr>
+        <td><strong>ADR (Architecture Decision Records)</strong></td>
+        <td>Um ficheiro por decisão técnica major (ex: "ADR-001-flutter-choice.md"). Template: contexto → decisão → consequências</td>
+        <td><code>/docs/adr/</code></td>
+        <td>Por decisão</td>
+      </tr>
+      <tr>
+        <td><strong>SECURITY.md</strong></td>
+        <td>Modelo de ameaças, políticas RLS documentadas, responsible disclosure policy, checklists de segurança por release</td>
+        <td><code>/docs/</code></td>
+        <td>Por trimestre + por feature</td>
+      </tr>
+      <tr>
+        <td><strong>API.md</strong></td>
+        <td>Contrato de todas as Edge Functions: input/output types, autenticação necessária, rate limits, exemplos</td>
+        <td><code>/docs/</code></td>
+        <td>Por nova Edge Function</td>
+      </tr>
+      <tr>
+        <td><strong>Database Schema</strong></td>
+        <td>Diagrama ERD gerado automaticamente + explicação de cada tabela, RLS policies documentadas inline em SQL</td>
+        <td><code>/supabase/migrations/</code></td>
+        <td>Automático (dbdocs.io)</td>
+      </tr>
+      <tr>
+        <td><strong>CONTRIBUTING.md</strong></td>
+        <td>Git flow, coding standards, processo de code review, convenções de commit (Conventional Commits)</td>
+        <td><code>/</code></td>
+        <td>Inicial + ajustes pontuais</td>
+      </tr>
+      <tr>
+        <td><strong>CHANGELOG.md</strong></td>
+        <td>Histórico de releases gerado automaticamente por Conventional Commits + semantic versioning</td>
+        <td><code>/</code></td>
+        <td>Automático (CI)</td>
+      </tr>
+      <tr>
+        <td><strong>Storybook / Widgetbook</strong></td>
+        <td>Catálogo vivo de todos os widgets do design system. Executável em browser — sem dispositivo necessário para revisar UI</td>
+        <td><code>widgetbook/</code></td>
+        <td>Por novo widget</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="divider" style="margin:0;"></div>
+
+<!-- SECTION 8: COSTS -->
+<div class="page">
+  <div class="section-num">08 · Estimativa de Custos de Infraestrutura</div>
+  <h2>Infraestrutura para 0 → 50k Utilizadores</h2>
+
+  <p style="opacity:0.65; margin-bottom:1.5rem; font-size:0.9rem;">Actualizado após validação dos free tiers reais em Junho 2026. A fase inicial opera a <strong>€0/mês</strong> de infraestrutura — todos os serviços têm free tiers que cobrem o período completo de MVP e validação de mercado.</p>
+
+  <!-- FREE TIER DETAIL BOX -->
+  <div style="background:var(--green); color:white; border-radius:12px; padding:1.5rem 2rem; margin-bottom:2rem; display:grid; grid-template-columns:auto 1fr; gap:1.5rem; align-items:center;">
+    <div style="font-size:3rem; line-height:1;">€0</div>
+    <div>
+      <div style="font-family:var(--mono); font-size:11px; letter-spacing:0.12em; text-transform:uppercase; opacity:0.8; margin-bottom:0.3rem;">Custo real de infraestrutura — Fases 1 e 2 (0 → 2.000 MAU)</div>
+      <div style="font-size:0.85rem; opacity:0.85; line-height:1.6;">Supabase free tier cobre 50.000 MAU, 500MB DB e 500k Edge Function invocations/mês. RevenueCat gratuito até $2.500 MTR. FCM sempre gratuito. O primeiro euro de custo de infra aparece <strong>quando o negócio já gera receita</strong>.</div>
+    </div>
+  </div>
+
+  <h3>Fase 1 — MVP / Validação (0 → 2.000 MAU activos)</h3>
+  <table class="cost-table">
+    <thead>
+      <tr><th>Serviço</th><th>Plano &amp; Limites Free</th><th>€/mês</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Supabase</strong></td><td>Free — 500MB DB, 50.000 MAU, 1GB storage, 5GB bandwidth, 500k Edge Functions, 200 Realtime connections. <em>Pausa após 7 dias inactividade → mitigado com GitHub Action ping (20min setup, gratuito)</em></td><td style="color:var(--green); font-weight:700;">€0</td></tr>
+      <tr><td><strong>Firebase FCM</strong></td><td>Spark — push notifications ilimitadas. Gratuito para sempre (modelo de negócio Google)</td><td style="color:var(--green); font-weight:700;">€0</td></tr>
+      <tr><td><strong>RevenueCat</strong></td><td>Free — até $2.500 MTR/mês. Billing completo iOS + Android, dashboard MRR/churn, webhooks. A €3,99/família → gratuito até ~625 famílias pagantes</td><td style="color:var(--green); font-weight:700;">€0</td></tr>
+      <tr><td><strong>Sentry</strong></td><td>Developer — 5.000 erros/mês, crash reporting iOS + Android, performance monitoring</td><td style="color:var(--green); font-weight:700;">€0</td></tr>
+      <tr><td><strong>PostHog</strong></td><td>Free — 1 milhão de eventos/mês, analytics completo, feature flags, GDPR-safe</td><td style="color:var(--green); font-weight:700;">€0</td></tr>
+      <tr><td><strong>Codemagic CI/CD</strong></td><td>Free — 500 min/mês (~8–10 builds iOS completos). GitHub Actions gratuito para builds Android (disponível no free tier desde Abril 2026)</td><td style="color:var(--green); font-weight:700;">€0</td></tr>
+      <tr><td><strong>App Store + Play Store</strong></td><td>Taxas anuais: Apple €99/ano + Google €25 único (amortizadas)</td><td>€9</td></tr>
+    </tbody>
+    <tfoot>
+      <tr class="cost-total"><td colspan="2">Total Fase 1 — infra pura (excluindo taxas de loja)</td><td>€0/mês</td></tr>
+    </tfoot>
+  </table>
+
+  <h3>Fase 2 — Early Growth (2.000 → 10.000 MAU)</h3>
+  <p style="opacity:0.65; margin-bottom:1rem; font-size:0.85rem;">O Supabase free tier aguentar até ~2.000 MAU activos (dentro dos 50k auth, mas DB a aproximar-se dos 500MB com volume de sessões). Upgrade para Pro apenas quando necessário.</p>
+  <table class="cost-table">
+    <thead>
+      <tr><th>Serviço</th><th>Plano</th><th>€/mês</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Supabase</strong></td><td>Pro — 8GB DB, 100k MAU, 100GB storage, 500 Realtime connections, backups diários</td><td>~€25</td></tr>
+      <tr><td><strong>RevenueCat</strong></td><td>1% sobre gross MTR acima de $2.500. Estimativa: €1.200 MRR × 1% = ~€12</td><td>~€12</td></tr>
+      <tr><td><strong>Sentry</strong></td><td>Free mantém-se até escalar equipa (upgrade Team €26/mês apenas se >1 dev)</td><td>€0–26</td></tr>
+      <tr><td><strong>PostHog</strong></td><td>Free continua (1M eventos/mês raramente ultrapassado antes de 10k MAU)</td><td>€0</td></tr>
+      <tr><td><strong>Codemagic</strong></td><td>Mac Mini M2 se >10 builds/mês necessários</td><td>€0–45</td></tr>
+    </tbody>
+    <tfoot>
+      <tr class="cost-total"><td colspan="2">Total Fase 2 (estimativa conservadora)</td><td>~€37–108/mês</td></tr>
+    </tfoot>
+  </table>
+
+  <h3>Fase 3 — Escala (10k → 50k MAU)</h3>
+  <table class="cost-table">
+    <thead>
+      <tr><th>Serviço</th><th>Plano</th><th>€/mês</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Supabase</strong></td><td>Pro + compute add-ons (4GB RAM, read replicas EU)</td><td>~€150</td></tr>
+      <tr><td><strong>RevenueCat</strong></td><td>1% de ~€30k MRR gross</td><td>~€300</td></tr>
+      <tr><td><strong>Sentry</strong></td><td>Team</td><td>€26</td></tr>
+      <tr><td><strong>Codemagic</strong></td><td>Mac Mini M2</td><td>€45</td></tr>
+      <tr><td><strong>Cloudflare</strong></td><td>CDN free tier (assets estáticos)</td><td>€0</td></tr>
+    </tbody>
+    <tfoot>
+      <tr class="cost-total"><td colspan="2">Total Fase 3</td><td>~€521/mês</td></tr>
+    </tfoot>
+  </table>
+
+  <h3>Projecção de Rentabilidade por Fase</h3>
+  <table class="cost-table">
+    <thead>
+      <tr><th>Fase</th><th>MAU</th><th>Famílias Pagantes (est.)</th><th>Receita Est.</th><th>Custo Infra</th><th>Margem Infra</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Fase 1</strong> — MVP</td><td>0–2.000</td><td>0–200</td><td>€0–800/mês</td><td style="color:var(--green);font-weight:700;">€0</td><td>100%</td></tr>
+      <tr><td><strong>Fase 2</strong> — Growth</td><td>2k–10k</td><td>200–1.500</td><td>€800–6.000/mês</td><td>€37–108</td><td>>98%</td></tr>
+      <tr><td><strong>Fase 3</strong> — Escala</td><td>10k–50k</td><td>1.500–12.500</td><td>€6k–50k/mês</td><td>~€521</td><td>>99%</td></tr>
+    </tbody>
+  </table>
+
+  <div class="verdict">
+    <div class="verdict-icon">💰</div>
+    <p><strong>Conclusão actualizada:</strong> A stack opera a <strong>€0 de infra pura durante toda a Fase 1</strong> — validação completa do modelo de negócio sem custo fixo. O primeiro upgrade (Supabase Pro, ~€25/mês) só é necessário quando o negócio já tem receita. Com 50.000 utilizadores e ~12.500 subscrições de família a €3,99/mês, a receita seria <strong>~€50.000 MRR</strong> com custos de infraestrutura de <strong>~€521/mês — menos de 1,1% da receita</strong>. O custo dominante a essa escala é RevenueCat (~€300) — não infraestrutura técnica.</p>
+  </div>
+</div>
+
+<div class="divider" style="margin:0;"></div>
+
+<!-- SECTION 8B: CRITICAL WEAKNESSES -->
+<div class="page">
+  <div class="section-num">08B · Revisão Crítica — Pontos Fracos</div>
+  <h2>Honestidade Radical: O Que Pode Matar Este Produto</h2>
+  <p style="opacity:0.65; margin-bottom:2rem; font-size:0.9rem; color:var(--red);">Documento actualizado v2.0. Estes riscos foram identificados em revisão crítica pós-especificação. Cada ponto tem uma resposta estratégica integrada nos documentos funcionais.</p>
+
+  <table class="feature-table">
+    <thead>
+      <tr>
+        <th style="width:5%">Nº</th>
+        <th style="width:28%">Problema</th>
+        <th style="width:37%">Porquê é grave</th>
+        <th style="width:15%">Severidade</th>
+        <th style="width:15%">Resposta</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background:rgba(192,57,43,0.06);">
+        <td><strong>1</strong></td>
+        <td><strong>Problema de Rede — a app precisa de todos</strong></td>
+        <td>A "Sessão Presente" com 1 pessoa é apenas um timer de cozinha. Se um familiar recusa instalar, a proposta de valor central desmorona. Apps com dependência de rede multi-utilizador têm taxa de adopção dramaticamente menor.</td>
+        <td><span class="badge" style="background:var(--red-light);color:var(--red);">CRÍTICO</span></td>
+        <td>MVP funciona a solo. Família é amplificador, não requisito.</td>
+      </tr>
+      <tr style="background:rgba(192,57,43,0.04);">
+        <td><strong>2</strong></td>
+        <td><strong>Paradoxo de Retenção — sucesso parece abandono</strong></td>
+        <td>DAU/MAU baixo = produto que funciona OU produto morto? App Stores usam engagement para rankings. Reviews dirão "deixei de usar" — mesmo que seja porque o produto funcionou. Métricas convencionais trabalham contra nós.</td>
+        <td><span class="badge" style="background:var(--red-light);color:var(--red);">CRÍTICO</span></td>
+        <td>Redefinir sessão de uso: Score semanal, diário e insights são razões legítimas para abrir a app diariamente.</td>
+      </tr>
+      <tr style="background:rgba(192,57,43,0.06);">
+        <td><strong>3</strong></td>
+        <td><strong>Concorrência built-in gratuita e invisível</strong></td>
+        <td>Apple Screen Time (iOS) e Google Digital Wellbeing (Android obrigatório em todos os dispositivos) são grátis, pré-instalados e integram ao nível do SO. "Porque pagar €3,99 pelo que já tenho?" é a objecção #1 na conversão.</td>
+        <td><span class="badge" style="background:var(--red-light);color:var(--red);">CRÍTICO</span></td>
+        <td>Posicionamento explícito: não somos um bloqueador — somos um coach de vida familiar. Os built-ins dizem "para". Nós dizemos "faz isto em vez disso".</td>
+      </tr>
+      <tr style="background:rgba(192,57,43,0.04);">
+        <td><strong>4</strong></td>
+        <td><strong>Churn catastrófico nos primeiros 30 dias</strong></td>
+        <td>Benchmarks 2026: 74.7% churn no Dia 1, 94.3% no Dia 30 em apps mobile. O valor desta app é lento (hábitos levam semanas) mas o churn é imediato. Trial de 21 dias é demasiado longo se o "aha moment" não acontecer na primeira sessão.</td>
+        <td><span class="badge" style="background:var(--red-light);color:var(--red);">CRÍTICO</span></td>
+        <td>"Aha moment" obrigatório na primeira sessão: score imediato + primeira entrada de diário + ritual sugerido concluído = loop completo em <15 min.</td>
+      </tr>
+      <tr style="background:rgba(192,57,43,0.06);">
+        <td><strong>5</strong></td>
+        <td><strong>Detecção de "distracção" é frágil e tóxica</strong></td>
+        <td>iOS limita processos em background agressivamente — heartbeat a cada 30s não é garantido. Mostrar "Pedro desbloqueou o ecrã" a toda a família é surveillance, não motivação. Pode criar conflito familiar em vez de coesão.</td>
+        <td><span class="badge" style="background:var(--red-light);color:var(--red);">CRÍTICO</span></td>
+        <td>Remover detecção passiva. Substituir por check-in voluntário honesto: "Ainda estás presente? ✓". Privacidade individual protegida.</td>
+      </tr>
+      <tr>
+        <td><strong>6</strong></td>
+        <td><strong>Billing familiar com ponto único de falha</strong></td>
+        <td>Se o admin cancela, toda a família perde acesso. Filhos adultos que saem de casa ficam sem histórico. Grupo de 8 a €3,99 = €0,50/pessoa — underpriced vs. valor percebido individual.</td>
+        <td><span class="badge" style="background:var(--gold-light);color:var(--gold);">ALTO</span></td>
+        <td>Grace period de 30 dias pós-cancelamento do admin. Exportação de dados individual garantida. Plano individual como safety net.</td>
+      </tr>
+      <tr>
+        <td><strong>7</strong></td>
+        <td><strong>Ausência de loop viral concreto</strong></td>
+        <td>Convite por email para familiar tem fricção enorme. Partilha pública do score viola privacidade (ninguém quer expor dinâmicas familiares). Sem mecanismo viral = CAC alto para sempre.</td>
+        <td><span class="badge" style="background:var(--gold-light);color:var(--gold);">ALTO</span></td>
+        <td>Convite por link (WhatsApp-first em PT/BR). Partilha de "conquista" (não score) opcional e anonimizada. Referral com 30 dias extra de trial para quem convida.</td>
+      </tr>
+      <tr>
+        <td><strong>8</strong></td>
+        <td><strong>Portugal é demasiado pequeno para validação de receita</strong></td>
+        <td>Mercado total endereçável em PT: ~100k-250k famílias potencialmente interessadas. A €3,99/família, o tecto teórico é €400k-1M ARR — pequeno para um negócio de software escalável. Sem expansão imediata, o investimento não se justifica.</td>
+        <td><span class="badge" style="background:var(--gold-light);color:var(--gold);">ALTO</span></td>
+        <td>PT como beta de 3 meses. Internacionalização (EN + ES + BR) desde o início da arquitectura. App Store em 4 línguas no lançamento v1.</td>
+      </tr>
+      <tr>
+        <td><strong>9</strong></td>
+        <td><strong>Ritual Engine v1 é um switch/case glorificado</strong></td>
+        <td>"Sugestão por hora do dia" não impressiona ninguém. Se a primeira interacção com o Ritual Engine decepciona, a percepção da app fica comprometida. Não é "wow" — é genérico.</td>
+        <td><span class="badge" style="background:var(--gold-light);color:var(--gold);">MÉDIO</span></td>
+        <td>50 rituais editorialmente curados por psicólogo/pedagogo > algoritmo fraco. Qualidade do conteúdo > falsa inteligência.</td>
+      </tr>
+      <tr>
+        <td><strong>10</strong></td>
+        <td><strong>Offline Score sem benchmark = número sem significado</strong></td>
+        <td>"847 pontos" — compara com quê? Sem referencial, a gamificação não funciona. Um número isolado não motiva comportamento.</td>
+        <td><span class="badge" style="background:var(--gold-light);color:var(--gold);">MÉDIO</span></td>
+        <td>Adicionar percentil anonimizado: "Estão no Top 23% das famílias esta semana." Privado — agrega dados sem identificar.</td>
+      </tr>
+      <tr>
+        <td><strong>11</strong></td>
+        <td><strong>Diário pós-sessão = fricção não recompensada</strong></td>
+        <td>Pedir nota de 280 chars 2 minutos após sessão é demasiado. Maioria ignora → diário fica vazio → feature parece morta → percepção negativa da app.</td>
+        <td><span class="badge" style="background:var(--gold-light);color:var(--gold);">MÉDIO</span></td>
+        <td>Reduzir a 1 emoji obrigatório. Texto e foto completamente opcionais. "Como foi?" → tap num de 5 emojis → feito.</td>
+      </tr>
+      <tr>
+        <td><strong>12</strong></td>
+        <td><strong>GDPR menores: risco legal subestimado</strong></td>
+        <td>GDPR Art. 8 e COPPA requerem verificação de consentimento parental para menores de 16 anos (PT) / 13 anos (EUA). "Role: young" no schema não é suficiente legalmente. Uma queixa pode bloquear o produto em toda a UE.</td>
+        <td><span class="badge" style="background:var(--gold-light);color:var(--gold);">MÉDIO</span></td>
+        <td>Fluxo de verificação parental antes de criar perfil "jovem". DPO (Data Protection Officer) consultado antes do lançamento. Dados de jovens em schema isolado.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="verdict">
+    <div class="verdict-icon">⚖️</div>
+    <p><strong>Veredicto honesto — v2.0:</strong> A ideia base é boa e o mercado existe. A versão original tinha 5 problemas críticos e 14 problemas importantes — todos identificados em revisão independente e corrigidos. A revisão de implementação identificou mais 19 bugs críticos adicionais (crashes, mock data em produção, RevenueCat não funcional, RTL em falta) — todos corrigidos. <strong>O produto implementado é substancialmente mais robusto do que qualquer versão anterior. Está pronto para desenvolvimento e submissão às lojas.</strong></p>
+  </div>
+</div>
+
+<div class="divider" style="margin:0;"></div>
+
+<!-- SECTION 9: ROADMAP -->
+<div class="page">
+  <div class="section-num">09 · Roadmap de Desenvolvimento</div>
+  <h2>Da Ideia ao Mercado</h2>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-phase">Mês 1–2 · Fundações</div>
+      <div class="tl-title">Setup & Core Architecture</div>
+      <div class="tl-desc">Setup completo do projecto Flutter + Supabase. Design system base. Autenticação (Apple/Google/email). Estrutura de família e convites. CI/CD configurado. Políticas RLS básicas. Base de dados schema v1. Sem features visíveis — só arquitectura sólida.</div>
+      <div class="tl-chips">
+        <span class="tl-chip">Flutter + Supabase setup</span>
+        <span class="tl-chip">Auth flow completo</span>
+        <span class="tl-chip">Design system</span>
+        <span class="tl-chip">CI/CD Codemagic</span>
+        <span class="tl-chip">RLS policies v1</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-phase">Mês 3–4 · MVP Core</div>
+      <div class="tl-title">Sessão Presente + Offline Score</div>
+      <div class="tl-desc">As duas features core que justificam o download. Sessão em tempo real com toda a família via Supabase Realtime. Dashboard com Offline Score (gráficos semanais). Ritual Engine v1 (sugestões básicas por hora do dia). Notificações via FCM. Onboarding animado.</div>
+      <div class="tl-chips">
+        <span class="tl-chip">Supabase Realtime</span>
+        <span class="tl-chip">fl_chart dashboard</span>
+        <span class="tl-chip">FCM notifications</span>
+        <span class="tl-chip">Onboarding flow</span>
+        <span class="tl-chip">Lottie animations</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-phase">Mês 5 · Monetização</div>
+      <div class="tl-title">RevenueCat + Paywall</div>
+      <div class="tl-desc">Integração RevenueCat. Paywall após 21 dias de trial. Plano Individual + Plano Família. Gestão de subscrição in-app. Webhook para Supabase actualizar estado premium. Trial sem cartão de crédito — reduz fricção de conversão.</div>
+      <div class="tl-chips">
+        <span class="tl-chip">RevenueCat SDK</span>
+        <span class="tl-chip">Paywall design</span>
+        <span class="tl-chip">Subscription webhooks</span>
+        <span class="tl-chip">A/B pricing test</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-phase">Mês 6 · Launch</div>
+      <div class="tl-title">Submissão App Store + Play Store</div>
+      <div class="tl-desc">Review completa de segurança. Penetration testing básico. Submission App Store + Play Store. Landing page. Beta fechado com 100 famílias. Ajustes pós-feedback. Launch público PT/BR.</div>
+      <div class="tl-chips">
+        <span class="tl-chip">Security audit</span>
+        <span class="tl-chip">Beta 100 famílias</span>
+        <span class="tl-chip">App Store review</span>
+        <span class="tl-chip">Landing page</span>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-phase">Mês 7–9 · v2</div>
+      <div class="tl-title">Diário + Insights + Modo Viagem</div>
+      <div class="tl-desc">Diário de momentos (fotos + notas de sessão). Cards de Insights educacionais semanais. Modo Viagem (familiares à distância). Ritual Engine v2 com meteorologia e personalização por perfil. Expansão ES + internacionalização.</div>
+      <div class="tl-chips">
+        <span class="tl-chip">Supabase Storage</span>
+        <span class="tl-chip">CMS para insights</span>
+        <span class="tl-chip">WebRTC/Agora</span>
+        <span class="tl-chip">i18n PT/EN/ES</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider" style="margin:0;"></div>
+
+
+<div class="divider" style="margin:0;"></div>
+
+<!-- SECTION 09B: IMPLEMENTATION STATUS -->
+<div class="page">
+  <div class="section-num">09B · Estado de Implementação</div>
+  <h2>O Que Foi Produzido</h2>
+  <p style="opacity:0.65; margin-bottom:2rem; font-size:0.9rem;">Inventário completo após implementação e revisão crítica. 19 bugs identificados e corrigidos antes da entrega.</p>
+
+  <table class="feature-table">
+    <thead>
+      <tr>
+        <th style="width:30%">Categoria</th>
+        <th style="width:50%">Ficheiros / Conteúdo</th>
+        <th style="width:20%">Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Entry Point</strong></td>
+        <td>main.dart — Supabase + Firebase + RevenueCat + Hive + RTL init</td>
+        <td><span class="badge" style="background:var(--green-light);color:var(--green);">✓ Completo</span></td>
+      </tr>
+      <tr>
+        <td><strong>i18n — 10 Línguas</strong></td>
+        <td>11 ARBs: EN · PT-PT · PT-BR · ZH · HI · ES · AR · FR · BN · RU · ID<br>l10n.yaml · locale_provider.dart com RTL detection</td>
+        <td><span class="badge" style="background:var(--green-light);color:var(--green);">✓ Completo</span></td>
+      </tr>
+      <tr>
+        <td><strong>Design System</strong></td>
+        <td>app_theme.dart — tokens, PresentColors extension, light/dark, typography</td>
+        <td><span class="badge" style="background:var(--green-light);color:var(--green);">✓ Completo</span></td>
+      </tr>
+      <tr>
+        <td><strong>Router + Navigation</strong></td>
+        <td>app_router.dart — GoRouter, auth guards, deep links, splash route corrigido</td>
+        <td><span class="badge" style="background:var(--green-light);color:var(--green);">✓ Completo</span></td>
+      </tr>
+      <tr>
+        <td><strong>Auth — 4 Camadas</strong></td>
+        <td>auth_provider.dart — Apple + Google + Magic Link + Biometria + MFA/TOTP<br>secure_storage.dart — Keychain/Keystore</td>
+        <td><span class="badge" style="background:var(--green-light);color:var(--green);">✓ Completo</span></td>
+      </tr>
+      <tr>
+        <td><strong>Providers Partilhados</strong></td>
+        <td>family_provider.dart — FamilyData, MemberPresence (fonte única de verdade)<br>locale_provider.dart — gestão de língua persistida</td>
+        <td><span class="badge" style="background:var(--green-light);color:var(--green);">✓ Completo</span></td>
+      </tr>
+      <tr>
+        <td><strong>Ecrãs — Onboarding</strong></td>
+        <td>splash_screen · language_screen · onboarding_screen · auth_screen · family_setup_screen</td>
+        <td><span class="badge" style="background:var(--green-light);color:var(--green);">✓ Completo</span></td>
+      </tr>
+      <tr>
+        <td><strong>Ecrãs — Core App</strong></td>
+        <td>home_screen · session_screen · session_complete_screen · dashboard_screen · rituals_screen · family_screen · diary_screen · paywall_screen · settings_screen</td>
+        <td><span class="badge" style="background:var(--green-light);color:var(--green);">✓ Completo</span></td>
+      </tr>
+      <tr>
+        <td><strong>Widgets Partilhados</strong></td>
+        <td>main_shell (bottom nav 6 tabs) · splash_screen · present_button · present_text_field · error_screen</td>
+        <td><span class="badge" style="background:var(--green-light);color:var(--green);">✓ Completo</span></td>
+      </tr>
+      <tr>
+        <td><strong>Data Layer</strong></td>
+        <td>session_repository.dart · user_model · session_model (Freezed + JSON)</td>
+        <td><span class="badge" style="background:var(--green-light);color:var(--green);">✓ Completo</span></td>
+      </tr>
+      <tr>
+        <td><strong>Supabase — Migration</strong></td>
+        <td>7 tabelas + RLS completo + RPCs get_weekly_score + get_member_scores_this_week + fcm_tokens + updated_at triggers + handle_new_user + índices</td>
+        <td><span class="badge" style="background:var(--green-light);color:var(--green);">✓ Completo</span></td>
+      </tr>
+      <tr>
+        <td><strong>Supabase — Seed</strong></td>
+        <td>50 rituais curados editorialmente em 10 línguas (JSONB i18n)</td>
+        <td><span class="badge" style="background:var(--green-light);color:var(--green);">✓ Completo</span></td>
+      </tr>
+      <tr>
+        <td><strong>Edge Functions</strong></td>
+        <td>process-session-end (score calc) · send-nudge-notification (FCM por locale) · create-family-invite (email + link)</td>
+        <td><span class="badge" style="background:var(--green-light);color:var(--green);">✓ Completo</span></td>
+      </tr>
+      <tr>
+        <td><strong>Android</strong></td>
+        <td>AndroidManifest.xml (deep links + FCM) · build.gradle (app + root) · settings.gradle · gradle.properties · proguard-rules.pro</td>
+        <td><span class="badge" style="background:var(--green-light);color:var(--green);">✓ Completo</span></td>
+      </tr>
+      <tr>
+        <td><strong>iOS</strong></td>
+        <td>Info.plist (permissões + 10 locales + deep links + Apple Sign-In)</td>
+        <td><span class="badge" style="background:var(--green-light);color:var(--green);">✓ Completo</span></td>
+      </tr>
+      <tr>
+        <td><strong>Firebase</strong></td>
+        <td>firebase_options.dart (stub com instruções) — substituir com <code>flutterfire configure</code></td>
+        <td><span class="badge" style="background:var(--gold-light);color:var(--gold);">⚠ Credenciais</span></td>
+      </tr>
+      <tr>
+        <td><strong>CI/CD</strong></td>
+        <td>.github/workflows/ci.yml (Android + lint + tests) · codemagic.yaml (iOS release)</td>
+        <td><span class="badge" style="background:var(--green-light);color:var(--green);">✓ Completo</span></td>
+      </tr>
+      <tr>
+        <td><strong>Config</strong></td>
+        <td>pubspec.yaml · l10n.yaml · analysis_options.yaml · .gitignore · supabase/config.toml · README.md</td>
+        <td><span class="badge" style="background:var(--green-light);color:var(--green);">✓ Completo</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>19 Bugs Críticos Corrigidos em Revisão</h3>
+  <table class="feature-table">
+    <thead>
+      <tr><th style="width:5%">#</th><th style="width:40%">Bug</th><th style="width:35%">Impacto se não corrigido</th><th style="width:20%">Fix</th></tr>
+    </thead>
+    <tbody>
+      <tr style="background:rgba(192,57,43,0.05);">
+        <td>1</td><td>Rota <code>/</code> sem handler</td><td>App não arrancava — router crash imediato</td><td>SplashScreen criado</td>
+      </tr>
+      <tr style="background:rgba(192,57,43,0.05);">
+        <td>2</td><td><code>firebase_options.dart</code> em falta</td><td>Crash no arranque — Firebase.initializeApp falha</td><td>Stub criado + import</td>
+      </tr>
+      <tr style="background:rgba(192,57,43,0.05);">
+        <td>3</td><td>RevenueCat completamente comentado</td><td>Paywall não processava pagamentos — receita zero</td><td>Purchases.purchasePackage real</td>
+      </tr>
+      <tr style="background:rgba(192,57,43,0.05);">
+        <td>4</td><td>RevenueCat não inicializado no main</td><td>Crash ao tentar comprar</td><td>Purchases.configure no boot</td>
+      </tr>
+      <tr style="background:rgba(192,57,43,0.05);">
+        <td>5</td><td>build.gradle Android em falta</td><td>App não compilava para Android</td><td>4 ficheiros Gradle criados</td>
+      </tr>
+      <tr style="background:rgba(192,57,43,0.05);">
+        <td>6</td><td>RPCs Supabase inexistentes na migration</td><td>Crash em runtime — funções chamadas mas não definidas</td><td>get_weekly_score + get_member_scores adicionados</td>
+      </tr>
+      <tr style="background:rgba(192,57,43,0.05);">
+        <td>7</td><td>fcm_tokens no seed em vez da migration</td><td>Tabela não existia antes dos dados — erro de FK</td><td>Movido para migration</td>
+      </tr>
+      <tr style="background:rgba(192,57,43,0.05);">
+        <td>8</td><td>Settings screen em falta</td><td>Router quebrava — rota definida mas sem destino</td><td>settings_screen.dart criado</td>
+      </tr>
+      <tr style="background:rgba(192,57,43,0.05);">
+        <td>9</td><td>RTL não implementado para árabe</td><td>UI árabe espelhada incorrectamente</td><td>Directionality no MaterialApp</td>
+      </tr>
+      <tr>
+        <td>10</td><td>"Família Silva", "847", "Gonçalo" hardcoded</td><td>App embaraçosa em produção — dados de teste visíveis</td><td>Providers Supabase reais</td>
+      </tr>
+      <tr>
+        <td>11</td><td>Rituals screen com títulos PT hardcoded</td><td>App em inglês/árabe mostrava títulos em português</td><td>Provider com JSONB i18n</td>
+      </tr>
+      <tr>
+        <td>12</td><td>Diary screen com mock data</td><td>Diário estático — sem dados reais do utilizador</td><td>Provider Supabase real</td>
+      </tr>
+      <tr>
+        <td>13</td><td>Slide onboarding hardcoded em PT</td><td>Texto em português para todos os idiomas</td><td>ARB key onboardingHowSteps em 11 línguas</td>
+      </tr>
+      <tr>
+        <td>14</td><td>familyPresenceProvider duplicado</td><td>Inconsistência de estado entre ecrãs</td><td>family_provider.dart como fonte única</td>
+      </tr>
+      <tr>
+        <td>15</td><td>assets/ dirs inexistentes</td><td>Flutter não compilava — pubspec referenciava dirs em falta</td><td>Dirs criados com .gitkeep</td>
+      </tr>
+      <tr>
+        <td>16</td><td>Settings não estava na bottom nav</td><td>Settings inacessível ao utilizador</td><td>6º tab adicionado</td>
+      </tr>
+      <tr>
+        <td>17</td><td>onboardingFamiliesCount hardcoded (12847)</td><td>Número inventado visível no onboarding</td><td>Fetch dinâmico do Supabase</td>
+      </tr>
+      <tr>
+        <td>18</td><td>_score/_percentile em widget vs state</td><td>Crash de compilação no dashboard</td><td>Campos movidos para State</td>
+      </tr>
+      <tr>
+        <td>19</td><td>SessionCompleteExtra sem export</td><td>Tipo não reconhecido no router — erro de tipo</td><td>Export adicionado ao router</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="highlight-box">
+    <p>⚠️ <strong>Credenciais que o programador tem de configurar antes de correr:</strong> Supabase URL + anon key · Firebase project (GoogleService-Info.plist + google-services.json + <code>flutterfire configure</code>) · RevenueCat Apple key + Google key · Apple Developer account (Bundle ID + Sign-In capability) · Google Cloud OAuth client IDs. Tudo documentado passo a passo no README.md.</p>
+  </div>
+</div>
+
+<div class="divider" style="margin:0;"></div>
+
+<!-- SECTION 10: SUMMARY -->
+<div class="page">
+  <div class="section-num">10 · Resumo Executivo</div>
+  <h2>A Stack em 10 Segundos</h2>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-bottom:2rem;">
+    <div style="background:var(--ink); color:var(--paper); padding:2rem; border-radius:16px;">
+      <div style="font-family:var(--mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; opacity:0.5; margin-bottom:1rem;">Mobile</div>
+      <div style="font-family:var(--serif); font-size:2rem; margin-bottom:0.5rem;">Flutter</div>
+      <div style="font-size:0.82rem; opacity:0.6; line-height:1.6;">1 codebase → iOS + Android. Animações cinematográficas. ARB i18n nativo. Suporte RTL preparado. Custos manutenção previsíveis.</div>
+    </div>
+    <div style="background:var(--green); color:white; padding:2rem; border-radius:16px;">
+      <div style="font-family:var(--mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; opacity:0.7; margin-bottom:1rem;">Backend</div>
+      <div style="font-family:var(--serif); font-size:2rem; margin-bottom:0.5rem;">Supabase</div>
+      <div style="font-size:0.82rem; opacity:0.8; line-height:1.6;">PostgreSQL real. RLS nativa. Open-source. <strong>€0/mês até ~2.000 MAU</strong> (free tier: 50k MAU, 500MB DB). EU data residency para GDPR.</div>
+    </div>
+    <div style="background:var(--accent); color:white; padding:2rem; border-radius:16px;">
+      <div style="font-family:var(--mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; opacity:0.7; margin-bottom:1rem;">Auth — 4 Camadas</div>
+      <div style="font-family:var(--serif); font-size:2rem; margin-bottom:0.5rem;">Apple + Google</div>
+      <div style="font-size:0.82rem; opacity:0.8; line-height:1.6;">OAuth obrigatório (App Store + Play Store). Magic Link sem password. Biometria local. MFA/TOTP opcional. JWT + Keychain/Keystore.</div>
+    </div>
+    <div style="background:var(--blue); color:white; padding:2rem; border-radius:16px;">
+      <div style="font-family:var(--mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; opacity:0.7; margin-bottom:1rem;">Segurança — 6 Layers</div>
+      <div style="font-family:var(--serif); font-size:2rem; margin-bottom:0.5rem;">RLS + JWT</div>
+      <div style="font-size:0.82rem; opacity:0.8; line-height:1.6;">OAuth → JWT → Biometria → RLS → MFA → TLS 1.3 + certificate pinning. Isolamento familiar garantido ao nível do motor de BD.</div>
+    </div>
+    <div style="background:#2d6a4f; color:white; padding:2rem; border-radius:16px;">
+      <div style="font-family:var(--mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; opacity:0.7; margin-bottom:1rem;">Monetização</div>
+      <div style="font-family:var(--serif); font-size:2rem; margin-bottom:0.5rem;">RevenueCat</div>
+      <div style="font-size:0.82rem; opacity:0.8; line-height:1.6;">Cross-platform billing abstraído. Dashboard MRR/churn. Gratuito até $2.5k MRR. Referral +30 dias. Grace period 30d.</div>
+    </div>
+    <div style="background:#1a4c8c; color:white; padding:2rem; border-radius:16px;">
+      <div style="font-family:var(--mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; opacity:0.7; margin-bottom:1rem;">i18n — Internacional</div>
+      <div style="font-family:var(--serif); font-size:2rem; margin-bottom:0.5rem;">ARB + intl</div>
+      <div style="font-size:0.82rem; opacity:0.8; line-height:1.6;">PT-PT, PT-BR, EN-US, ES-ES no lançamento. Arquitectura ARB: nova língua = 1 ficheiro, zero refactor. RTL preparado (v3). Notificações por locale.</div>
+    </div>
+  </div>
+
+  <div class="verdict">
+    <div class="verdict-icon">🎯</div>
+    <p><strong>v2.0 — Implementado e revisto:</strong> O projecto está produzido com <strong>65 ficheiros</strong>, 31 Dart (Clean Architecture), 11 ARBs em 10 línguas, schema PostgreSQL completo com RPCs e RLS, 3 Edge Functions, CI/CD Android + iOS, e build.gradle configurado. Foram corrigidos <strong>19 bugs críticos</strong> identificados em revisão independente: crash no arranque (splash em falta), Firebase sem options, RevenueCat comentado, mock data em produção, RTL não implementado para árabe, RPCs inexistentes na migration, settings screen em falta, e duplicação de providers. A infra opera a <strong>€0/mês</strong> até ~2.000 MAU. O projecto está pronto para clonar, configurar as credenciais reais (Supabase, Firebase, RevenueCat) e submeter às lojas.</p>
+  </div>
+
+  <div style="text-align:center; padding:3rem 0 1rem; font-family:var(--mono); font-size:10px; letter-spacing:0.12em; text-transform:uppercase; opacity:0.3;">
+    Present App · Architecture Document v2.0 · Junho 2026 — Implementação completa · 65 ficheiros · 10 línguas · 19 bugs críticos corrigidos
+  </div>
+</div>
+
+</body>
+</html>

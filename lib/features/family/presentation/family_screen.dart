@@ -8,6 +8,7 @@ import '../../../core/database/supabase_client.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/present_text_field.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class _FamilyMember {
   final String userId;
@@ -115,6 +116,25 @@ class FamilyScreen extends ConsumerWidget {
                         icon: const Icon(Icons.link_rounded),
                         label: Text(l10n.familyInviteLink),
                       ).animate().fadeIn(delay: 280.ms, duration: 350.ms),
+                      const SizedBox(height: 12),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton.icon(
+                          onPressed: () async {
+                            final link = 'https://present.app/join/${family.inviteCode}';
+                            final text = Uri.encodeComponent('${l10n.familyInviteLink}: $link');
+                            final url = Uri.parse('https://wa.me/?text=$text');
+                            try {
+                              if (await canLaunchUrl(url)) {
+                                await launchUrl(url, mode: LaunchMode.externalApplication);
+                              }
+                            } catch (_) {}
+                          },
+                          icon: const Icon(Icons.share_outlined),
+                          label: Text(l10n.familyInviteShareWhatsApp),
+                          style: ElevatedButton.styleFrom(backgroundColor: AppColors.teal, minimumSize: const Size(double.infinity, 52), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14))),
+                        ),
+                      ).animate().fadeIn(delay: 320.ms, duration: 350.ms),
                     ]),
                   ),
                 ),

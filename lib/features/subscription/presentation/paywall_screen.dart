@@ -17,6 +17,7 @@ class PaywallScreen extends StatefulWidget {
 
 class _PaywallScreenState extends State<PaywallScreen> {
   int _selectedPlan = 0;
+  bool _isAnnual = true;
   bool _isLoading = false;
 
   Future<void> _purchase() async {
@@ -29,7 +30,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
         throw PlatformException(message: 'No offerings configured', code: 'no_offerings');
       }
 
-      final pkg = _selectedPlan == 0 ? (current.annual ?? current.monthly) : current.monthly;
+      final pkg = _isAnnual ? (current.annual ?? current.monthly) : (current.monthly ?? current.annual);
       if (pkg == null) {
         throw PlatformException(message: 'No package found', code: 'no_package');
       }
@@ -100,10 +101,15 @@ class _PaywallScreenState extends State<PaywallScreen> {
               Text(l10n.paywallSubtitle, textAlign: TextAlign.center, style: TextStyle(color: AppColors.paper.withOpacity(0.5), fontSize: 15))
                   .animate().fadeIn(delay: 140.ms, duration: 400.ms),
               const SizedBox(height: 32),
-              _PlanCard(title: l10n.paywallPlanFamily, desc: l10n.paywallPlanFamilyDesc, price: '€4.99', period: l10n.paywallPerMonth, isFamily: true, selected: _selectedPlan == 0, onTap: () => setState(() => _selectedPlan = 0))
+              _BillingToggle(
+                isAnnual: _isAnnual,
+                onChanged: (v) => setState(() => _isAnnual = v),
+              ).animate().fadeIn(delay: 180.ms, duration: 400.ms),
+              const SizedBox(height: 16),
+              _PlanCard(title: l10n.paywallPlanFamily, desc: l10n.paywallPlanFamilyDesc, price: '€4.99', period: _isAnnual ? l10n.paywallBilledAnnually : l10n.paywallBilledMonthly, isFamily: true, selected: _selectedPlan == 0, onTap: () => setState(() => _selectedPlan = 0))
                   .animate().fadeIn(delay: 200.ms, duration: 400.ms),
               const SizedBox(height: 12),
-              _PlanCard(title: l10n.paywallPlanIndividual, desc: l10n.paywallPlanIndividualDesc, price: '€2.49', period: l10n.paywallPerMonth, isFamily: false, selected: _selectedPlan == 1, onTap: () => setState(() => _selectedPlan = 1))
+              _PlanCard(title: l10n.paywallPlanIndividual, desc: l10n.paywallPlanIndividualDesc, price: '€2.49', period: _isAnnual ? l10n.paywallBilledAnnually : l10n.paywallBilledMonthly, isFamily: false, selected: _selectedPlan == 1, onTap: () => setState(() => _selectedPlan = 1))
                   .animate().fadeIn(delay: 260.ms, duration: 400.ms),
               const SizedBox(height: 24),
               Container(
@@ -129,6 +135,73 @@ class _PaywallScreenState extends State<PaywallScreen> {
               Center(child: TextButton(onPressed: _isLoading ? null : _restore, child: Text(l10n.paywallRestorePurchases, style: TextStyle(color: AppColors.paper.withOpacity(0.25), fontSize: 12)))),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _BillingToggle extends StatelessWidget {
+  final bool isAnnual;
+  final ValueChanged<bool> onChanged;
+  const _BillingToggle({required this.isAnnual, required this.onChanged});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return Container(
+      padding: const EdgeInsets.all(4),
+      decoration: BoxDecoration(color: AppColors.inkSurface, borderRadius: BorderRadius.circular(14), border: Border.all(color: AppColors.paper.withOpacity(0.1))),
+      child: Row(
+        children: [
+          Expanded(
+            child: _ToggleOption(
+              label: l10n.paywallBilledMonthly,
+              selected: !isAnnual,
+              onTap: () => onChanged(false),
+            ),
+          ),
+          Expanded(
+            child: _ToggleOption(
+              label: l10n.paywallBilledAnnually,
+              selected: isAnnual,
+              onTap: () => onChanged(true),
+              badge: l10n.paywallTrialBadge,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ToggleOption extends StatelessWidget {
+  final String label;
+  final bool selected;
+  final VoidCallback onTap;
+  final String? badge;
+  const _ToggleOption({required this.label, required this.selected, required this.onTap, this.badge});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 180),
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        decoration: BoxDecoration(
+          color: selected ? AppColors.teal : Colors.transparent,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Column(
+          children: [
+            Text(label, style: TextStyle(color: selected ? Colors.white : AppColors.paper.withOpacity(0.6), fontSize: 14, fontWeight: FontWeight.w700)),
+            if (badge != null && selected)
+              Padding(
+                padding: const EdgeInsets.only(top: 2),
+                child: Text(badge!, style: const TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.w600)),
+              ),
+          ],
         ),
       ),
     );
