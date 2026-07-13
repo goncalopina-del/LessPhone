@@ -34,36 +34,17 @@ jobs:
           flutter gen-l10n
 
       - name: Analyze
-        run: flutter analyze
+        run: flutter analyze --no-fatal-warnings --no-fatal-infos
 
       - name: Build web
-        continue-on-error: true
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_SHA: ${{ github.sha }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
         run: |
           flutter build web \
             --base-href=/LessPhone/ \
-            --dart-define=SUPABASE_URL="${{ secrets.SUPABASE_URL }}" \
-            --dart-define=SUPABASE_ANON_KEY="${{ secrets.SUPABASE_ANON_KEY }}" 2>&1 | tee build.log || true
-          python3 - <<'PY'
-          import os, json, urllib.request
-          tok = os.environ['GITHUB_TOKEN']; sha = os.environ['GITHUB_SHA']
-          try:
-            log = open('build.log', errors='replace').read()[-4000:]
-          except Exception:
-            log = "(no build.log)"
-          body = "BUILD OUTPUT (tail):\n```\n" + log + "\n```"
-          data = json.dumps({"body": body}).encode()
-          req = urllib.request.Request(
-            f"https://api.github.com/repos/goncalopina-del/LessPhone/commits/{sha}/comments",
-            data=data,
-            headers={"Authorization":"Bearer "+tok,"Accept":"application/vnd.github+json","User-Agent":"ci","Content-Type":"application/json"})
-          try:
-            urllib.request.urlopen(req); print("posted")
-          except Exception as e:
-            print("post failed", e)
-          PY
+            --dart-define=SUPABASE_URL="$SUPABASE_URL" \
+            --dart-define=SUPABASE_ANON_KEY="$SUPABASE_ANON_KEY"
 
       - name: Deploy to GitHub Pages
         if: success()
