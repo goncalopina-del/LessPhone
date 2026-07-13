@@ -34,32 +34,26 @@ jobs:
           flutter gen-l10n
 
       - name: Analyze
-        run: flutter analyze > analyze.log 2>&1
+        run: flutter analyze
 
       - name: Build web
-        run: |
-          flutter build web \
-            --base-href=/LessPhone/ \
-            --dart-define=SUPABASE_URL="${{ secrets.SUPABASE_URL }}" \
-            --dart-define=SUPABASE_ANON_KEY="${{ secrets.SUPABASE_ANON_KEY }}" > build.log 2>&1
-
-      - name: Post logs
-        if: always()
+        continue-on-error: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_SHA: ${{ github.sha }}
         run: |
+          flutter build web \
+            --base-href=/LessPhone/ \
+            --dart-define=SUPABASE_URL="${{ secrets.SUPABASE_URL }}" \
+            --dart-define=SUPABASE_ANON_KEY="${{ secrets.SUPABASE_ANON_KEY }}" 2>&1 | tee build.log || true
           python3 - <<'PY'
           import os, json, urllib.request
-          tok = os.environ['GITHUB_TOKEN']
-          sha = os.environ['GITHUB_SHA']
-          parts = []
-          for name in ["analyze.log", "build.log"]:
-            try:
-              parts.append(f"=== {name} ===\n" + open(name, errors='replace').read()[-2500:])
-            except Exception:
-              parts.append(f"=== {name} ===\n(no file)")
-          body = "CI LOGS (tail):\n```\n" + "\n".join(parts) + "\n```"
+          tok = os.environ['GITHUB_TOKEN']; sha = os.environ['GITHUB_SHA']
+          try:
+            log = open('build.log', errors='replace').read()[-4000:]
+          except Exception:
+            log = "(no build.log)"
+          body = "BUILD OUTPUT (tail):\n```\n" + log + "\n```"
           data = json.dumps({"body": body}).encode()
           req = urllib.request.Request(
             f"https://api.github.com/repos/goncalopina-del/LessPhone/commits/{sha}/comments",
