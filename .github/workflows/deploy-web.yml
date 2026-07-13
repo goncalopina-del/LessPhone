@@ -41,7 +41,11 @@ jobs:
           flutter build web \
             --base-href=/LessPhone/ \
             --dart-define=SUPABASE_URL="${{ secrets.SUPABASE_URL }}" \
-            --dart-define=SUPABASE_ANON_KEY="${{ secrets.SUPABASE_ANON_KEY }}"
+            --dart-define=SUPABASE_ANON_KEY="${{ secrets.SUPABASE_ANON_KEY }}" 2>&1 | tee build.log
+
+      - name: Echo build log on failure
+        if: failure()
+        run: cat build.log
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
