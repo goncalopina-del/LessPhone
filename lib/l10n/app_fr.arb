@@ -39,6 +39,15 @@
       }
     }
   },
+  "authConfirmationSent": "We sent a confirmation email to {email}. Check your inbox (and spam folder) to activate your account.",
+  "@authConfirmationSent": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "authBackToLogin": "Back to login",
   "authNoPassword": "No password. More secure.",
   "authOr": "or",
   "authBiometricPrompt": "Authenticate to continue",

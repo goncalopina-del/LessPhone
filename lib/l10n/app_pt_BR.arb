@@ -39,6 +39,15 @@
       }
     }
   },
+  "authConfirmationSent": "Enviamos um e-mail de confirmação para {email}. Verifique sua caixa de entrada (e o spam) para ativar a conta.",
+  "@authConfirmationSent": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
+  "authBackToLogin": "Voltar ao login",
   "authNoPassword": "Sem senha. Mais seguro.",
   "authOr": "ou",
   "authBiometricPrompt": "Autentique para continuar",

@@ -3,6 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/auth/auth_provider.dart';
 import '../../../core/router/app_router.dart';
@@ -33,6 +34,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
 
   bool _isLoading = false;
   bool _magicLinkSent = false;
+  bool _confirmationSent = false;
   bool _usingPassword = false;
   bool _isSignUp = false;
   String? _error;
@@ -178,7 +180,9 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
         context.go(Routes.home);
         return;
       }
-      if (mounted) setState(() => _magicLinkSent = true);
+      if (mounted) setState(() => _confirmationSent = true);
+    } on AuthException catch (e) {
+      if (mounted) setState(() => _error = e.message);
     } catch (_) {
       if (mounted) setState(() => _error = l10n.errorGeneric);
     } finally {
@@ -202,7 +206,9 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
               const Center(child: Text('PRESENT', style: TextStyle(fontFamily: 'PlusJakartaSans', fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.teal, letterSpacing: 0.3)))
                   .animate().fadeIn(duration: 400.ms),
               const SizedBox(height: 48),
-              if (_magicLinkSent)
+              if (_confirmationSent)
+                _ConfirmationSentView(email: _emailController.text.trim(), l10n: l10n)
+              else if (_magicLinkSent)
                 _MagicLinkSentView(email: _emailController.text.trim(), l10n: l10n)
               else ...[
                 _SocialButton(label: l10n.authSignInWithApple, icon: Icons.apple, backgroundColor: Colors.white, textColor: Colors.black, onTap: _isLoading ? null : _signInWithApple)
@@ -300,6 +306,26 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
         ),
       ),
     );
+  }
+}
+
+class _ConfirmationSentView extends StatelessWidget {
+  final String email;
+  final AppLocalizations l10n;
+  const _ConfirmationSentView({required this.email, required this.l10n});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+      const Text('✉️', style: TextStyle(fontSize: 56)),
+      const SizedBox(height: 20),
+      Text(l10n.authConfirmationSent(email), style: const TextStyle(color: AppColors.paper, fontSize: 16), textAlign: TextAlign.center),
+      const SizedBox(height: 16),
+      TextButton(
+        onPressed: () => context.go(Routes.login),
+        child: Text(l10n.authBackToLogin, style: const TextStyle(color: AppColors.teal)),
+      ),
+    ]).animate().fadeIn(duration: 400.ms).slideY(begin: 0.08);
   }
 }
 
