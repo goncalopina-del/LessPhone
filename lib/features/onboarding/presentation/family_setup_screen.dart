@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -91,6 +92,7 @@ class _FamilySetupScreenState extends ConsumerState<FamilySetupScreen> {
           'action': 'invite',
           'family_group_id': family['id'],
           'emails': emails,
+          'platform': kIsWeb ? 'web' : 'mobile',
         });
       }
 

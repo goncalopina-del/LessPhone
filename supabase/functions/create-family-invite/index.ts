@@ -26,7 +26,7 @@ serve(async (req: Request) => {
   const action = body.action as string | undefined;
 
   if (action === "invite") {
-    return await handleInvite(body, userData.user);
+    return await handleInvite(body, userData.user, req);
   } else if (action === "join") {
     return await handleJoin(body, userData.user);
   }
@@ -34,7 +34,24 @@ serve(async (req: Request) => {
   return new Response("Unknown action", { status: 400 });
 });
 
-async function handleInvite(body: Record<string, unknown>, inviter: User): Promise<Response> {
+// Builds the post-invite redirect URL, choosing the web app URL when the
+// request originates from the web build and the deep link otherwise.
+function buildInviteRedirect(body: Record<string, unknown>, req: Request, familyGroupId: string): string {
+  const explicit = body.redirect_url as string | undefined;
+  if (explicit && /^https?:\/\//.test(explicit)) return explicit;
+
+  const platform = body.platform as string | undefined;
+  if (platform === "web") return `https://goncalopina-del.github.io/LessPhone/invite/${familyGroupId}`;
+
+  const origin = req.headers.get("origin") ?? req.headers.get("referer") ?? "";
+  if (origin.includes("goncalopina-del.github.io") || origin.includes("github.io")) {
+    return `https://goncalopina-del.github.io/LessPhone/invite/${familyGroupId}`;
+  }
+
+  return `present://invite/${familyGroupId}`;
+}
+
+async function handleInvite(body: Record<string, unknown>, inviter: User, req: Request): Promise<Response> {
   const familyGroupId = body.family_group_id as string | undefined;
   const emails = body.emails as string[] | undefined;
 
@@ -64,7 +81,7 @@ async function handleInvite(body: Record<string, unknown>, inviter: User): Promi
     try {
       const { error } = await supabase.auth.admin.inviteUserByEmail(email, {
         data: { family_group_id: familyGroupId, invited_by: inviter.id, action: "family_invite" },
-        redirectTo: `present://invite/${familyGroupId}`,
+        redirectTo: buildInviteRedirect(body, req, familyGroupId),
       });
 
       if (error) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -168,7 +169,7 @@ class FamilyScreen extends ConsumerWidget {
                 onPressed: () async {
                   final email = ctrl.text.trim();
                   if (email.isEmpty) return;
-                  await supabase.functions.invoke('create-family-invite', body: {'action': 'invite', 'family_group_id': groupId, 'emails': [email]});
+                  await supabase.functions.invoke('create-family-invite', body: {'action': 'invite', 'family_group_id': groupId, 'emails': [email], 'platform': kIsWeb ? 'web' : 'mobile'});
                   if (ctx.mounted) Navigator.pop(ctx);
                 },
                 child: Text(l10n.setupCreateFamily),
