@@ -322,7 +322,7 @@ class _ConfirmationSentView extends StatelessWidget {
       Text(l10n.authConfirmationSent(email), style: const TextStyle(color: AppColors.paper, fontSize: 16), textAlign: TextAlign.center),
       const SizedBox(height: 16),
       TextButton(
-        onPressed: () => context.go(Routes.login),
+        onPressed: () => context.go(Routes.auth),
         child: Text(l10n.authBackToLogin, style: const TextStyle(color: AppColors.teal)),
       ),
     ]).animate().fadeIn(duration: 400.ms).slideY(begin: 0.08);
