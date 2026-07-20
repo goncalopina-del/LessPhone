@@ -36,19 +36,21 @@ serve(async (req: Request) => {
 
 // Builds the post-invite redirect URL, choosing the web app URL when the
 // request originates from the web build and the deep link otherwise.
-function buildInviteRedirect(body: Record<string, unknown>, req: Request, familyGroupId: string): string {
+// Uses the family invite_code (not the group id) so the /invite/:code route
+// can resolve the family via handleJoin.
+function buildInviteRedirect(body: Record<string, unknown>, req: Request, inviteCode: string): string {
   const explicit = body.redirect_url as string | undefined;
   if (explicit && /^https?:\/\//.test(explicit)) return explicit;
 
   const platform = body.platform as string | undefined;
-  if (platform === "web") return `https://goncalopina-del.github.io/LessPhone/invite/${familyGroupId}`;
+  if (platform === "web") return `https://goncalopina-del.github.io/LessPhone/invite/${inviteCode}`;
 
   const origin = req.headers.get("origin") ?? req.headers.get("referer") ?? "";
   if (origin.includes("goncalopina-del.github.io") || origin.includes("github.io")) {
-    return `https://goncalopina-del.github.io/LessPhone/invite/${familyGroupId}`;
+    return `https://goncalopina-del.github.io/LessPhone/invite/${inviteCode}`;
   }
 
-  return `present://invite/${familyGroupId}`;
+  return `present://invite/${inviteCode}`;
 }
 
 async function handleInvite(body: Record<string, unknown>, inviter: User, req: Request): Promise<Response> {
@@ -71,6 +73,16 @@ async function handleInvite(body: Record<string, unknown>, inviter: User, req: R
     return new Response("Forbidden — only admins can invite", { status: 403 });
   }
 
+  const { data: family } = await supabase
+    .from("family_groups")
+    .select("invite_code")
+    .eq("id", familyGroupId)
+    .single();
+
+  if (!family?.invite_code) {
+    return new Response("Family invite code not found", { status: 404 });
+  }
+
   const validEmails = emails
     .slice(0, 7)
     .filter((e) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e));
@@ -80,8 +92,8 @@ async function handleInvite(body: Record<string, unknown>, inviter: User, req: R
   for (const email of validEmails) {
     try {
       const { error } = await supabase.auth.admin.inviteUserByEmail(email, {
-        data: { family_group_id: familyGroupId, invited_by: inviter.id, action: "family_invite" },
-        redirectTo: buildInviteRedirect(body, req, familyGroupId),
+        data: { family_group_id: familyGroupId, invite_code: family.invite_code, invited_by: inviter.id, action: "family_invite" },
+        redirectTo: buildInviteRedirect(body, req, family.invite_code),
       });
 
       if (error) {
