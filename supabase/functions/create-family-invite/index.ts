@@ -9,29 +9,46 @@ const supabase = createClient(
   Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
 );
 
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers":
+    "authorization, x-client-info, apikey, content-type, x-service-key",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+};
+
+// Ensures every response carries CORS headers so the web build can read it.
+function withCors(res: Response): Response {
+  const headers = new Headers(res.headers);
+  for (const [k, v] of Object.entries(corsHeaders)) headers.set(k, v);
+  return new Response(res.body, { status: res.status, headers });
+}
+
 serve(async (req: Request) => {
+  if (req.method === "OPTIONS") {
+    return new Response("ok", { headers: corsHeaders });
+  }
   if (req.method !== "POST") {
-    return new Response("Method not allowed", { status: 405 });
+    return withCors(new Response("Method not allowed", { status: 405 }));
   }
 
   const authHeader = req.headers.get("Authorization");
-  if (!authHeader) return new Response("Unauthorized", { status: 401 });
+  if (!authHeader) return withCors(new Response("Unauthorized", { status: 401 }));
 
   const { data: userData, error: authError } = await supabase.auth.getUser(
     authHeader.replace("Bearer ", ""),
   );
-  if (authError || !userData?.user) return new Response("Unauthorized", { status: 401 });
+  if (authError || !userData?.user) return withCors(new Response("Unauthorized", { status: 401 }));
 
   const body = await req.json();
   const action = body.action as string | undefined;
 
   if (action === "invite") {
-    return await handleInvite(body, userData.user, req);
+    return withCors(await handleInvite(body, userData.user, req));
   } else if (action === "join") {
-    return await handleJoin(body, userData.user);
+    return withCors(await handleJoin(body, userData.user));
   }
 
-  return new Response("Unknown action", { status: 400 });
+  return withCors(new Response("Unknown action", { status: 400 }));
 });
 
 // Builds the post-invite redirect URL, choosing the web app URL when the

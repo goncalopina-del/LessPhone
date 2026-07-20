@@ -11,6 +11,15 @@ const supabase = createClient(
 
 const FCM_SERVER_KEY = Deno.env.get("FCM_SERVER_KEY")!;
 
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers":
+    "authorization, x-client-info, apikey, content-type, x-service-key",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+};
+
+const jsonHeaders = { ...corsHeaders, "Content-Type": "application/json" };
+
 type NotificationType = "ritual" | "streak" | "trial_ending" | "invite_accepted";
 
 interface NotificationPayload {
@@ -61,13 +70,16 @@ function getTemplate(type: NotificationType, locale: string): Template {
 }
 
 serve(async (req: Request) => {
+  if (req.method === "OPTIONS") {
+    return new Response("ok", { headers: corsHeaders });
+  }
   if (req.method !== "POST") {
-    return new Response("Method not allowed", { status: 405 });
+    return new Response("Method not allowed", { status: 405, headers: corsHeaders });
   }
 
   const serviceKey = req.headers.get("X-Service-Key");
   if (serviceKey !== Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")) {
-    return new Response("Unauthorized", { status: 401 });
+    return new Response("Unauthorized", { status: 401, headers: corsHeaders });
   }
 
   const payload = await req.json() as NotificationPayload;
@@ -116,7 +128,5 @@ serve(async (req: Request) => {
     }
   }
 
-  return new Response(JSON.stringify({ results }), {
-    headers: { "Content-Type": "application/json" },
-  });
+  return new Response(JSON.stringify({ results }), { headers: jsonHeaders });
 });

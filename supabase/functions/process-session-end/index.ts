@@ -9,6 +9,15 @@ const supabase = createClient(
   Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
 );
 
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers":
+    "authorization, x-client-info, apikey, content-type, x-service-key",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+};
+
+const jsonHeaders = { ...corsHeaders, "Content-Type": "application/json" };
+
 interface SessionRow {
   id: string;
   family_group_id: string;
@@ -17,20 +26,23 @@ interface SessionRow {
 }
 
 serve(async (req: Request) => {
+  if (req.method === "OPTIONS") {
+    return new Response("ok", { headers: corsHeaders });
+  }
   if (req.method !== "POST") {
-    return new Response("Method not allowed", { status: 405 });
+    return new Response("Method not allowed", { status: 405, headers: corsHeaders });
   }
 
   const authHeader = req.headers.get("Authorization");
   if (!authHeader) {
-    return new Response("Unauthorized", { status: 401 });
+    return new Response("Unauthorized", { status: 401, headers: corsHeaders });
   }
 
   const { data: userData, error: authError } = await supabase.auth.getUser(
     authHeader.replace("Bearer ", ""),
   );
   if (authError || !userData?.user) {
-    return new Response("Unauthorized", { status: 401 });
+    return new Response("Unauthorized", { status: 401, headers: corsHeaders });
   }
 
   const body = await req.json();
@@ -59,7 +71,7 @@ serve(async (req: Request) => {
         (p: { user_id: string }) => p.user_id === userData.user.id,
       );
       if (!wasParticipant) {
-        return new Response("Forbidden", { status: 403 });
+        return new Response("Forbidden", { status: 403, headers: corsHeaders });
       }
 
       score = calculateScore(session.duration_minutes ?? 0, session.session_participants.length);
@@ -75,14 +87,12 @@ serve(async (req: Request) => {
       metadata: { session_id: sessionId ?? null, score },
     });
 
-    return new Response(JSON.stringify({ score }), {
-      headers: { "Content-Type": "application/json" },
-    });
+    return new Response(JSON.stringify({ score }), { headers: jsonHeaders });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
     return new Response(JSON.stringify({ error: message }), {
       status: 500,
-      headers: { "Content-Type": "application/json" },
+      headers: jsonHeaders,
     });
   }
 });
