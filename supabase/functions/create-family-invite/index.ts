@@ -89,12 +89,6 @@ async function handleInvite(body: Record<string, unknown>, inviter: User, req: R
         continue;
       }
 
-      await supabase.from("family_members").upsert({
-        family_group_id: familyGroupId,
-        status: "invited",
-        role: "adult",
-      });
-
       await supabase.from("audit_log").insert({
         user_id: inviter.id,
         action: "family_invite_sent",

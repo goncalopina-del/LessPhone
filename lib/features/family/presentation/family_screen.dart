@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' show FunctionException;
 
 import '../../../core/auth/auth_provider.dart';
 import '../../../core/database/supabase_client.dart';
@@ -149,33 +150,68 @@ class FamilyScreen extends ConsumerWidget {
 
   void _showInviteSheet(BuildContext context, AppLocalizations l10n, String groupId) {
     final ctrl = TextEditingController();
+    bool sending = false;
+    String? error;
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
-      builder: (ctx) => Padding(
-        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom + 24, left: 24, right: 24, top: 24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(l10n.setupInviteTitle, style: Theme.of(context).textTheme.titleLarge),
-            const SizedBox(height: 16),
-            PresentTextField(controller: ctrl, hintText: l10n.setupInviteEmailHint, keyboardType: TextInputType.emailAddress, autofocus: true),
-            const SizedBox(height: 16),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () async {
-                  final email = ctrl.text.trim();
-                  if (email.isEmpty) return;
-                  await supabase.functions.invoke('create-family-invite', body: {'action': 'invite', 'family_group_id': groupId, 'emails': [email], 'platform': kIsWeb ? 'web' : 'mobile'});
-                  if (ctx.mounted) Navigator.pop(ctx);
-                },
-                child: Text(l10n.setupCreateFamily),
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setSheetState) => Padding(
+          padding: EdgeInsets.only(bottom: MediaQuery.of(ctx).viewInsets.bottom + 24, left: 24, right: 24, top: 24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(l10n.setupInviteTitle, style: Theme.of(ctx).textTheme.titleLarge),
+              const SizedBox(height: 16),
+              PresentTextField(controller: ctrl, hintText: l10n.setupInviteEmailHint, keyboardType: TextInputType.emailAddress, autofocus: true),
+              if (error != null) ...[
+                const SizedBox(height: 12),
+                Text(error!, style: const TextStyle(color: Colors.redAccent, fontSize: 13)),
+              ],
+              const SizedBox(height: 16),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: sending
+                      ? null
+                      : () async {
+                          final email = ctrl.text.trim();
+                          if (email.isEmpty) return;
+                          setSheetState(() { sending = true; error = null; });
+                          try {
+                            final res = await supabase.functions.invoke('create-family-invite', body: {
+                              'action': 'invite',
+                              'family_group_id': groupId,
+                              'emails': [email],
+                              'platform': kIsWeb ? 'web' : 'mobile',
+                            });
+                            final results = (res.data is Map) ? (res.data['results'] as Map?) : null;
+                            final status = results?[email]?.toString();
+                            if (status != null && status != 'sent') {
+                              setSheetState(() { sending = false; error = status; });
+                              return;
+                            }
+                            if (ctx.mounted) Navigator.pop(ctx);
+                            if (context.mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text(l10n.familyInviteSent(email)), backgroundColor: AppColors.teal),
+                              );
+                            }
+                          } on FunctionException catch (e) {
+                            setSheetState(() { sending = false; error = '${e.status}: ${e.details ?? e.reasonPhrase ?? l10n.errorGeneric}'; });
+                          } catch (e) {
+                            setSheetState(() { sending = false; error = e.toString(); });
+                          }
+                        },
+                  child: sending
+                      ? const SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
+                      : Text(l10n.familyInviteMember),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

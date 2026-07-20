@@ -182,6 +182,14 @@
   "familyInviteMember": "+ Convidar familiar",
   "familyInviteLink": "Copiar link de convite",
   "familyInviteLinkCopied": "Link copiado!",
+  "familyInviteSent": "Convite enviado para {email}",
+  "@familyInviteSent": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
   "familyRoleAdmin": "Admin",
   "familyRoleAdult": "Adulto",
   "familyRoleYoung": "Jovem",

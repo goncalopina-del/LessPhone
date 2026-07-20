@@ -199,6 +199,14 @@
   "familyInviteMember": "+ Invite family member",
   "familyInviteLink": "Copy invite link",
   "familyInviteLinkCopied": "Link copied!",
+  "familyInviteSent": "Invite sent to {email}",
+  "@familyInviteSent": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      }
+    }
+  },
   "familyInviteShareWhatsApp": "Invite via WhatsApp",
   "familyRoleAdmin": "Admin",
   "familyRoleAdult": "Adult",
