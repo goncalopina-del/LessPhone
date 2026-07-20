@@ -1,3 +1,5 @@
+project_id = "gpiecetkpckiqndyyohf"
+
 [api]
 port = 54321
 schemas = ["public", "storage", "graphql_public"]
@@ -11,19 +13,13 @@ major_version = 15
 
 [studio]
 port = 54323
-api_url = "http://localhost"
-
-[inbucket]
-port = 54324
-smtp_port = 54325
-pop3_port = 54326
 
 [storage]
 file_size_limit = "50MiB"
 
 [auth]
-site_url = "present://auth/confirm"
-additional_redirect_urls = ["present://auth/confirm", "present://invite/**", "http://localhost:3000/**"]
+site_url = "http://localhost:3000"
+additional_redirect_urls = ["present://auth/confirm", "present://invite/**", "http://localhost:3000/**", "https://goncalopina-del.github.io/LessPhone/**"]
 jwt_expiry = 3600
 enable_refresh_token_rotation = true
 refresh_token_reuse_interval = 10
@@ -44,8 +40,15 @@ client_id = "app.present.ios"
 
 [auth.external.google]
 enabled = true
+client_id = "app.present.android"
 
-[functions]
+[functions.create-family-invite]
+verify_jwt = true
+
+[functions.process-session-end]
+verify_jwt = true
+
+[functions.send-nudge-notification]
 verify_jwt = true
 
 [analytics]
